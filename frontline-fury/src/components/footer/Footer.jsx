@@ -57,13 +57,14 @@ const Footer = () => {
             <div className="map1-section">
 
                 <iframe
-                    src="https://www.google.com/maps/embed?https://maps.app.goo.gl/c4Sm1bgs9hZgSA7s8"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3271.1118568360152!2d78.07713567535924!3d30.396702974748123!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3908d7d84f30dc9f%3A0x49b471322f958310!2sHyatt%20Regency%20Dehradun%20Resort%20and%20Spa!5e1!3m2!1sen!2sin!4v1738876333430!5m2!1sen!2sin"
                     width="100%"
                     height="400"
-                    allowFullScreen=""
+                    allowFullScreen
                     loading="lazy"
-                    title="Embedded Example Page"
+                    title="sdsdsd"
                 ></iframe>
+
             </div>
 
         </footer>
