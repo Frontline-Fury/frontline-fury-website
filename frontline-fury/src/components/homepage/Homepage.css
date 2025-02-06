@@ -690,3 +690,12 @@
     flex-direction: column;
   }
 }
+
+.faq-right {
+  width: 45%;
+  border-right: 1px solid #ddd;
+}
+
+.faq-left {
+  width: 55%;
+}
