@@ -62,6 +62,7 @@ const Footer = () => {
                     height="400"
                     allowFullScreen=""
                     loading="lazy"
+                    title="Embedded Example Page"
                 ></iframe>
             </div>
 
