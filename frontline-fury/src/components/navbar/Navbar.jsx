@@ -5,7 +5,7 @@ import logo from '../assests/Capture.PNG'
 const Navbar = () => {
     return (
         <nav className="navbar">
-            <img src={logo} alt='' width={300}/>
+            <img src={logo} alt='logo' width={300}/>
             <ul>
             
                 <li><a href="#home">Home</a></li>
