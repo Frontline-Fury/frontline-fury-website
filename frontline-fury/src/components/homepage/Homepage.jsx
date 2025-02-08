@@ -13,8 +13,8 @@ import ff from '../assests/ff.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
-import Navbar from '../navbar/Navbar';
-import Footer from '../footer/Footer';
+// import Navbar from '../navbar/Navbar';
+// import Footer from '../footer/Footer';
 
 
 
@@ -166,7 +166,7 @@ const Homepage = () => {
   return (
     <div>
 
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="home-container">
         {/* Banner Section */}
@@ -387,7 +387,7 @@ const Homepage = () => {
 
 
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 };
