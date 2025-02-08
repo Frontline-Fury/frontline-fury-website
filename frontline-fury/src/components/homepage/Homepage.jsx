@@ -23,107 +23,6 @@ import { useEffect } from 'react';
 
 
 
-const gamemodeData = [
-  {
-    title: 'Capture The Flag',
-    description: 'Battle for dominance in Capture the Flag! Strategize, outmaneuver opponents, and secure the enemy’s flag while defending your own to claim victory.',
-    image: captureTheFlagImg,
-  },
-  {
-    title: 'Spike Rush',
-    description: 'One team plants the objective, while the other fights to defuse it. Plan your tactics, hold your ground, and secure victory.',
-    image: spikeRushImg,
-  },
-  {
-    title: 'Battle Royal',
-    description: 'Every player for themselves! Eliminate opponents, survive the chaos, and be the last one standing to claim victory.',
-    image: battleRoyalImg,
-  },
-];
-
-const carouselData = [
-  {
-    title: "Experience the Ultimate Battle!",
-    description: "Get ready for adrenaline-pumping airsoft action in a realistic battleground.",
-    image: captureTheFlagImg,
-  },
-  {
-    title: "Game Modes & Events",
-    description: "Team Deathmatch, Capture the Flag, VIP Escort, and more exciting challenges await you!",
-    image: spikeRushImg,
-  },
-  {
-    title: "Top Shooters & Leaderboard",
-    description: "Compete with the best and rise to the top of the leaderboard!",
-    image: battleRoyalImg,
-  },
-];
-
-
-const faqData = [
-  {
-    question: "What is the objective of the airsoft arena?",
-    answer: "Our airsoft arena provides a realistic tactical experience, promoting team-based strategy and sportsmanship."
-  },
-  {
-    question: "What equipment do I need?",
-    answer: "We provide all necessary equipment, including airsoft guns, protective gear, and pellets. You can also bring your own gear if it meets safety standards."
-  },
-  {
-    question: "Is airsoft safe?",
-    answer: "Yes! We enforce strict safety rules, provide protective gear, and have trained referees monitoring all games."
-  },
-  {
-    question: "Do I need prior experience to play?",
-    answer: "No experience is needed! We offer beginner-friendly game modes and provide a quick training session before you start."
-  },
-  {
-    question: "How do I book a session?",
-    answer: "You can book a session through our website or contact us directly for reservations and group bookings."
-  }
-];
-
-
-
-const steps = [
-  { number: "1", title: "Choose Game Mode", description: "Pick from Capture The Flag, Battle Royale, or more!" },
-  { number: "2", title: "Select Date & Time", description: "Book a slot that suits you!" },
-  { number: "3", title: "Choose The Slot", description: "Choose a slot that suits you!" },
-  { number: "4", title: "Confirm Your Booking", description: "Pay, Confirm  & start the action!" },
-];
-
-
-const pricingPlans = [
-  { name: "Per Player", price: "₹1000", benefits: ["1 Hour Gameplay", "Basic Equipment", "Standard Arena"] },
-  { name: "Team Entry", price: "₹4000", benefits: ["3 Hours Gameplay", "Advanced Equipment", "Priority Booking"] },
-  { name: "Shooting Range", price: "₹500", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-  { name: "Private Events", price: "₹15000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-  { name: "VIP Membership", price: "₹7000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-];
-
-
-const testimonials = [
-  {
-    name: "Nandini Kishore",
-    image: battleRoyalImg,
-    quote: "Amazing experience! The best airsoft arena I've ever been to."
-  },
-  {
-    name: "Karan Singh Negi",
-    image: spikeRushImg,
-    quote: "Incredible game modes and friendly staff. Highly recommended!"
-  },
-  {
-    name: "Tarun Guleria",
-    image: captureTheFlagImg,
-    quote: "Had a blast with my friends. Can't wait to come back!"
-  },
-  {
-    name: "Jatin Agarwal",
-    image: captureTheFlagImg,
-    quote: "Had a blast with my friends. Can't wait to come back!"
-  }
-];
 
 
 
@@ -147,6 +46,114 @@ const Homepage = () => {
   }, []);
 
   const [selectedQuestion, setSelectedQuestion] = useState(0);
+
+
+
+
+  const gamemodeData = [
+    {
+      title: 'Capture The Flag',
+      description: 'Battle for dominance in Capture the Flag! Strategize, outmaneuver opponents, and secure the enemy’s flag while defending your own to claim victory.',
+      image: captureTheFlagImg,
+    },
+    {
+      title: 'Spike Rush',
+      description: 'One team plants the objective, while the other fights to defuse it. Plan your tactics, hold your ground, and secure victory.',
+      image: spikeRushImg,
+    },
+    {
+      title: 'Battle Royal',
+      description: 'Every player for themselves! Eliminate opponents, survive the chaos, and be the last one standing to claim victory.',
+      image: battleRoyalImg,
+    },
+  ];
+  
+  const carouselData = [
+    {
+      title: "Experience the Ultimate Battle!",
+      description: "Get ready for adrenaline-pumping airsoft action in a realistic battleground.",
+      image: captureTheFlagImg,
+    },
+    {
+      title: "Game Modes & Events",
+      description: "Team Deathmatch, Capture the Flag, VIP Escort, and more exciting challenges await you!",
+      image: spikeRushImg,
+    },
+    {
+      title: "Top Shooters & Leaderboard",
+      description: "Compete with the best and rise to the top of the leaderboard!",
+      image: battleRoyalImg,
+    },
+  ];
+  
+  
+  const faqData = [
+    {
+      question: "What is the objective of the airsoft arena?",
+      answer: "Our airsoft arena provides a realistic tactical experience, promoting team-based strategy and sportsmanship."
+    },
+    {
+      question: "What equipment do I need?",
+      answer: "We provide all necessary equipment, including airsoft guns, protective gear, and pellets. You can also bring your own gear if it meets safety standards."
+    },
+    {
+      question: "Is airsoft safe?",
+      answer: "Yes! We enforce strict safety rules, provide protective gear, and have trained referees monitoring all games."
+    },
+    {
+      question: "Do I need prior experience to play?",
+      answer: "No experience is needed! We offer beginner-friendly game modes and provide a quick training session before you start."
+    },
+    {
+      question: "How do I book a session?",
+      answer: "You can book a session through our website or contact us directly for reservations and group bookings."
+    }
+  ];
+  
+  
+  
+  const steps = [
+    { number: "1", title: "Choose Game Mode", description: "Pick from Capture The Flag, Battle Royale, or more!" },
+    { number: "2", title: "Select Date & Time", description: "Book a slot that suits you!" },
+    { number: "3", title: "Choose The Slot", description: "Choose a slot that suits you!" },
+    { number: "4", title: "Confirm Your Booking", description: "Pay, Confirm  & start the action!" },
+  ];
+  
+  
+  const pricingPlans = [
+    { name: "Per Player", price: "₹1000", benefits: ["1 Hour Gameplay", "Basic Equipment", "Standard Arena"] },
+    { name: "Team Entry", price: "₹4000", benefits: ["3 Hours Gameplay", "Advanced Equipment", "Priority Booking"] },
+    { name: "Shooting Range", price: "₹500", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
+    { name: "Private Events", price: "₹15000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
+    { name: "VIP Membership", price: "₹7000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
+  ];
+  
+  
+  const testimonials = [
+    {
+      name: "Nandini Kishore",
+      image: battleRoyalImg,
+      quote: "Amazing experience! The best airsoft arena I've ever been to."
+    },
+    {
+      name: "Karan Singh Negi",
+      image: spikeRushImg,
+      quote: "Incredible game modes and friendly staff. Highly recommended!"
+    },
+    {
+      name: "Tarun Guleria",
+      image: captureTheFlagImg,
+      quote: "Had a blast with my friends. Can't wait to come back!"
+    },
+    {
+      name: "Jatin Agarwal",
+      image: captureTheFlagImg,
+      quote: "Had a blast with my friends. Can't wait to come back!"
+    }
+  ];
+  
+
+
 
   
 
