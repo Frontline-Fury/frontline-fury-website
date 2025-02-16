@@ -222,18 +222,20 @@ const Homepage = () => {
 
         </div>
 
-
+        <div data-aos="fade-up">
         <div className="cta-section">
           <h2>Ready for Action?</h2>
           <p>Book your session now and experience the thrill!</p>
           <button>Book Now</button>
           <p>📞 Call: +91 639664369 | 📩 Email: info@frontlinefury.com</p>
         </div>
+        </div>
 
 
 
 
         {/* Game Modes Section */}
+        <div data-aos="fade-up">
         <div className="game-mode" id="features">
           <h2>Game Modes</h2>
           <div className="game-mode-container">
@@ -251,6 +253,7 @@ const Homepage = () => {
             ))}
           </div>
         </div>
+        </div>
 
 
 
@@ -258,6 +261,7 @@ const Homepage = () => {
 
 
         {/* Carousel Section */}
+        <div data-aos="fade-up">
         <div className="homepage-carousel">
           <Slider {...settings}>
             {carouselData.map((slide, index) => (
@@ -279,6 +283,7 @@ const Homepage = () => {
             ))}
           </Slider>
         </div>
+        </div>
 
 
 
@@ -287,7 +292,7 @@ const Homepage = () => {
 
 
 
-
+        <div data-aos="fade-up">
         <div className="pricing-section">
           <h2>Pricing</h2>
           <div className="pricing-container">
@@ -305,6 +310,7 @@ const Homepage = () => {
             ))}
           </div>
         </div>
+        </div>
 
 
 
@@ -319,7 +325,7 @@ const Homepage = () => {
 
 
 
-
+        <div data-aos="fade-up">
         <div className="testimonial-section">
           <h2>What Our Players Say</h2>
           <div className="testimonial-container">
@@ -342,9 +348,10 @@ const Homepage = () => {
             </div>
           </div>
         </div>
+        </div>
 
 
-
+        <div data-aos="fade-up">
         <div className="faq-container">
           <h2>Frequently Asked Questions</h2>
           <div className="faq-layout">
@@ -372,6 +379,7 @@ const Homepage = () => {
               </ul>
             </div>
           </div>
+        </div>
         </div>
 
 

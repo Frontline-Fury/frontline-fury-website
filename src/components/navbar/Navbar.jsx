@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Link import karo
 import './Navbar.css';
 import logo from '../assests/capture.jpeg'
 
@@ -7,14 +8,13 @@ const Navbar = () => {
         <nav className="navbar">
             <img src={logo} alt='logo' width={300}/>
             <ul>
-            
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#leaderboard">Leaderboard</a></li>
-                <li><a href="#pricing">Pricing</a></li>
-                <li><a href="#wavier">Waiver</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-                <li><a href="#signup/login">Signup/Login</a></li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/aboutus">About Us</Link></li>
+                <li><Link to="/leaderboard">Leaderboard</Link></li>
+                <li><Link to="/pricing">Pricing</Link></li>
+                <li><Link to="/waiver">Waiver</Link></li>
+                <li><Link to="/contact">Contact Us</Link></li>
+                <li><Link to="/signup-login">Signup/Login</Link></li>
             </ul>
         </nav>
     );
