@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://frontline-fury-backend.onrender.com/api/waivers"; // Change to your actual backend URL
+const API_URL = "https://frontline-fury-backend.onrender.com/api/waivers";
 
 export const submitWaiver = async (formData) => {
   try {

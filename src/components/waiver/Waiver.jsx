@@ -150,7 +150,7 @@ const Waiver = () => {
         {/* Waiver Form Section */}
         <div className="waiver-form">
           <h2>Frontline Fury Waiver Form</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             {/* First Name, Last Name, DOB */}
             <div className="form-row">
               <div className="form-group">
@@ -291,7 +291,7 @@ const Waiver = () => {
                 <input
                   type="radio"
                   id="yes"
-                  name="medical"
+                  name="medicalCondition"
                   value="yes"
                   checked={formData.medicalCondition === "Yes"}
                   onChange={handleChange}
@@ -303,7 +303,7 @@ const Waiver = () => {
                 <input
                   type="radio"
                   id="no"
-                  name="medical"
+                  name="medicalCondition"
                   value="no"
                   checked={formData.medicalCondition === "No"}
                   onChange={handleChange}
