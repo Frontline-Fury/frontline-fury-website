@@ -352,7 +352,9 @@
   font-size: 20px !important;
 }
 
-.pricing-section {
+
+
+/* .pricing-section {
   width: 85%;
   margin: 50px auto;
   background: #fff;
@@ -418,7 +420,10 @@
 
 .pricing-card button:hover {
   background: #ff9900;
-}
+} */
+
+
+
 
 .testimonial-section {
   width: 100%;

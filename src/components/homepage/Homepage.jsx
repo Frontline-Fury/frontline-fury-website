@@ -122,13 +122,13 @@ const Homepage = () => {
   ];
 
 
-  const pricingPlans = [
-    { name: "Per Player", price: "₹1000", benefits: ["1 Hour Gameplay", "Basic Equipment", "Standard Arena"] },
-    { name: "Team Entry", price: "₹4000", benefits: ["3 Hours Gameplay", "Advanced Equipment", "Priority Booking"] },
-    { name: "Shooting Range", price: "₹500", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-    { name: "Private Events", price: "₹15000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-    { name: "VIP Membership", price: "₹7000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-  ];
+  // const pricingPlans = [
+  //   { name: "Per Player", price: "₹1000", benefits: ["1 Hour Gameplay", "Basic Equipment", "Standard Arena"] },
+  //   { name: "Team Entry", price: "₹4000", benefits: ["3 Hours Gameplay", "Advanced Equipment", "Priority Booking"] },
+  //   { name: "Shooting Range", price: "₹500", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
+  //   { name: "Private Events", price: "₹15000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
+  //   { name: "VIP Membership", price: "₹7000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
+  // ];
 
 
   const testimonials = [
@@ -292,7 +292,7 @@ const Homepage = () => {
 
 
 
-        <div data-aos="fade-up">
+        {/* <div data-aos="fade-up">
         <div className="pricing-section">
           <h2>Pricing</h2>
           <div className="pricing-container">
@@ -310,7 +310,7 @@ const Homepage = () => {
             ))}
           </div>
         </div>
-        </div>
+        </div> */}
 
 
 
