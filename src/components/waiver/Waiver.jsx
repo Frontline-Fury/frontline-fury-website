@@ -294,7 +294,7 @@ const Waiver = () => {
                   id="yes"
                   name="medicalCondition"
                   value="yes"
-                  checked={formData.medicalCondition === "Yes"}
+                  checked={formData.medicalCondition === "yes"}
                   onChange={handleChange}
                   required
                 />
@@ -306,7 +306,7 @@ const Waiver = () => {
                   id="no"
                   name="medicalCondition"
                   value="no"
-                  checked={formData.medicalCondition === "No"}
+                  checked={formData.medicalCondition === "no"}
                   onChange={handleChange}
                   required
                 />
