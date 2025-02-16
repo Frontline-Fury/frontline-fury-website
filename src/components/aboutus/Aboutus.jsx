@@ -21,7 +21,7 @@ const Aboutus = () => {
         <div className="aboutus-story">
           <h2>Our Story</h2>
           <p>
-            Founded in [Year], our journey began with a passion to revolutionize the tech space.
+            Founded in 2025, our journey began with a passion to revolutionize the tech space.
             From humble beginnings, our dedicated team has been pushing boundaries to deliver exceptional experiences.
           </p>
         </div>
