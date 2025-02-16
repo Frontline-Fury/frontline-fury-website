@@ -20,8 +20,8 @@ const Waiver = () => {
     medicalCondition: "",
   });
 
-  const [setError] = useState("");
-  const [setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   // Handle input changes
   const handleChange = (e) => {
@@ -312,6 +312,10 @@ const Waiver = () => {
                 />
                 <label htmlFor="no">No</label>
               </div>
+            </div>
+            <div className="message-container">
+              {error && <p className="error-message">{error}</p>}
+              {success && <p className="success-message">{success}</p>}
             </div>
 
             <button type="submit">Submit</button>
