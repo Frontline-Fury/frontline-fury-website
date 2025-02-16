@@ -220,7 +220,7 @@ const Waiver = () => {
                   value={formData.state}
                   onChange={handleChange}
                 >
-                  <option>Select State</option>
+                  <option value="">Select State</option>
                   <option value="state1">State 1</option>
                   <option value="state2">State 2</option>
                 </select>
