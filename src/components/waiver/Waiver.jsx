@@ -20,8 +20,8 @@ const Waiver = () => {
     medicalCondition: "",
   });
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [setError] = useState("");
+  const [setSuccess] = useState("");
 
   // Handle input changes
   const handleChange = (e) => {
@@ -51,6 +51,7 @@ const Waiver = () => {
         email: "",
         medicalCondition: "",
       });
+      console.log(response);
     } catch (err) {
       setError(err.response?.data?.error || "Something went wrong!");
     }
