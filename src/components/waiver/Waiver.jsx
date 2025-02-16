@@ -1,10 +1,61 @@
-import React from 'react';
-import Navbar from '../navbar/Navbar';
-import Footer from '../footer/Footer';
-import './Waiver.css';
-import waiverimg from '../assests/waiverimg.jpg';
+import React, { useState } from "react";
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer";
+import "./Waiver.css";
+import waiverimg from "../assests/waiverimg.jpg";
+import { submitWaiver } from "../../api/waiverApi";
 
 const Waiver = () => {
+  // State to store form data
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    dob: "",
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    phone: "",
+    email: "",
+    medicalCondition: "",
+  });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await submitWaiver(formData);
+      setSuccess("Waiver submitted successfully!");
+
+      // Reset form after successful submission
+      setFormData({
+        firstName: "",
+        lastName: "",
+        dob: "",
+        address: "",
+        city: "",
+        state: "",
+        zip: "",
+        phone: "",
+        email: "",
+        medicalCondition: "",
+      });
+    } catch (err) {
+      setError(err.response?.data?.error || "Something went wrong!");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -18,40 +69,81 @@ const Waiver = () => {
           <h2>FRONTLINE FURY STANDARD WAIVER OF RELEASE OF LIABILITY</h2>
           <h3>READ CAREFULLY</h3>
           <p>
-            This waiver is intended for those players 18 years of age and older. For those players under 18 years of age needing parental or guardian approval, please use the button below. Upon agreement of these terms and conditions, your submission of the electronic form provided acts as your consent for our records and is valid until 12/31 of the current year.
+            This waiver is intended for those players 18 years of age and older.
+            For those players under 18 years of age needing parental or guardian
+            approval, please use the button below. Upon agreement of these terms
+            and conditions, your submission of the electronic form provided acts
+            as your consent for our records and is valid until 12/31 of the
+            current year.
           </p>
           <p>
-            In consideration of Frontline Fury furnishing privately owned land to enable me to participate in Airsoft games and activities, I agree to the following:
+            In consideration of Frontline Fury furnishing privately owned land
+            to enable me to participate in Airsoft games and activities, I agree
+            to the following:
           </p>
           <p>
             I fully understand and acknowledge that:
             <br />
-            (a) Risks and dangers exist in my use of Airsoft equipment and my participation in Airsoft activities.
+            (a) Risks and dangers exist in my use of Airsoft equipment and my
+            participation in Airsoft activities.
             <br />
-            (b) My participation in such activities and/or use of such equipment may result in my injury, or illness including but not limited to bodily injury, disease, sprains, fractures, partial and/or total paralysis, eye injury, blindness, heat stroke, heart attack, death, or other ailments that could cause serious disability.
+            (b) My participation in such activities and/or use of such equipment
+            may result in my injury, or illness including but not limited to
+            bodily injury, disease, sprains, fractures, partial and/or total
+            paralysis, eye injury, blindness, heat stroke, heart attack, death,
+            or other ailments that could cause serious disability.
             <br />
-            (c) These risks and dangers may be caused by the negligence of the officers or agents of Frontline Fury, the negligence of the participants, the negligence of others, accidents, breaches of contract, the forces of nature such as snakes, or other causes. These risks and dangers may arise from foreseeable or unforeseeable causes.
+            (c) These risks and dangers may be caused by the negligence of the
+            officers or agents of Frontline Fury, the negligence of the
+            participants, the negligence of others, accidents, breaches of
+            contract, the forces of nature such as snakes, or other causes.
+            These risks and dangers may arise from foreseeable or unforeseeable
+            causes.
             <br />
-            (d) By my participation in these activities and/or use of equipment, I assume all responsibility for any consequences.
+            (d) By my participation in these activities and/or use of equipment,
+            I assume all responsibility for any consequences.
           </p>
           <p>
-            I hereby assume all risks and dangers and all responsibility for any losses and/or damages, whether caused in whole or in part by the negligence or other conduct of the officers and agents of Frontline Fury.
+            I hereby assume all risks and dangers and all responsibility for any
+            losses and/or damages, whether caused in whole or in part by the
+            negligence or other conduct of the officers and agents of Frontline
+            Fury.
           </p>
           <p>
-            I, on behalf of myself, my personal representatives, and my heirs, voluntarily agree to release, waive, discharge, hold harmless, defend, and indemnify Frontline Fury, its agents, officers, and property owners from any and all claims, actions, or losses for bodily injury, property damage, wrongful death, or loss of services which may arise out of my use of Airsoft equipment, facilities, or my participation in Airsoft activities.
+            I, on behalf of myself, my personal representatives, and my heirs,
+            voluntarily agree to release, waive, discharge, hold harmless,
+            defend, and indemnify Frontline Fury, its agents, officers, and
+            property owners from any and all claims, actions, or losses for
+            bodily injury, property damage, wrongful death, or loss of services
+            which may arise out of my use of Airsoft equipment, facilities, or
+            my participation in Airsoft activities.
           </p>
           <p>
-            I understand that Frontline Fury reserves all rights to photographic and video footage. By participating in Frontline Fury events, I consent that my image may be captured in photographs and/or videos and utilized exclusively by Frontline Fury, with no compensation. Unauthorized use outside of Frontline Fury is prohibited without express permission.
+            I understand that Frontline Fury reserves all rights to photographic
+            and video footage. By participating in Frontline Fury events, I
+            consent that my image may be captured in photographs and/or videos
+            and utilized exclusively by Frontline Fury, with no compensation.
+            Unauthorized use outside of Frontline Fury is prohibited without
+            express permission.
           </p>
           <p>
-            I hereby acknowledge that I will abide by Frontline Fury’s recommended Rules and Eye/Face Protection Systems.
+            I hereby acknowledge that I will abide by Frontline Fury’s
+            recommended Rules and Eye/Face Protection Systems.
           </p>
           <p>
-            I have read, understood, and agree to abide by the posted Frontline Fury Rules and Policies, Player Conduct, and General Rules. I voluntarily submit my information with the understanding that it is a legally binding agreement.
+            I have read, understood, and agree to abide by the posted Frontline
+            Fury Rules and Policies, Player Conduct, and General Rules. I
+            voluntarily submit my information with the understanding that it is
+            a legally binding agreement.
           </p>
-          <h3>THIS IS A RELEASE/HOLD HARMLESS AGREEMENT, READ BEFORE SIGNING:</h3>
+          <h3>
+            THIS IS A RELEASE/HOLD HARMLESS AGREEMENT, READ BEFORE SIGNING:
+          </h3>
           <p>
-            I am 18 years of age or older and have executed this Agreement on the date of my form submission. By submitting the form, I declare that I have read, understood, and agree to Frontline Fury’s “Field Safety Rules, Player Conduct, and General Rules.”
+            I am 18 years of age or older and have executed this Agreement on
+            the date of my form submission. By submitting the form, I declare
+            that I have read, understood, and agree to Frontline Fury’s “Field
+            Safety Rules, Player Conduct, and General Rules.”
           </p>
         </div>
 
@@ -63,33 +155,71 @@ const Waiver = () => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="first-name">First Name *</label>
-                <input type="text" id="first-name" required />
+                <input
+                  type="text"
+                  id="first-name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="last-name">Last Name *</label>
-                <input type="text" id="last-name" required />
+                <input
+                  type="text"
+                  id="last-name"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="dob">Date of Birth *</label>
-                <input type="date" id="dob" required />
+                <input
+                  type="date"
+                  id="dob"
+                  name="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
 
             {/* Address (Full Width) */}
             <div className="form-group full-width">
               <label htmlFor="address">Address</label>
-              <input type="text" id="address" />
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={formData.address}
+                onChange={handleChange}
+              />
             </div>
 
             {/* State, City, ZIP */}
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="city">City</label>
-                <input type="text" id="city" />
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="state">State/Province</label>
-                <select id="state">
+                <select
+                  id="state"
+                  name="state"
+                  value={formData.state}
+                  onChange={handleChange}
+                >
                   <option>Select State</option>
                   <option value="state1">State 1</option>
                   <option value="state2">State 2</option>
@@ -97,7 +227,13 @@ const Waiver = () => {
               </div>
               <div className="form-group">
                 <label htmlFor="zip">Zip/Postal</label>
-                <input type="text" id="zip" />
+                <input
+                  type="text"
+                  id="zip"
+                  name="zip"
+                  value={formData.zip}
+                  onChange={handleChange}
+                />
               </div>
             </div>
 
@@ -105,11 +241,25 @@ const Waiver = () => {
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="phone">Phone Number *</label>
-                <input type="tel" id="phone" required />
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email *</label>
-                <input type="email" id="email" required />
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
               </div>
             </div>
 
@@ -138,11 +288,27 @@ const Waiver = () => {
             <div className="radio-group">
               <label>I have a medical condition or concern *</label>
               <div className="radio-item">
-                <input type="radio" id="yes" name="medical" value="yes" required />
+                <input
+                  type="radio"
+                  id="yes"
+                  name="medical"
+                  value="yes"
+                  checked={formData.medicalCondition === "Yes"}
+                  onChange={handleChange}
+                  required
+                />
                 <label htmlFor="yes">Yes</label>
               </div>
               <div className="radio-item">
-                <input type="radio" id="no" name="medical" value="no" required />
+                <input
+                  type="radio"
+                  id="no"
+                  name="medical"
+                  value="no"
+                  checked={formData.medicalCondition === "No"}
+                  onChange={handleChange}
+                  required
+                />
                 <label htmlFor="no">No</label>
               </div>
             </div>
