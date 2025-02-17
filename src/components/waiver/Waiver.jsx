@@ -4,6 +4,7 @@ import Footer from "../footer/Footer";
 import "./Waiver.css";
 import waiverimg from "../assests/waiverimg.jpg";
 import { submitWaiver } from "../../api/waiverApi";
+import Signup from "../signup/Signup";
 
 const Waiver = () => {
   // State to store form data
@@ -19,6 +20,9 @@ const Waiver = () => {
     email: "",
     medicalCondition: "",
   });
+
+  
+  const [isSignupOpen, setSignupOpen] = useState(false);
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -59,7 +63,8 @@ const Waiver = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar onSignupClick={() => setSignupOpen(true)}/>
+        <Signup isOpen={isSignupOpen} onClose={() => setSignupOpen(false)}/>
       <div className="waiver-container">
         <div className="waiver-image-wrapper">
           <img src={waiverimg} alt="waiverimg" />

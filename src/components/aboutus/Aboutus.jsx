@@ -1,15 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../navbar/Navbar";
 import "./Aboutus.css";
 import Footer from "../footer/Footer";
 import nandiniimg from '../assests/nandini.jpeg';
 import karanimg from '../assests/karan.jpeg';
 import tarunimg from '../assests/tarun.jpeg';
+import Signup from "../signup/Signup";
 
 const Aboutus = () => {
+  
+  const [isSignupOpen, setSignupOpen] = useState(false);
   return (
     <>
-      <Navbar />
+      <Navbar onSignupClick={() => setSignupOpen(true)} />
+        <Signup isOpen={isSignupOpen} onClose={() => setSignupOpen(false)}/>
       <div className="aboutus-container">
         <section className="aboutus-header">
           <h1>About Us</h1>

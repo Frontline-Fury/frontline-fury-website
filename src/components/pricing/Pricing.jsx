@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState }  from "react";
 import "./Pricing.css";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
+import Signup from "../signup/Signup";
 
 const Pricing = () => {
+  
+  const [isSignupOpen, setSignupOpen] = useState(false);
   return (
     <>
-      <Navbar />
+      <Navbar onSignupClick={() => setSignupOpen(true)} />
+        <Signup isOpen={isSignupOpen} onClose={() => setSignupOpen(false)}/>
       <div className="pricing-page-container">
 
         {/* Pricing Plans Section */}

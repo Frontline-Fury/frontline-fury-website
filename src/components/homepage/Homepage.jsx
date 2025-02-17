@@ -15,6 +15,7 @@ import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
+import Signup from '../signup/Signup';
 
 
 
@@ -41,6 +42,13 @@ const Homepage = () => {
     fade: true,
     arrows: false,
   };
+
+
+  // State to manage the signup modal
+  const [isSignupOpen, setSignupOpen] = useState(false);
+  // State to manage the logged-in user; null means not logged in.
+  const [user, setUser] = useState(null);
+
 
 
   useEffect(() => {
@@ -166,7 +174,20 @@ const Homepage = () => {
   return (
     <div>
 
-      <Navbar />
+      <Navbar onSignupClick={() => setSignupOpen(true)}
+        user={user} />
+
+      <Signup
+        isOpen={isSignupOpen}
+        onClose={() => setSignupOpen(false)}
+        onAuthSuccess={(userData) => {
+          setUser(userData);
+          setSignupOpen(false);
+        }}
+      />
+
+
+
 
       <div className="home-container">
         {/* Banner Section */}
@@ -223,12 +244,12 @@ const Homepage = () => {
         </div>
 
         <div data-aos="fade-up">
-        <div className="cta-section">
-          <h2>Ready for Action?</h2>
-          <p>Book your session now and experience the thrill!</p>
-          <button>Book Now</button>
-          <p>📞 Call: +91 639664369 | 📩 Email: info@frontlinefury.com</p>
-        </div>
+          <div className="cta-section">
+            <h2>Ready for Action?</h2>
+            <p>Book your session now and experience the thrill!</p>
+            <button>Book Now</button>
+            <p>📞 Call: +91 639664369 | 📩 Email: info@frontlinefury.com</p>
+          </div>
         </div>
 
 
@@ -236,23 +257,23 @@ const Homepage = () => {
 
         {/* Game Modes Section */}
         <div data-aos="fade-up">
-        <div className="game-mode" id="features">
-          <h2>Game Modes</h2>
-          <div className="game-mode-container">
-            {gamemodeData.map((gamemode, index) => (
-              <div className="game-mode-card" key={index}>
-                <div className="game-mode-image">
-                  <img src={gamemode.image} alt={gamemode.title} />
+          <div className="game-mode" id="features">
+            <h2>Game Modes</h2>
+            <div className="game-mode-container">
+              {gamemodeData.map((gamemode, index) => (
+                <div className="game-mode-card" key={index}>
+                  <div className="game-mode-image">
+                    <img src={gamemode.image} alt={gamemode.title} />
+                  </div>
+                  <div className="game-mode-content">
+                    <h3>{gamemode.title}</h3>
+                    <p>{gamemode.description}</p>
+                  </div>
+                  <button className="book-now-button">Book Now</button>
                 </div>
-                <div className="game-mode-content">
-                  <h3>{gamemode.title}</h3>
-                  <p>{gamemode.description}</p>
-                </div>
-                <button className="book-now-button">Book Now</button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
         </div>
 
 
@@ -262,27 +283,27 @@ const Homepage = () => {
 
         {/* Carousel Section */}
         <div data-aos="fade-up">
-        <div className="homepage-carousel">
-          <Slider {...settings}>
-            {carouselData.map((slide, index) => (
-              <div key={index} className="relative w-full h-screen">
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="w-full h-screen object-cover"
-                />
-                <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white text-center p-6">
-                  <h1 className="text-4xl md:text-6xl font-bold">
-                    {slide.title}
-                  </h1>
-                  <p className="mt-4 text-lg md:text-2xl">
-                    {slide.description}
-                  </p>
+          <div className="homepage-carousel">
+            <Slider {...settings}>
+              {carouselData.map((slide, index) => (
+                <div key={index} className="relative w-full h-screen">
+                  <img
+                    src={slide.image}
+                    alt={slide.title}
+                    className="w-full h-screen object-cover"
+                  />
+                  <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white text-center p-6">
+                    <h1 className="text-4xl md:text-6xl font-bold">
+                      {slide.title}
+                    </h1>
+                    <p className="mt-4 text-lg md:text-2xl">
+                      {slide.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </Slider>
-        </div>
+              ))}
+            </Slider>
+          </div>
         </div>
 
 
@@ -326,60 +347,60 @@ const Homepage = () => {
 
 
         <div data-aos="fade-up">
-        <div className="testimonial-section">
-          <h2>What Our Players Say</h2>
-          <div className="testimonial-container">
-            <div className="testimonial-slider">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="testimonial-card">
-                  <img src={testimonial.image} alt={testimonial.name} />
-                  <h3>{testimonial.name}</h3>
-                  <p>{testimonial.quote}</p>
-                </div>
-              ))}
-              {/* Duplicate for seamless scrolling */}
-              {testimonials.map((testimonial, index) => (
-                <div key={index + testimonials.length} className="testimonial-card">
-                  <img src={testimonial.image} alt={testimonial.name} />
-                  <h3>{testimonial.name}</h3>
-                  <p>{testimonial.quote}</p>
-                </div>
-              ))}
+          <div className="testimonial-section">
+            <h2>What Our Players Say</h2>
+            <div className="testimonial-container">
+              <div className="testimonial-slider">
+                {testimonials.map((testimonial, index) => (
+                  <div key={index} className="testimonial-card">
+                    <img src={testimonial.image} alt={testimonial.name} />
+                    <h3>{testimonial.name}</h3>
+                    <p>{testimonial.quote}</p>
+                  </div>
+                ))}
+                {/* Duplicate for seamless scrolling */}
+                {testimonials.map((testimonial, index) => (
+                  <div key={index + testimonials.length} className="testimonial-card">
+                    <img src={testimonial.image} alt={testimonial.name} />
+                    <h3>{testimonial.name}</h3>
+                    <p>{testimonial.quote}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
         </div>
 
 
         <div data-aos="fade-up">
-        <div className="faq-container">
-          <h2>Frequently Asked Questions</h2>
-          <div className="faq-layout">
+          <div className="faq-container">
+            <h2>Frequently Asked Questions</h2>
+            <div className="faq-layout">
 
-            <div className="faq-right">
-              <h3>Articles in this section</h3>
-              <ul>
-                {faqData.map((item, index) => (
-                  <li
-                    key={index}
-                    className={index === selectedQuestion ? "active" : ""}
-                    onClick={() => setSelectedQuestion(index)}
-                  >
-                    {item.question}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="faq-left">
-              <h1>{faqData[selectedQuestion].question}</h1>
-              <ul>
-                {faqData[selectedQuestion].answer.split("\n").map((line, idx) => (
-                  <li key={idx}>{line.trim()}</li>
-                ))}
-              </ul>
+              <div className="faq-right">
+                <h3>Articles in this section</h3>
+                <ul>
+                  {faqData.map((item, index) => (
+                    <li
+                      key={index}
+                      className={index === selectedQuestion ? "active" : ""}
+                      onClick={() => setSelectedQuestion(index)}
+                    >
+                      {item.question}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="faq-left">
+                <h1>{faqData[selectedQuestion].question}</h1>
+                <ul>
+                  {faqData[selectedQuestion].answer.split("\n").map((line, idx) => (
+                    <li key={idx}>{line.trim()}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
         </div>
 
 
@@ -395,7 +416,7 @@ const Homepage = () => {
 
 
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
