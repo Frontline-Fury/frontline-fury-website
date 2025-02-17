@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import { signupUser } from "../api/authApi";
+import { signupUser } from "../../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [isSignUp, setIsSignUp] = useState(true);
