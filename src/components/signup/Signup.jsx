@@ -7,7 +7,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [Username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  
 
   if (!isOpen) return null;
 
@@ -20,7 +20,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
       onAuthSuccess(response); // Pass user data to parent component
       onClose(); // Close the modal
     } catch (err) {
-      setError(err.response?.data?.error || "Signup failed");
+      console.log("signup failed.");
     }
   };
 
@@ -66,9 +66,6 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
               <p>
                 Lost Password? <a href="kk">Click Here</a>
               </p>
-            </div>
-            <div className="message-container">
-              {error && <p className="error-message">{error}</p>}
             </div>
             <div className="btn-field">
               <button type="submit" onClick={() => setIsSignUp(true)}>
