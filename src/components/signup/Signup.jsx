@@ -4,7 +4,7 @@ import { signupUser } from "../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [isSignUp, setIsSignUp] = useState(true);
-  const [Username, setUserName] = useState("");
+  const [Username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +13,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = { UserName, email, password };
+      const userData = { Username, email, password };
       const response = await signupUser(userData);
       console.log("Signup successful:", response);
       onAuthSuccess(response); // Pass user data to parent component
@@ -43,7 +43,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
                     type="text"
                     placeholder="Name"
                     value={Username}
-                    onChange={(e) => setUserName(e.target.value)}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                   />
                 </div>
