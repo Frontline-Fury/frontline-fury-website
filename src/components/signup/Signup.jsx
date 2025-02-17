@@ -67,6 +67,9 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
                 Lost Password? <a href="kk">Click Here</a>
               </p>
             </div>
+            <div className="message-container">
+              {error && <p className="error-message">{error}</p>}
+            </div>
             <div className="btn-field">
               <button type="submit" onClick={() => setIsSignUp(true)}>
                 Sign Up
