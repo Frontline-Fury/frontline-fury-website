@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import { signupUser } from "../../api/authApi";
+import { signupUser, loginUser } from "../../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -14,14 +14,26 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userData = { Username, email, password };
-      const response = await signupUser(userData);
-      console.log("Signup successful:", response);
+      let response;
+      const userData = { email, password }; // Only email and password for login
+
+      if (isSignUp) {
+        // Sign Up
+        response = await signupUser({ Username, email, password }); // Send all data for sign up
+        console.log("Signup successful:", response);
+      } else {
+        // Login
+        response = await loginUser(userData); // Only email and password for login
+        console.log("Login successful:", response);
+      }
+
       onAuthSuccess(response); // Pass user data to parent component
-      onClose(); // Close the modal
+      onClose(); // Close the modal after success
     } catch (err) {
-      console.error("Signup failed:", err.response?.data?.error || err.message); // Log detailed error
-      setError("Signup failed, please try again."); // Set error message
+      console.error("Error:", err.response?.data?.error || err.message);
+      setError(
+        err.response?.data?.error || "Authentication failed. Please try again."
+      );
     }
   };
 
