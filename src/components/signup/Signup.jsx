@@ -3,7 +3,6 @@ import "./Signup.css";
 import { signupUser, loginUser } from "../../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
-  const [isSignUp, setIsSignUp] = useState(true);
   const [Username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,22 +10,28 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
 
   if (!isOpen) return null;
 
-  const handleSubmit = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      let response;
+      const userData = { Username, email, password }; // Send all data for sign up
+      const response = await signupUser(userData); // Call signupUser function
+      console.log("Signup successful:", response);
+      onAuthSuccess(response); // Pass user data to parent component
+      onClose(); // Close the modal after success
+    } catch (err) {
+      console.error("Error:", err.response?.data?.error || err.message);
+      setError(
+        err.response?.data?.error || "Authentication failed. Please try again."
+      );
+    }
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
       const userData = { email, password }; // Only email and password for login
-
-      if (isSignUp) {
-        // Sign Up
-        response = await signupUser({ Username, email, password }); // Send all data for sign up
-        console.log("Signup successful:", response);
-      } else {
-        // Login
-        response = await loginUser(userData); // Only email and password for login
-        console.log("Login successful:", response);
-      }
-
+      const response = await loginUser(userData); // Call loginUser function
+      console.log("Login successful:", response);
       onAuthSuccess(response); // Pass user data to parent component
       onClose(); // Close the modal after success
     } catch (err) {
@@ -41,21 +46,21 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     <div className="signup-modal-overlay" onClick={onClose}>
       <div className="signup-modal" onClick={(e) => e.stopPropagation()}>
         <div className="form-box">
-          <h1>{isSignUp ? "Sign Up" : "Sign In"}</h1>
-          <form onSubmit={handleSubmit}>
+          <h1>Sign Up / Sign In</h1>
+          <form>
             <div className="input-group">
-              {isSignUp && (
-                <div className="input-field">
-                  <i className="fa-solid fa-user"></i>
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    value={Username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                </div>
-              )}
+              {/* Sign Up Field */}
+              {/* Username input for Sign Up */}
+              <div className="input-field">
+                <i className="fa-solid fa-user"></i>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={Username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+              </div>
               <div className="input-field">
                 <i className="fa-solid fa-envelope"></i>
                 <input
@@ -76,16 +81,18 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
                   required
                 />
               </div>
+
               <p>
                 Lost Password? <a href="kk">Click Here</a>
               </p>
             </div>
             {error && <p className="error-message">{error}</p>}
             <div className="btn-field">
-              <button type="submit" onClick={() => setIsSignUp(true)}>
+              {/* Buttons to handle sign up and sign in separately */}
+              <button type="button" onClick={handleSignUp}>
                 Sign Up
               </button>
-              <button type="submit" onClick={() => setIsSignUp(false)}>
+              <button type="button" onClick={handleSignIn}>
                 Sign In
               </button>
             </div>
