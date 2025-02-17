@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Signup.css";
+import { signupUser } from "../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [isSignUp, setIsSignUp] = useState(true);
@@ -9,10 +10,18 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Yahan aap apne backend ke sath authentication ya dummy validation kar sakte hain.
-    
+    try {
+      const userData = { UserName, email, password };
+      const response = await signupUser(userData);
+      console.log("Signup successful:", response);
+      onAuthSuccess(response); // Pass user data to parent component
+      onClose(); // Close the modal
+    } catch (err) {
+      setError(err.response?.data?.error || "Signup failed");
+    }
+
     const userData = {
       name: isSignUp ? Username : "User",
       email,
@@ -64,16 +73,10 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
               </p>
             </div>
             <div className="btn-field">
-              <button
-                type="submit"
-                onClick={() => setIsSignUp(true)}
-              >
+              <button type="submit" onClick={() => setIsSignUp(true)}>
                 Sign Up
               </button>
-              <button
-                type="submit"
-                onClick={() => setIsSignUp(false)}
-              >
+              <button type="submit" onClick={() => setIsSignUp(false)}>
                 Sign In
               </button>
             </div>
