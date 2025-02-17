@@ -7,6 +7,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [Username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
   if (!isOpen) return null;
 
@@ -21,12 +22,6 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     } catch (err) {
       setError(err.response?.data?.error || "Signup failed");
     }
-
-    const userData = {
-      name: isSignUp ? Username : "User",
-      email,
-    };
-    onAuthSuccess(userData);
   };
 
   return (
