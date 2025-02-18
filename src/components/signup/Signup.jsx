@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import "./Signup.css";
-import { signupUser, loginUser } from "../../api/authApi";
+import {
+  signupUser,
+  loginUser,
+  checkUsernameAvailability,
+} from "../../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [Username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Add error state for displaying error messages
+  const [error, setError] = useState("");
+  const [usernameStatus, setUsernameStatus] = useState("");
 
   if (!isOpen) return null;
+
+  const handleUsernameChange = async (e) => {
+    const newUsername = e.target.value;
+    setUsername(newUsername);
+
+    if (newUsername.length < 3) {
+      setUsernameStatus("Username must be at least 3 characters.");
+      return;
+    }
+
+    try {
+      const response = await checkUsernameAvailability(newUsername);
+      setUsernameStatus(response.message);
+    } catch (err) {
+      setUsernameStatus("Error checking username availability.");
+    }
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -57,10 +79,11 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
                   type="text"
                   placeholder="Username"
                   value={Username}
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={handleUsernameChange}
                   required
                 />
               </div>
+              <p className="username-status">{usernameStatus}</p>
               <div className="input-field">
                 <i className="fa-solid fa-envelope"></i>
                 <input

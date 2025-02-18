@@ -27,3 +27,19 @@ export const loginUser = async (userData) => {
     throw error;
   }
 };
+
+// Check username availability
+export const checkUsernameAvailability = async (username) => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/check-username?Username=${username}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Username check error:",
+      error.response?.data || error.message
+    );
+    throw error;
+  }
+};
