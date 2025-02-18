@@ -33,7 +33,7 @@ const Navbar = ({ onSignupClick, user }) => {
                 <li><Link to="/profile">Profile</Link></li>
                 <li><Link to="/friends">Friends</Link></li>
                 <li><Link to="/notifications">Notifications</Link></li>
-                <li><Link to="/help">Help</Link></li>
+                <li><Link to="/help">Help Center</Link></li>
                 <li><Link to="/settings">Settings</Link></li>
                 <li><Link to="/logout">Logout</Link></li>
               </ul>

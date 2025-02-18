@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-
+import { useEffect } from 'react';
 import './Homepage.css';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import captureTheFlagImg from '../assests/captureflag.jpg';
 import spikeRushImg from '../assests/spikerush.jpg';
 import battleRoyalImg from '../assests/battleroyale.jpg';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import ff from '../assests/ff.png';
-
-
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from 'react';
 import Navbar from '../navbar/Navbar';
 import Footer from '../footer/Footer';
 import Signup from '../signup/Signup';

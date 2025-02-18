@@ -14,14 +14,14 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    /* border: 2px solid red; */
+    
 }
 
 .navbar ul {
     display: flex;
-    align-items: center;  /* Vertically center-align the items */
+    align-items: center; 
     gap: 10px;
-    /* border: 2px solid red; */
+ 
 }
 
 .navbar li {
@@ -30,7 +30,7 @@
     text-decoration: none;
     transition: color 0.3s;
     list-style: none;
-    /* border: 2px solid green; */
+    
 }
 
 .navbar a {
@@ -57,7 +57,6 @@
     display: flex;          
     align-items: center;    
     justify-content: center;
-    /* border: 2px solid green; */
     object-fit: cover;
 }
 
@@ -65,7 +64,7 @@
     width: 100%; 
     height: 100%;
     object-fit: cover; 
-    /* border: 2px solid red; */
+ 
 }
 
 .profile-container {
@@ -79,13 +78,13 @@
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    /* padding: 5px; */
+   
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 50px; /* Dropdown menu ko neeche shift karne ke liye */
-    right: 0px;
+    top: 50px;
+    right: -20px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;

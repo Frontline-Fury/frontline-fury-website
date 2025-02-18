@@ -4,6 +4,25 @@
   box-sizing: border-box;
 }
 
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+
+
+
 .home-container {
   text-align: center;
   background-color: #fff;
