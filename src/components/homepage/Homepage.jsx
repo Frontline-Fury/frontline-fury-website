@@ -10,9 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ff from '../assests/ff.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Navbar from '../navbar/Navbar';
-import Footer from '../footer/Footer';
-import Signup from '../signup/Signup';
+
 
 
 
@@ -41,10 +39,7 @@ const Homepage = () => {
   };
 
 
-  // State to manage the signup modal
-  const [isSignupOpen, setSignupOpen] = useState(false);
-  // State to manage the logged-in user; null means not logged in.
-  const [user, setUser] = useState(null);
+
 
 
 
@@ -171,18 +166,9 @@ const Homepage = () => {
   return (
     <div>
 
-      <Navbar onSignupClick={() => setSignupOpen(true)}
-        user={user} />
+      
 
-      <Signup
-        isOpen={isSignupOpen}
-        onClose={() => setSignupOpen(false)}
-        onAuthSuccess={(userData) => {
-          setUser(userData);
-          setSignupOpen(false);
-        }}
-      />
-
+     
 
 
 
@@ -413,7 +399,7 @@ const Homepage = () => {
 
 
       </div>
-      <Footer />
+    
     </div>
   );
 };

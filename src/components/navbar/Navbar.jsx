@@ -1,14 +1,15 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../assests/capture.jpeg";
-import karanprofile from '../assests/karan.jpeg';
+import karanprofile from '../assests/karan.jpeg'; // Default profile image
 
 const Navbar = ({ onSignupClick, user }) => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const toggleDropdown = () => {
-        setDropdownOpen(!dropdownOpen);
-      };
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
   return (
     <nav className="navbar">
       <img src={logo} alt="logo" width={300} />
@@ -23,7 +24,7 @@ const Navbar = ({ onSignupClick, user }) => {
         {user ? (
           <div className="profile-container">
             <img
-              src={karanprofile}
+              src={user.profileImage || karanprofile} // Use user profile image if available
               alt="Profile"
               className="profile-image"
               onClick={toggleDropdown}

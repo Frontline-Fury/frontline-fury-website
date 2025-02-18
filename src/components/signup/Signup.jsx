@@ -7,11 +7,11 @@ import {
 } from "../../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
-  const [Username, setUsername] = useState("");
+  const [Username, setUsername] = useState(""); // Changed to camelCase
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [usernameStatus, setUsernameStatus] = useState("");
+  const [UsernameStatus, setUsernameStatus] = useState("");
 
   if (!isOpen) return null;
 
@@ -35,15 +35,16 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const userData = { Username, email, password }; // Send all data for sign up
-      const response = await signupUser(userData); // Call signupUser function
+      const userData = { Username, email, password }; // using username instead of Username
+      const response = await signupUser(userData);
       console.log("Signup successful:", response);
-      onAuthSuccess(response); // Pass user data to parent component
-      onClose(); // Close the modal after success
+      onAuthSuccess(response);
+      onClose();
     } catch (err) {
       console.error("Error:", err.response?.data?.error || err.message);
       setError(
-        err.response?.data?.error || "Authentication failed. Please try again."
+        err.response?.data?.error ||
+          "Authentication failed. Please try again."
       );
     }
   };
@@ -51,15 +52,16 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      const userData = { email, password }; // Only email and password for login
-      const response = await loginUser(userData); // Call loginUser function
+      const userData = { email, password };
+      const response = await loginUser(userData);
       console.log("Login successful:", response);
-      onAuthSuccess(response); // Pass user data to parent component
-      onClose(); // Close the modal after success
+      onAuthSuccess(response);
+      onClose();
     } catch (err) {
       console.error("Error:", err.response?.data?.error || err.message);
       setError(
-        err.response?.data?.error || "Authentication failed. Please try again."
+        err.response?.data?.error ||
+          "Authentication failed. Please try again."
       );
     }
   };
@@ -71,8 +73,6 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
           <h1>Sign Up / Sign In</h1>
           <form>
             <div className="input-group">
-              {/* Sign Up Field */}
-              {/* Username input for Sign Up */}
               <div className="input-field">
                 <i className="fa-solid fa-user"></i>
                 <input
@@ -83,7 +83,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
                   required
                 />
               </div>
-              <p className="username-status">{usernameStatus}</p>
+              <p className="username-status">{UsernameStatus}</p>
               <div className="input-field">
                 <i className="fa-solid fa-envelope"></i>
                 <input
@@ -106,12 +106,11 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
               </div>
 
               <p>
-                Lost Password? <a href="kk">Click Here</a>
+                Lost Password? <a href="#!">Click Here</a>
               </p>
             </div>
             {error && <p className="error-message">{error}</p>}
             <div className="btn-field">
-              {/* Buttons to handle sign up and sign in separately */}
               <button type="button" onClick={handleSignUp}>
                 Sign Up
               </button>
@@ -124,6 +123,11 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
       </div>
     </div>
   );
+};
+
+// Set default props to prevent errors if onAuthSuccess isn't provided
+Signup.defaultProps = {
+  onAuthSuccess: () => {},
 };
 
 export default Signup;

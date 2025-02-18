@@ -1,16 +1,12 @@
-import React, { useState }  from "react";
+import React  from "react";
 import "./Pricing.css";
-import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer";
-import Signup from "../signup/Signup";
+
 
 const Pricing = () => {
   
-  const [isSignupOpen, setSignupOpen] = useState(false);
   return (
     <>
-      <Navbar onSignupClick={() => setSignupOpen(true)} />
-        <Signup isOpen={isSignupOpen} onClose={() => setSignupOpen(false)}/>
+      
       <div className="pricing-page-container">
 
         {/* Pricing Plans Section */}
@@ -87,7 +83,7 @@ const Pricing = () => {
           </div>
         </div>
       </div>
-      <Footer />
+  
     </>
   );
 };

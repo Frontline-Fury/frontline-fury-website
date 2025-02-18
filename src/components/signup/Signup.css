@@ -9,7 +9,7 @@
 /* Modal overlay CSS (add this to the bottom ya alag file) */
 .signup-modal-overlay {
     position: fixed;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     top: 0;
     left: 0;
     width: 100%;
