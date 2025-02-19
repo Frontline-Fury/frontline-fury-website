@@ -1,5 +1,5 @@
 // App.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Aboutus from "./components/aboutus/Aboutus";
 import Homepage from "./components/homepage/Homepage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -10,7 +10,16 @@ import Layout from "./components/layout/Layout";
 import Leaderboard from "./components/leaderboard/Leaderboard";
 
 function App() {
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
+
+
 
   return (
     <Router>
@@ -18,6 +27,7 @@ function App() {
         user={user} 
         onAuthSuccess={(userData) => {
           setUser(userData);
+          localStorage.setItem("user", JSON.stringify(userData));
         }}
       >
         <Routes>

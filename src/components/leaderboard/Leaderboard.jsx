@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaSearch } from "react-icons/fa";
+// import { FaBullhorn } from "react-icons/fa";
 import "./Leaderboard.css";
 
 const initialLeaderboardData = [
@@ -20,6 +21,22 @@ const initialLeaderboardData = [
   // Add more players as needed...
 ];
 
+
+const announcementsData = [
+    " New tournament starting next week! Register now!",
+    " Top 3 players this month will win exclusive rewards!",
+    " Player 'X' just hit a record-breaking score!",
+    " Weekend challenge: Win 5 matches to earn bonus points!",
+    " Leaderboard reset coming soon – prepare for the next season!"
+  ];
+
+
+
+
+
+
+
+
 // Sort leaderboard data by wins in descending order
 const sortedLeaderboardData = [...initialLeaderboardData].sort(
   (a, b) => b.wins - a.wins
@@ -28,6 +45,18 @@ const sortedLeaderboardData = [...initialLeaderboardData].sort(
 const Leaderboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const firstMatchRef = useRef(null);
+
+
+
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % announcementsData.length);
+    }, 3000); // Change announcement every 3 seconds
+    return () => clearInterval(interval);
+  }, []);
+
 
   // When searchTerm changes, if there's a matching row, scroll it into view
   useEffect(() => {
@@ -44,59 +73,61 @@ const Leaderboard = () => {
   let firstMatchAssigned = false;
 
   return (
-    <div className="leaderboard-container">
-      <h1>Leaderboards</h1>
-      <p>Radiant</p>
+    <><div className="leaderboard-container">
+          <h1>Leaderboards</h1>
+          <p>Radiant</p>
 
-      {/* Search Bar with icon */}
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Search by player name..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <FaSearch className="search-icon" />
-      </div>
+          {/* Search Bar with icon */}
+          <div className="search-container">
+              <input
+                  type="text"
+                  placeholder="Search by player name..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)} />
+              <FaSearch className="search-icon" />
+          </div>
 
-      {/* Leaderboard Table */}
-      <div className="table-wrapper">
-        <table className="leaderboard-table">
-          <thead>
-            <tr>
-              <th>Position</th>
-              <th>Name</th>
-              <th>Rating</th>
-              <th>Games Won</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedLeaderboardData.map((player, index) => {
-              const match = player.name
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase());
-              let rowRef = null;
-              if (searchTerm && match && !firstMatchAssigned) {
-                rowRef = firstMatchRef;
-                firstMatchAssigned = true;
-              }
-              return (
-                <tr
-                  key={player.name}
-                  ref={rowRef}
-                  className={match && searchTerm ? "highlight" : ""}
-                >
-                  <td>{index + 1}</td>
-                  <td>{player.name}</td>
-                  <td>{player.Rating}</td>
-                  <td>{player.wins}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    </div>
+          {/* Leaderboard Table */}
+          <div className="table-wrapper">
+              <table className="leaderboard-table">
+                  <thead>
+                      <tr>
+                          <th>Position</th>
+                          <th>Name</th>
+                          <th>Rating</th>
+                          <th>Games Won</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {sortedLeaderboardData.map((player, index) => {
+                          const match = player.name
+                              .toLowerCase()
+                              .includes(searchTerm.toLowerCase());
+                          let rowRef = null;
+                          if (searchTerm && match && !firstMatchAssigned) {
+                              rowRef = firstMatchRef;
+                              firstMatchAssigned = true;
+                          }
+                          return (
+                              <tr
+                                  key={player.name}
+                                  ref={rowRef}
+                                  className={match && searchTerm ? "highlight" : ""}
+                              >
+                                  <td>{index + 1}</td>
+                                  <td>{player.name}</td>
+                                  <td>{player.Rating}</td>
+                                  <td>{player.wins}</td>
+                              </tr>
+                          );
+                      })}
+                  </tbody>
+              </table>
+          </div>
+      </div><div className="announcements-container">
+              {/* <FaBullhorn className="announcement-icon" /> */}
+              <p className="announcement-text">{announcementsData[index]}</p>
+          </div></>
   );
 };
 
