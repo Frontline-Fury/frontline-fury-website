@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import ff from '../assests/ff.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import bgvideo from '../assests/bgvid4.mp4';
+import bgvideo from '../assests/bgvid.mp4';
 
 
 
