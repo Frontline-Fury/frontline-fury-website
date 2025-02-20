@@ -172,7 +172,7 @@ const Homepage = () => {
 
 
 
-      <div className="home-container">
+      
         {/* Banner Section */}
         <div className="home-banner">
           <video src={bgvideo} autoPlay loop muted />
@@ -184,7 +184,7 @@ const Homepage = () => {
             <button className="home-banner-button">Get Started</button>
           </div>
         </div>
-      </div>
+      
 
 
       <div data-aos="fade-up">
@@ -270,29 +270,24 @@ const Homepage = () => {
 
 
       {/* Carousel Section */}
-      <div data-aos="fade-up">
-        <div className="homepage-carousel">
-          <Slider {...settings}>
-            {carouselData.map((slide, index) => (
-              <div key={index} className="relative w-full h-screen">
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="w-full h-screen object-cover"
-                />
-                <div className="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white text-center p-6">
-                  <h1 className="text-4xl md:text-6xl font-bold">
-                    {slide.title}
-                  </h1>
-                  <p className="mt-4 text-lg md:text-2xl">
-                    {slide.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </Slider>
+<div data-aos="fade-up" className="homepage-carousel">
+  <Slider {...settings}>
+    {carouselData.map((slide, index) => (
+      <div key={index} className="relative w-full h-screen">
+        <img
+          src={slide.image}
+          alt={slide.title}
+          className="w-full h-screen object-cover rounded-lg"
+        />
+        <div className="overlay">
+          <h1 className="text-4xl md:text-6xl font-bold">{slide.title}</h1>
+          <p className="mt-4 text-lg md:text-2xl">{slide.description}</p>
         </div>
       </div>
+    ))}
+  </Slider>
+</div>
+
 
 
 

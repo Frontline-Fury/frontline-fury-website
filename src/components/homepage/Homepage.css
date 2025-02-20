@@ -4,29 +4,15 @@
   box-sizing: border-box;
 }
 
-
-/* Hide scrollbar for Chrome, Safari, and Edge */
-::-webkit-scrollbar {
-  display: none;
+.home-container {
+  text-align: center;
+  background-color: #fff;
 }
-
-/* Hide scrollbar for Firefox */
-html {
-  scrollbar-width: none;
-}
-
-/* Hide scrollbar for IE and Edge */
-body {
-  -ms-overflow-style: none;
-}
-
-
-
 
 .home-banner {
   position: relative;
   width: 100%;
-  height: 80vh;
+  height: 100vh; /* Full screen height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,6 +62,7 @@ body {
 .home-banner-button:hover {
   background-color: #ff4500;
 }
+
 
 @keyframes fadeInDown {
   from {
@@ -263,6 +250,12 @@ body {
   font-size: 0.9rem;
 }
 
+
+
+
+
+
+
 .game-mode {
   width: 85%;
   margin: auto;
@@ -273,6 +266,9 @@ body {
   background: linear-gradient(to right, #4a90e2, #9013fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin: auto;
+  /* border: 2px solid red; */
+  text-align: center;
   font-size: 50px;
   font-weight: 400;
   margin-bottom: 40px;
@@ -344,46 +340,67 @@ body {
   background-color: #f4f4f4;
 }
 
-.relative {
-  height: 80vh !important;
-  width: 85% !important;
+
+
+
+.homepage-carousel{
+  width: 85%;
+  height: 60vh;
+  border: 2px solid green;
+  margin: auto;
   margin-top: 70px;
-  border-radius: 10px;
+  position: relative;
+  
+  
 }
 
-.relative img {
-  height: 100% !important;
-  width: 100% !important;
-  border-radius: 10px;
-  object-fit: cover !important;
+
+
+.homepage-carousel {
+  width: 85%;
+  height: 80vh;
+  margin: auto;
+  margin-top: 70px;
+  position: relative;
+  overflow: hidden;
 }
 
-.relative .absolute {
-  position: absolute !important;
-  top: 70% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  padding: 30px !important;
-  border-radius: 10px !important;
-  color: white !important;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7) !important;
+.homepage-carousel img {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
   animation: fadeIn 1s ease-in-out;
+  width: 80%;
 }
 
 .homepage-carousel .slick-slide {
-  transition: transform 0.1s ease !important;
+  transition: transform 0.3s ease-in-out;
 }
 
 .homepage-carousel .slick-prev,
 .homepage-carousel .slick-next {
-  z-index: 1 !important;
+  z-index: 2;
 }
 
 .homepage-carousel .slick-dots li button:before {
-  color: #fff !important;
-  font-size: 20px !important;
+  color: #fff;
+  font-size: 14px;
 }
+
 
 
 
@@ -459,6 +476,7 @@ body {
 
 
 .testimonial-section {
+  /* border: 2px solid red; */
   width: 100%;
   height: 400px;
   text-align: center;
@@ -515,6 +533,9 @@ body {
   }
 }
 
+
+
+
 .faq-container {
   display: flex;
   flex-direction: column;
@@ -534,6 +555,7 @@ body {
   background: linear-gradient(to right, #4a90e2, #9013fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-align: center;
 }
 
 .faq-layout {
