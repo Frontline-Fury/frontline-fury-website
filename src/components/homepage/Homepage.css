@@ -23,44 +23,58 @@ body {
 
 
 
-.home-container {
-  text-align: center;
-  background-color: #fff;
+.home-banner {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.home-banner {
-  background: linear-gradient(to right, #4a90e2, #9013fe);
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-  position: relative;
-  overflow: hidden;
+.home-banner video {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* Ensure video covers the whole area */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Send the video to the background */
+}
+
+.home-banner-content {
+  position: absolute;
+  text-align: center;
+  color: white;
+  z-index: 1; /* Bring text above video */
 }
 
 .home-banner h1 {
   font-size: 3rem;
-  animation: fadeInDown 1s ease-in-out;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .home-banner p {
   font-size: 1.5rem;
-  margin-top: 5px;
-  animation: fadeInUp 1s ease-in-out;
+  margin-top: 10px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .home-banner-button {
-  background-color: #fff;
-  color: #4a90e2;
-  border: none;
+  margin-top: 20px;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #ff6600;
+  color: white;
   cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s;
-  margin-top: 20px;
-  animation: fadeIn 1.5s ease-in-out;
+  transition: 0.3s;
+}
+
+.home-banner-button:hover {
+  background-color: #ff4500;
 }
 
 @keyframes fadeInDown {
