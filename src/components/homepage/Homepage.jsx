@@ -172,19 +172,19 @@ const Homepage = () => {
 
 
 
-      
-        {/* Banner Section */}
-        <div className="home-banner">
-          <video src={bgvideo} autoPlay loop muted />
 
-          {/* Overlay Content */}
-          <div className="home-banner-content">
-            <h1>Welcome to India's First Premier Airsoft Arena</h1>
-            <p>Where Gaming Meets Action!</p>
-            <button className="home-banner-button">Get Started</button>
-          </div>
+      {/* Banner Section */}
+      <div className="home-banner">
+        <video src={bgvideo} autoPlay loop muted />
+
+        {/* Overlay Content */}
+        <div className="home-banner-content">
+          <h1>Welcome to India's First Premier Airsoft Arena</h1>
+          <p>Where Gaming Meets Action!</p>
+          <button className="home-banner-button">Get Started</button>
         </div>
-      
+      </div>
+
 
 
       <div data-aos="fade-up">
@@ -270,23 +270,23 @@ const Homepage = () => {
 
 
       {/* Carousel Section */}
-<div data-aos="fade-up" className="homepage-carousel">
-  <Slider {...settings}>
-    {carouselData.map((slide, index) => (
-      <div key={index} className="relative w-full h-screen">
-        <img
-          src={slide.image}
-          alt={slide.title}
-          className="w-full h-screen object-cover rounded-lg"
-        />
-        <div className="overlay">
-          <h1 className="text-4xl md:text-6xl font-bold">{slide.title}</h1>
-          <p className="mt-4 text-lg md:text-2xl">{slide.description}</p>
-        </div>
+      <div data-aos="fade-up" className="homepage-carousel">
+        <Slider {...settings}>
+          {carouselData.map((slide, index) => (
+            <div key={index} className="relative w-full h-screen">
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-screen object-cover rounded-lg"
+              />
+              <div className="overlay">
+                <h1 className="text-4xl md:text-6xl font-bold">{slide.title}</h1>
+                <p className="mt-4 text-lg md:text-2xl">{slide.description}</p>
+              </div>
+            </div>
+          ))}
+        </Slider>
       </div>
-    ))}
-  </Slider>
-</div>
 
 
 
@@ -399,8 +399,8 @@ const Homepage = () => {
 
 
     </div>
-    
-    
+
+
   );
 };
 
