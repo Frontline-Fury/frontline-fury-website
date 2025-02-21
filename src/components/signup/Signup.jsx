@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import {
   signupUser,
   loginUser,
   checkUsernameAvailability,
+  signInWithGoogle,
+  handleGoogleCallback,
 } from "../../api/authApi";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
@@ -13,7 +15,32 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [error, setError] = useState("");
   const [UsernameStatus, setUsernameStatus] = useState("");
 
+  // Handle OAuth callback on page load
+  useEffect(() => {
+    const handleOAuthRedirect = async () => {
+      const params = new URLSearchParams(window.location.search);
+      const googleToken = params.get("access_token");
+
+      if (googleToken) {
+        try {
+          const response = await handleGoogleCallback(googleToken);
+          onAuthSuccess(response);
+          onClose();
+        } catch (error) {
+          console.error("Error handling Google sign-in:", error);
+          setError("Google sign-in failed. Please try again.");
+        }
+      }
+    };
+
+    handleOAuthRedirect();
+  }, [onAuthSuccess, onClose]);
+
   if (!isOpen) return null;
+
+  const handleGoogleSignIn = async () => {
+    signInWithGoogle();
+  };
 
   const handleUsernameChange = async (e) => {
     const newUsername = e.target.value;
@@ -43,8 +70,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     } catch (err) {
       console.error("Error:", err.response?.data?.error || err.message);
       setError(
-        err.response?.data?.error ||
-          "Authentication failed. Please try again."
+        err.response?.data?.error || "Authentication failed. Please try again."
       );
     }
   };
@@ -63,7 +89,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
       //   err.response?.data?.error ||
       //     "Authentication failed. Please try again."
       // );
-      alert("Maa chuda ")
+      alert("Maa chuda ");
     }
   };
 
@@ -117,6 +143,9 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
               </button>
               <button type="button" onClick={handleSignIn}>
                 Sign In
+              </button>
+              <button type="button" onClick={handleGoogleSignIn}>
+                Sign in with Google
               </button>
             </div>
           </form>
