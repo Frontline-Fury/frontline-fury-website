@@ -10,14 +10,14 @@ import Layout from "./components/layout/Layout";
 import Leaderboard from "./components/leaderboard/Leaderboard";
 
 function App() {
-  const [user, setUser] = useState(() => {
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
-  });
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
+
+  
+
 
 
 
@@ -25,10 +25,9 @@ function App() {
     <Router>
       <Layout 
         user={user} 
-        onAuthSuccess={(userData) => {
-          setUser(userData);
-          localStorage.setItem("user", JSON.stringify(userData));
-        }}
+        onAuthSuccess={setUser}
+          
+        
       >
         <Routes>
           <Route path="/" element={<Homepage />} />

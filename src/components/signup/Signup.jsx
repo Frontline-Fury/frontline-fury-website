@@ -58,11 +58,12 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
       onAuthSuccess(response);
       onClose();
     } catch (err) {
-      console.error("Error:", err.response?.data?.error || err.message);
-      setError(
-        err.response?.data?.error ||
-          "Authentication failed. Please try again."
-      );
+      // console.error("Error:", err.response?.data?.error || err.message);
+      // setError(
+      //   err.response?.data?.error ||
+      //     "Authentication failed. Please try again."
+      // );
+      alert("Maa chuda ")
     }
   };
 
