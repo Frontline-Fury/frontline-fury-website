@@ -43,7 +43,7 @@ const SetUpProfile = ({ onAuthSuccess }) => {
       // Create profile
       const { data: newProfile, error: createError } = await supabase
         .from("profiles")
-        .insert([{ id: user.id, username, email }])
+        .insert([{ id: user.id, Username: username, email }])
         .select();
 
       if (createError) {
