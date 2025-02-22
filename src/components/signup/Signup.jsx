@@ -92,15 +92,16 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
         queryParams: {
           access_type: "offline",
           prompt: "consent",
         },
-        redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
+
     if (error) {
-      console.error("Google Sign-Up Error:", error.message);
+      console.error("Google Sign-Up Error:", error);
       setError("Google Sign-Up failed. Please try again.");
     }
   };

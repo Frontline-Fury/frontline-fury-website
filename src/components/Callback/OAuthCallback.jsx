@@ -8,25 +8,15 @@ const OAuthCallback = ({ onAuthSuccess }) => {
   useEffect(() => {
     const handleOAuthCallback = async () => {
       try {
-        // Extract the hash from the URL
-        const hash = window.location.hash.substring(1);
-        const params = new URLSearchParams(hash);
+        // Supabase automatically handles the OAuth callback
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
 
-        // Get the access token
-        const accessToken = params.get("access_token");
-        const refreshToken = params.get("refresh_token");
-
-        if (!accessToken || !refreshToken) {
-          throw new Error("Authentication failed: No tokens found");
+        if (error || !session) {
+          throw new Error("Authentication failed: No session found");
         }
-
-        // Set the session
-        const { error } = await supabase.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        });
-
-        if (error) throw error;
 
         // Get the authenticated user
         const {
@@ -34,7 +24,7 @@ const OAuthCallback = ({ onAuthSuccess }) => {
         } = await supabase.auth.getUser();
 
         // Check if the user has a profile
-        const { data: profile } = await supabase
+        const { data: profile, error: profileError } = await supabase
           .from("profiles")
           .select("id")
           .eq("id", user.id)
@@ -43,6 +33,7 @@ const OAuthCallback = ({ onAuthSuccess }) => {
         // Trigger onAuthSuccess with user data
         onAuthSuccess({ user, profile });
 
+        console.log("URL hash:", window.location.hash);
         // Redirect based on profile existence
         if (profile) {
           navigate("/");
@@ -53,7 +44,7 @@ const OAuthCallback = ({ onAuthSuccess }) => {
         }
       } catch (error) {
         console.error("OAuth callback error:", error);
-        navigate("/signup");
+        navigate("/login");
       }
     };
 
