@@ -53,7 +53,7 @@ const OAuthCallback = ({ onAuthSuccess }) => {
         }
       } catch (error) {
         console.error("OAuth callback error:", error);
-        navigate("/login");
+        navigate("/signup");
       }
     };
 
