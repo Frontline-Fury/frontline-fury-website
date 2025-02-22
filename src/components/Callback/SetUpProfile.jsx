@@ -16,8 +16,8 @@ const SetUpProfile = ({ onAuthSuccess }) => {
       // Check if username is available
       const { data: profile, error: profileError } = await supabase
         .from("profiles")
-        .select("username")
-        .eq("username", username);
+        .select("Username")
+        .eq("Username", username);
 
       if (profileError) {
         console.error("Profile check error:", profileError);
