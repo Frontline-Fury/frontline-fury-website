@@ -27,24 +27,21 @@ const OAuthCallback = ({ onAuthSuccess }) => {
         const { data: profile, error: profileError } = await supabase
           .from("profiles")
           .select("id")
-          .eq("id", user.id)
-          .single();
+          .eq("id", user.id);
 
         if (profileError) {
           console.error("Profile check error:", profileError);
           throw new Error("Failed to check profile");
         }
-        // Trigger onAuthSuccess with user data
-        onAuthSuccess({ user, profile });
 
-        console.log("URL hash:", window.location.hash);
         // Redirect based on profile existence
-        if (profile) {
-          navigate("/");
-        } else {
+        if (profile.length === 0) {
           navigate("/setup-profile", {
             state: { email: user.email, provider: "google" },
           });
+        } else {
+          onAuthSuccess({ user, profile: profile[0] });
+          navigate("/");
         }
       } catch (error) {
         console.error("OAuth callback error:", error);
