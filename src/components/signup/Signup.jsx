@@ -5,6 +5,7 @@ import {
   loginUser,
   checkUsernameAvailability,
 } from "../../api/authApi";
+import supabase from "../../supabaseClient";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [Username, setUsername] = useState(""); // Changed to camelCase
@@ -43,8 +44,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     } catch (err) {
       console.error("Error:", err.response?.data?.error || err.message);
       setError(
-        err.response?.data?.error ||
-          "Authentication failed. Please try again."
+        err.response?.data?.error || "Authentication failed. Please try again."
       );
     }
   };
@@ -63,7 +63,23 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
       //   err.response?.data?.error ||
       //     "Authentication failed. Please try again."
       // );
-      alert("Maa chuda ")
+      alert("Maa chuda ");
+    }
+  };
+  const handleGoogleSignUp = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+    if (error) {
+      console.error("Google Sign-Up Error:", error.message);
+      setError("Google Sign-Up failed. Please try again.");
     }
   };
 
@@ -117,6 +133,9 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
               </button>
               <button type="button" onClick={handleSignIn}>
                 Sign In
+              </button>
+              <button type="button" onClick={handleGoogleSignUp}>
+                Sign In with Google
               </button>
             </div>
           </form>
