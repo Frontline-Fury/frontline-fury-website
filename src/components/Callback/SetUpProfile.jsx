@@ -2,24 +2,30 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import supabase from "../../supabaseClient";
 
-const SetupProfile = ({ onAuthSuccess }) => {
+const SetUpProfile = ({ onAuthSuccess }) => {
   const [username, setUsername] = useState("");
   const [status, setStatus] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
   const { email } = location.state || {};
 
-  const handleSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
       // Check if username is available
-      const { data: existing } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from("profiles")
         .select("username")
         .eq("username", username);
 
-      if (existing.length > 0) {
+      if (profileError) {
+        console.error("Profile check error:", profileError);
+        throw new Error("Failed to check username availability");
+      }
+
+      // If profile exists, username is taken
+      if (profile && profile.length > 0) {
         setStatus("Username is already taken");
         return;
       }
@@ -27,31 +33,39 @@ const SetupProfile = ({ onAuthSuccess }) => {
       // Get the authenticated user
       const {
         data: { user },
+        error: authError,
       } = await supabase.auth.getUser();
 
+      if (authError || !user) {
+        throw new Error("User not authenticated");
+      }
+
       // Create profile
-      const { data: profile, error } = await supabase
+      const { data: newProfile, error: createError } = await supabase
         .from("profiles")
         .insert([{ id: user.id, username, email }])
-        .single();
+        .select();
 
-      if (error) throw error;
+      if (createError) {
+        console.error("Profile creation error:", createError);
+        throw new Error("Failed to create profile");
+      }
 
       // Trigger onAuthSuccess with user and profile data
-      onAuthSuccess({ user, profile });
+      onAuthSuccess({ user, profile: newProfile[0] });
 
       // Redirect to home
       navigate("/");
     } catch (error) {
       console.error("Profile setup error:", error);
-      setStatus("Error creating profile");
+      setStatus(error.message);
     }
   };
 
   return (
     <div className="profile-setup">
       <h2>Complete Your Profile</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <input
           type="text"
           placeholder="Username"
@@ -66,4 +80,4 @@ const SetupProfile = ({ onAuthSuccess }) => {
   );
 };
 
-export default SetupProfile;
+export default SetUpProfile;
