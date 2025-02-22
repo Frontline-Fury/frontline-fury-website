@@ -4,7 +4,6 @@ import {
   signupUser,
   loginUser,
   checkUsernameAvailability,
-  signInWithGoogle,
   handleGoogleCallback,
 } from "../../api/authApi";
 import supabase from "../../supabaseClient";
