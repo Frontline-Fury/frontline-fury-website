@@ -7,6 +7,7 @@ import {
   signInWithGoogle,
   handleGoogleCallback,
 } from "../../api/authApi";
+import supabase from "../../supabaseClient";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   const [Username, setUsername] = useState(""); // Changed to camelCase
@@ -92,6 +93,22 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
       alert("Maa chuda ");
     }
   };
+  const handleGoogleSignUp = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+        redirectTo: `${window.location.origin}/auth/callback`,
+      },
+    });
+    if (error) {
+      console.error("Google Sign-Up Error:", error.message);
+      setError("Google Sign-Up failed. Please try again.");
+    }
+  };
 
   return (
     <div className="signup-modal-overlay" onClick={onClose}>
@@ -144,8 +161,8 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
               <button type="button" onClick={handleSignIn}>
                 Sign In
               </button>
-              <button type="button" onClick={handleGoogleSignIn}>
-                Sign in with Google
+              <button type="button" onClick={handleGoogleSignUp}>
+                Sign In with Google
               </button>
             </div>
           </form>
