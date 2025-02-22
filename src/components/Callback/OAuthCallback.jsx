@@ -30,6 +30,10 @@ const OAuthCallback = ({ onAuthSuccess }) => {
           .eq("id", user.id)
           .single();
 
+        if (profileError) {
+          console.error("Profile check error:", profileError);
+          throw new Error("Failed to check profile");
+        }
         // Trigger onAuthSuccess with user data
         onAuthSuccess({ user, profile });
 
