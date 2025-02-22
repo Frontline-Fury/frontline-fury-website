@@ -39,10 +39,6 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
 
   if (!isOpen) return null;
 
-  const handleGoogleSignIn = async () => {
-    signInWithGoogle();
-  };
-
   const handleUsernameChange = async (e) => {
     const newUsername = e.target.value;
     setUsername(newUsername);
