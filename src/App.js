@@ -36,7 +36,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
 
           {/* Callback routes */}
-          {/* Callback routes */}
+       
           <Route
             path="/auth/callback"
             element={<OAuthCallback onAuthSuccess={handleAuthSuccess} />}

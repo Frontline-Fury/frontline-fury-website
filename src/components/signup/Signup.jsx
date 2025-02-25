@@ -8,14 +8,20 @@ import {
 } from "../../api/authApi";
 import supabase from "../../supabaseClient";
 
+import { FcGoogle } from "react-icons/fc";
+
+
+
+
+
 const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
-  const [Username, setUsername] = useState(""); // Changed to camelCase
+  const [isSignup, setIsSignup] = useState(true);
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [UsernameStatus, setUsernameStatus] = useState("");
+  const [usernameStatus, setUsernameStatus] = useState("");
 
-  // Handle OAuth callback on page load
   useEffect(() => {
     const handleOAuthRedirect = async () => {
       const params = new URLSearchParams(window.location.search);
@@ -55,12 +61,18 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     }
   };
 
-  const handleSignUp = async (e) => {
+  const handleAuth = async (e) => {
     e.preventDefault();
     try {
-      const userData = { Username, email, password }; // using username instead of Username
-      const response = await signupUser(userData);
-      console.log("Signup successful:", response);
+      const userData = isSignup
+        ? { username, email, password }
+        : { email, password };
+
+      const response = isSignup
+        ? await signupUser(userData)
+        : await loginUser(userData);
+
+      console.log(`${isSignup ? "Signup" : "Login"} successful:`, response);
       onAuthSuccess(response);
       onClose();
     } catch (err) {
@@ -71,23 +83,6 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     }
   };
 
-  const handleSignIn = async (e) => {
-    e.preventDefault();
-    try {
-      const userData = { email, password };
-      const response = await loginUser(userData);
-      console.log("Login successful:", response);
-      onAuthSuccess(response);
-      onClose();
-    } catch (err) {
-      // console.error("Error:", err.response?.data?.error || err.message);
-      // setError(
-      //   err.response?.data?.error ||
-      //     "Authentication failed. Please try again."
-      // );
-      alert("Maa chuda ");
-    }
-  };
   const handleGoogleSignUp = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -110,20 +105,23 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     <div className="signup-modal-overlay" onClick={onClose}>
       <div className="signup-modal" onClick={(e) => e.stopPropagation()}>
         <div className="form-box">
-          <h1>Sign Up / Sign In</h1>
+          <h1>{isSignup ? "Sign Up" : "Login"}</h1>
           <form>
             <div className="input-group">
-              <div className="input-field">
-                <i className="fa-solid fa-user"></i>
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={Username}
-                  onChange={handleUsernameChange}
-                  required
-                />
-              </div>
-              <p className="username-status">{UsernameStatus}</p>
+              {isSignup && (
+                <div className="input-field">
+                  <i className="fa-solid fa-user"></i>
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    value={username}
+                    onChange={handleUsernameChange}
+                    required
+                  />
+                </div>
+              )}
+              {isSignup && <p className="username-status">{usernameStatus}</p>}
+
               <div className="input-field">
                 <i className="fa-solid fa-envelope"></i>
                 <input
@@ -144,23 +142,29 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
                   required
                 />
               </div>
-
-              <p>
-                Lost Password? <a href="#!">Click Here</a>
-              </p>
             </div>
             {error && <p className="error-message">{error}</p>}
-            <div className="btn-field">
-              <button type="button" onClick={handleSignUp}>
-                Sign Up
+
+            <button type="submit" onClick={handleAuth} className="auth-btn">
+              {isSignup ? "Create Account" : "Login"}
+            </button>
+
+            <p className="or-text">OR</p>
+
+            <button type="button" className="google-btn" onClick={handleGoogleSignUp}>
+              <FcGoogle size={24} className="google-icon" />
+              {isSignup ? "Sign Up with Google" : "Sign In with Google"}
+            </button>
+
+
+
+
+            <p className="switch-auth">
+              {isSignup ? "Already have an account?" : "Don't have an account?"}{" "}
+              <button type="button" className="switch-auth-btn" onClick={() => setIsSignup(!isSignup)}>
+                {isSignup ? "Login" : "Sign Up"}
               </button>
-              <button type="button" onClick={handleSignIn}>
-                Sign In
-              </button>
-              <button type="button" onClick={handleGoogleSignUp}>
-                Sign In with Google
-              </button>
-            </div>
+            </p>
           </form>
         </div>
       </div>
@@ -168,9 +172,8 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
   );
 };
 
-// Set default props to prevent errors if onAuthSuccess isn't provided
 Signup.defaultProps = {
-  onAuthSuccess: () => {},
+  onAuthSuccess: () => { },
 };
 
 export default Signup;

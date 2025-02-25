@@ -1,15 +1,12 @@
-/* Aapki existing Signup CSS */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-
-/* Modal overlay CSS (add this to the bottom ya alag file) */
 .signup-modal-overlay {
     position: fixed;
-    /* border: 2px solid red; */
     top: 0;
     left: 0;
     width: 100%;
@@ -18,99 +15,169 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* ensure modal sabse upar dikhe */
-  }
-
-
-
-
-
-
-.form-box{
-    width: 90%;
-    max-width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    text-align: center;
-    padding: 50px 60px 70px;
-
-    border-radius: 30px;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-in-out;
+    /* border: 2px solid red; */
+    z-index: 1000;
 }
 
-.form-box h1{
-    font-size: 30px;
-    margin-bottom: 60px;
-    color: #3c00a0;
+.signup-modal {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 400px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
+    overflow: hidden;
+    animation: slideIn 0.4s ease-in-out;
 }
-.form-box h1::after{
-    content: '';
-    width: 30px;
-    height: 4px;
-    border-radius: 3px;
-    background: #3c00a0;
-    position: absolute;
-    bottom: -12px;
-    left: 50%;
-    transform: translateX(-50%);
+
+.form-box {
+    text-align: center;
 }
-.input-field{
-    background: #eaeaea;
-    margin: 15px 0;
-    border-radius: 3px;
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.input-group {
+    margin: 1.2rem 0;
+}
+
+.input-field {
     display: flex;
     align-items: center;
-    max-height: 65px;
-    transition: max-height 0.5s;
-    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
-input{
+
+.input-field:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.input-field i {
+    color: #ddd;
+    margin-right: 12px;
+    font-size: 1.2rem;
+}
+
+.input-field input {
     width: 100%;
+    border: none;
     background: transparent;
-    border: 0;
-    outline: 0;
-    padding: 18px 15px;
-}
-.input-field i{
-    margin-left: 15px;
-    color: #999;
-}
-form p{
-    text-align: left;
-    font-size: 13px;
-}
-form p a{
-    text-decoration: none;
-    color: #3c00a0;
-}
-.btn-field{
-    width: 100%;
-    justify-content: space-between;
-    display: flex;
-}
-.btn-field button{
-    flex-basis: 48%;
-    background: #3c00a0;
+    outline: none;
+    font-size: 1rem;
     color: white;
-    height: 40px;
-    border-radius: 20px;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-    transition: background 1s;
 }
-.input-group{
-    height: 250px;
+
+.input-field input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
 }
-.btn-field button.disable{
-    background: #eaeaea;
+.or-text {
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
     color: #555;
-}
-
-
-
+  }
+  
+  .google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    background-color: white;
+    color: #555;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .google-btn:hover {
+    background-color: #f8f8f8;
+  }
+  
+  .google-icon {
+    width: 24px;
+    height: 24px;
+  }
   
 
+/* Signup & Login Button */
+.auth-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    margin-top: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+}
+
+.auth-btn:hover {
+    background: linear-gradient(135deg, #218838, #17a78f);
+    transform: scale(1.05);
+}
+
+/* Login Link */
+.switch-auth {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.switch-auth button {
+    color: #00d4ff;
+    font-weight: bold;
+   
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    border: none;
+    background: none;
+}
+
+.switch-auth button:hover {
+    color: #ff8c00;
+}
+
+/* Transition Effects */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
