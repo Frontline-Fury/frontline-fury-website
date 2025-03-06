@@ -20,8 +20,8 @@ const Waiver = () => {
     medicalCondition: "",
   });
 
-  
- 
+
+    const [age, setAge] = useState(""); //verify age
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -149,6 +149,36 @@ const Waiver = () => {
             that I have read, understood, and agree to Frontline Fury’s “Field
             Safety Rules, Player Conduct, and General Rules.”
           </p>
+
+
+{/* VERIFY AGE */}
+          <div className="verify_age">
+      <label>
+        <input
+          type="radio"
+          name="age"
+          value="18_or_above"
+          checked={age === "18_or_above"}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        I am 18 years or above
+      </label>
+     
+      <label className="verify_age_text">
+        <input 
+          type="radio"
+          name="age"
+          value="below_18"
+          checked={age === "below_18"}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        I am below 18 years
+      </label>
+    </div>
+
+{/* VERIFY AGE CLOSES */}
+
+
         </div>
 
         {/* Waiver Form Section */}
