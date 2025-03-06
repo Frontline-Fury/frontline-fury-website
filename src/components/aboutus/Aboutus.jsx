@@ -5,6 +5,8 @@ import "./Aboutus.css";
 import nandiniimg from '../assests/nandini.jpeg';
 import karanimg from '../assests/karan.jpeg';
 import tarunimg from '../assests/tarun.jpeg';
+import divyanshimg from '../assests/divyansh.jpeg';
+
 
 
 const Aboutus = () => {
@@ -48,6 +50,11 @@ const Aboutus = () => {
               <img src={tarunimg} alt="tarun guleria" />
               <h3>Tarun Guleria</h3>
               <p>CTO</p>
+            </div>
+            <div className="team-member">
+              <img src={divyanshimg} alt="Divyansh Negi" />
+              <h3>Divyansh Negi</h3>
+              <p>CMO</p>
             </div>
           </div>
         </section>

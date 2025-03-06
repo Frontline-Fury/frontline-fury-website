@@ -83,24 +83,16 @@ const Signup = ({ isOpen, onClose, onAuthSuccess }) => {
     }
   };
 
-  const handleGoogleSignUp = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
-    });
+ const handleGoogleSignUp = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+  });
 
-    if (error) {
-      console.error("Google Sign-Up Error:", error);
-      setError("Google Sign-Up failed. Please try again.");
-    }
-  };
-
+  if (error) {
+    console.error("Google Sign-Up Error:", error);
+    setError("Google Sign-Up failed. Please try again.");
+  }
+};
   return (
     <div className="signup-modal-overlay" onClick={onClose}>
       <div className="signup-modal" onClick={(e) => e.stopPropagation()}>
