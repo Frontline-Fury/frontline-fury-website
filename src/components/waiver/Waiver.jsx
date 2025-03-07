@@ -161,10 +161,10 @@ const Waiver = () => {
           checked={age === "18_or_above"}
           onChange={(e) => setAge(e.target.value)}
         />
-        I am 18 years or above
+        I am 18 years or abovee
       </label>
      
-      <label className="verify_age_text">
+      <label>
         <input 
           type="radio"
           name="age"
