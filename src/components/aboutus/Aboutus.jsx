@@ -17,7 +17,7 @@ const Aboutus = () => {
      
       <div className="aboutus-container">
         <section className="aboutus-header">
-          <h1>About Us</h1>
+          <h1>About Uss</h1>
           <p>
             Welcome to Frontline Fury, where creativity meets innovation. Our mission is to empower and inspire through technology.
           </p>
