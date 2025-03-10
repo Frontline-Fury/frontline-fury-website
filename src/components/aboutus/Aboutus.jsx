@@ -6,6 +6,7 @@ import nandiniimg from '../assests/nandini.jpeg';
 import karanimg from '../assests/karan.jpeg';
 import tarunimg from '../assests/tarun.jpeg';
 import divyanshimg from '../assests/divyansh.jpeg';
+import rajatimg from '../assests/rajat.jpeg'
 
 
 
@@ -36,6 +37,11 @@ const Aboutus = () => {
         <section className="aboutus-team">
           <h2>Meet the Team</h2>
           <div className="team-members">
+          <div className="team-member">
+              <img src={divyanshimg} alt="Divyansh Negi" />
+              <h3>Divyansh Negi</h3>
+              <p>CMO</p>
+            </div>
             <div className="team-member">
               <img src={nandiniimg} alt="nandini kishore" />
               <h3>Nandini Kishore</h3>
@@ -52,10 +58,11 @@ const Aboutus = () => {
               <p>CTO</p>
             </div>
             <div className="team-member">
-              <img src={divyanshimg} alt="Divyansh Negi" />
-              <h3>Divyansh Negi</h3>
-              <p>CMO</p>
+              <img src={rajatimg} alt="Divyansh Negi" />
+              <h3>Rajat Rawat</h3>
+              <p>Tech Team Head</p>
             </div>
+           
           </div>
         </section>
         
