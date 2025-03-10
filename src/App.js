@@ -8,7 +8,7 @@ import Pricing from "./components/pricing/Pricing";
 import Signup from "./components/signup/Signup";
 import Layout from "./components/layout/Layout";
 import Leaderboard from "./components/leaderboard/Leaderboard";
-// import SetupProfile from "./components/Callback/SetUpProfile";
+import SetupProfile from "./components/Callback/SetUpProfile";
 import OAuthCallback from "./components/Callback/OAuthCallback";
 
 function App() {
@@ -41,10 +41,10 @@ function App() {
             path="/auth/callback"
             element={<OAuthCallback onAuthSuccess={handleAuthSuccess} />}
           />
-          {/* <Route
+          <Route
             path="/setup-profile"
             element={<SetupProfile onAuthSuccess={handleAuthSuccess} />}
-          /> */}
+          />
         </Routes>
       </Layout>
     </Router>
