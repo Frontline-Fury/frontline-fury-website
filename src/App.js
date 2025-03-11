@@ -8,8 +8,6 @@ import Pricing from "./components/pricing/Pricing";
 import Signup from "./components/signup/Signup";
 import Layout from "./components/layout/Layout";
 import Leaderboard from "./components/leaderboard/Leaderboard";
-import SetupProfile from "./components/Callback/SetUpProfile";
-import OAuthCallback from "./components/Callback/OAuthCallback";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -32,19 +30,9 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/waiver" element={<Waiver />} />
-          {/* Other routes */}
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup onAuthSuccess={handleAuthSuccess} />} />
 
-          {/* Callback routes */}
-       
-          <Route
-            path="/auth/callback"
-            element={<OAuthCallback onAuthSuccess={handleAuthSuccess} />}
-          />
-          <Route
-            path="/setup-profile"
-            element={<SetupProfile onAuthSuccess={handleAuthSuccess} />}
-          />
+         
         </Routes>
       </Layout>
     </Router>
