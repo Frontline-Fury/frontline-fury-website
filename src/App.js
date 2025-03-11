@@ -17,7 +17,6 @@ function App() {
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
-  // Handle authentication success
   const handleAuthSuccess = (userData) => {
     setUser(userData);
   };
@@ -31,16 +30,13 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/waiver" element={<Waiver />} />
-          {/* Other routes */}
-          <Route path="/signup" element={<Signup />} />
-
-         
-       
-        
+          {/* Signup route should receive the prop */}
+          <Route path="/signup" element={<Signup onAuthSuccess={handleAuthSuccess} />} />
         </Routes>
       </Layout>
     </Router>
   );
 }
+
 
 export default App;
