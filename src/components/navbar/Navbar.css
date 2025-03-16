@@ -3,7 +3,39 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* Ticker CSS */
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(to right, #4a90e2, #9013fe);
+    color: white;
+    padding: 5px 0;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    white-space: nowrap;
+  }
+  
+  .ticker {
+    display: inline-block;
+    padding-left: 100%;
+    animation: tickerMove 10s linear infinite;
+  }
+  
+  @keyframes tickerMove {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
 
+  
+  
 .navbar {
     background-color: #fff;
     color: white;
@@ -15,6 +47,7 @@
     top: 0;
     z-index: 1000;
     /* border: 2px solid red; */
+    margin-top: 30px;
     
 }
 

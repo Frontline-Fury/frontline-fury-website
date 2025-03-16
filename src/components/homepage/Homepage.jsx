@@ -30,13 +30,12 @@ const Homepage = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    fade: true,
-    arrows: false,
+    pauseOnHover: false,  // 👈 This will prevent pausing on hover
   };
 
 
@@ -270,23 +269,20 @@ const Homepage = () => {
 
 
       {/* Carousel Section */}
-      <div data-aos="fade-up" className="homepage-carousel">
-        <Slider {...settings}>
-          {carouselData.map((slide, index) => (
-            <div key={index} className="relative w-full h-screen">
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className="w-full h-screen object-cover rounded-lg"
-              />
-              <div className="overlay">
-                <h1 className="text-4xl md:text-6xl font-bold">{slide.title}</h1>
-                <p className="mt-4 text-lg md:text-2xl">{slide.description}</p>
-              </div>
+      <div className="new-carousel">
+      <Slider {...settings}>
+        {carouselData.map((slide, index) => (
+          <div key={index} className="carousel-slide">
+            <img src={slide.image} alt={slide.title} className="carousel-image" />
+            <div className="overlay">
+              <h1>{slide.title}</h1>
+              <p>{slide.description}</p>
             </div>
-          ))}
-        </Slider>
-      </div>
+          </div>
+        ))}
+      </Slider>
+    </div>
+      
 
 
 
