@@ -2,9 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+ 
 }
 
-
+body::-webkit-scrollbar {
+    display: none;
+}   
 
 /* Container styling */
 .aboutus-container {
@@ -89,4 +92,98 @@
     font-size: 1rem;
     color: #777;
 }
+
+ /* Pricing Page Container */
+ .pricing-page-container {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to bottom right, #e9ecf3, #f5f7fa);
+  }
+  
+  /* Gradient Title */
+  .pricing-page-title {
+    font-size: 3rem;
+    margin: 40px 0 30px;
+    background: linear-gradient(to right, #4a90e2, #9013fe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+  
+  /* Cards container */
+  .pricing-page-cards,
+  .membership-cards {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  
+  /* Individual Card */
+  .pricing-page-card {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+    backdrop-filter: blur(10px);
+    width: 300px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .pricing-page-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+  }
+  
+  .pricing-page-card h3 {
+    font-size: 1.8rem;
+    color: #222;
+    margin-bottom: 0.5rem;
+  }
+  
+  .price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #4a90e2;
+    margin: 15px 0;
+  }
+  
+  /* Features List */
+  .pricing-page-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .pricing-page-card ul li {
+    font-size: 1rem;
+    margin: 8px 0;
+    color: #555;
+  }
+  
+  /* Call to Action Button */
+  .pricing-page-button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.3s;
+  }
+  
+  .pricing-page-button:hover {
+    background: #357abd;
+  }
+  
+  /* Popular Badge */
+  .popular {
+    border: 2px solid #ff9800;
+    box-shadow: 0px 8px 25px rgba(255, 152, 0, 0.35);
+  }
+
 

@@ -4,10 +4,11 @@ import Aboutus from "./components/aboutus/Aboutus";
 import Homepage from "./components/homepage/Homepage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Waiver from "./components/waiver/Waiver";
-import Pricing from "./components/pricing/Pricing";
 import Signup from "./components/signup/Signup";
 import Layout from "./components/layout/Layout";
 import Leaderboard from "./components/leaderboard/Leaderboard";
+import Booking from "./components/booking/Booking";
+import Market from "./components/market/Market";
 
 
 function App() {
@@ -28,8 +29,9 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/booking" element={<Booking />} />
           <Route path="/waiver" element={<Waiver />} />
+          <Route path="/market" element={<Market />} />
           {/* Signup route should receive the prop */}
           <Route path="/signup" element={<Signup onAuthSuccess={handleAuthSuccess} />} />
         </Routes>

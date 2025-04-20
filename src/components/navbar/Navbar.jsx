@@ -23,8 +23,10 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/aboutus">About Us</Link></li>
           <li><Link to="/leaderboard">Leaderboard</Link></li>
-          <li><Link to="/pricing">Pricing</Link></li>
-          <li><Link to="/waiver">Waiver</Link></li>
+          <li><Link to="/booking">Booking</Link></li>
+          
+          <li><Link to="/market">Market Place</Link></li>
+          
           <li><Link to="/contact">Contact Us</Link></li>
 
           {user ? (

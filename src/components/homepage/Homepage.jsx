@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import './Homepage.css';
 import captureTheFlagImg from '../assests/captureflag.jpg';
@@ -11,6 +11,13 @@ import ff from '../assests/ff.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import bgvideo from '../assests/bgvid.mp4';
+import { useNavigate } from 'react-router-dom';
+import nandiniimg from '../assests/nandini.jpeg';
+import karanimg from '../assests/karan.jpeg';
+import tarunimg from '../assests/tarun.jpeg';
+import divyanshimg from '../assests/divyansh.jpeg';
+
+
 
 
 
@@ -47,7 +54,7 @@ const Homepage = () => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
-  const [selectedQuestion, setSelectedQuestion] = useState(0);
+  // const [selectedQuestion, setSelectedQuestion] = useState(0);
 
 
 
@@ -89,28 +96,28 @@ const Homepage = () => {
   ];
 
 
-  const faqData = [
-    {
-      question: "What is the objective of the airsoft arena?",
-      answer: "Our airsoft arena provides a realistic tactical experience, promoting team-based strategy and sportsmanship."
-    },
-    {
-      question: "What equipment do I need?",
-      answer: "We provide all necessary equipment, including airsoft guns, protective gear, and pellets. You can also bring your own gear if it meets safety standards."
-    },
-    {
-      question: "Is airsoft safe?",
-      answer: "Yes! We enforce strict safety rules, provide protective gear, and have trained referees monitoring all games."
-    },
-    {
-      question: "Do I need prior experience to play?",
-      answer: "No experience is needed! We offer beginner-friendly game modes and provide a quick training session before you start."
-    },
-    {
-      question: "How do I book a session?",
-      answer: "You can book a session through our website or contact us directly for reservations and group bookings."
-    }
-  ];
+  // const faqData = [
+  //   {
+  //     question: "What is the objective of the airsoft arena?",
+  //     answer: "Our airsoft arena provides a realistic tactical experience, promoting team-based strategy and sportsmanship."
+  //   },
+  //   {
+  //     question: "What equipment do I need?",
+  //     answer: "We provide all necessary equipment, including airsoft guns, protective gear, and pellets. You can also bring your own gear if it meets safety standards."
+  //   },
+  //   {
+  //     question: "Is airsoft safe?",
+  //     answer: "Yes! We enforce strict safety rules, provide protective gear, and have trained referees monitoring all games."
+  //   },
+  //   {
+  //     question: "Do I need prior experience to play?",
+  //     answer: "No experience is needed! We offer beginner-friendly game modes and provide a quick training session before you start."
+  //   },
+  //   {
+  //     question: "How do I book a session?",
+  //     answer: "You can book a session through our website or contact us directly for reservations and group bookings."
+  //   }
+  // ];
 
 
 
@@ -134,22 +141,22 @@ const Homepage = () => {
   const testimonials = [
     {
       name: "Nandini Kishore",
-      image: battleRoyalImg,
+      image: nandiniimg,
       quote: "Amazing experience! The best airsoft arena I've ever been to."
     },
     {
       name: "Karan Singh Negi",
-      image: spikeRushImg,
+      image: karanimg,
       quote: "Incredible game modes and friendly staff. Highly recommended!"
     },
     {
       name: "Tarun Guleria",
-      image: captureTheFlagImg,
+      image: tarunimg,
       quote: "Had a blast with my friends. Can't wait to come back!"
     },
     {
-      name: "Jatin Agarwal",
-      image: captureTheFlagImg,
+      name: "Divyansh Negi",
+      image: divyanshimg,
       quote: "Had a blast with my friends. Can't wait to come back!"
     }
   ];
@@ -160,6 +167,7 @@ const Homepage = () => {
 
 
 
+  const navigate = useNavigate();
 
 
 
@@ -180,7 +188,7 @@ const Homepage = () => {
         <div className="home-banner-content">
           <h1>Welcome to India's First Premier Airsoft Arena</h1>
           <p>Where Gaming Meets Action!</p>
-          <button className="home-banner-button">Get Started</button>
+          <button className="home-banner-button" onClick={() => navigate('/booking')}>Book Now</button>
         </div>
       </div>
 
@@ -211,6 +219,10 @@ const Homepage = () => {
 
 
 
+  
+
+
+
 
 
       <div data-aos="fade-up">
@@ -229,7 +241,7 @@ const Homepage = () => {
         </div>
 
       </div>
-
+{/* 
       <div data-aos="fade-up">
         <div className="cta-section">
           <h2>Ready for Action?</h2>
@@ -237,7 +249,7 @@ const Homepage = () => {
           <button>Book Now</button>
           <p>📞 Call: +91 639664369 | 📩 Email: info@frontlinefury.com</p>
         </div>
-      </div>
+      </div> */}
 
 
 
@@ -351,7 +363,7 @@ const Homepage = () => {
       </div>
 
 
-      <div data-aos="fade-up">
+      {/* <div data-aos="fade-up">
         <div className="faq-container">
           <h2>Frequently Asked Questions</h2>
           <div className="faq-layout">
@@ -381,7 +393,7 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-
+ */}
 
 
 
