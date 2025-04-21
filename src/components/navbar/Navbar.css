@@ -5,23 +5,31 @@
     box-sizing: border-box;
 }
 
+
+.navbar-container{
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    overflow: hidden;
+    top: 0;
+    z-index: 1000;
+}
+
+
 /* Ticker */
 .ticker-container {
     width: 100%;
-    /* overflow: hidden; */
+    
     background: linear-gradient(to right, #4a90e2, #9013fe);
     color: white;
     padding: 5px 0;
     font-weight: bold;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
+ 
     white-space: nowrap;
-    border: 2px solid green;
 }
 
 .ticker {
-    /* display: inline-block; */
+ 
     padding-left: 100%;
     animation: tickerMove 10s linear infinite;
 }
@@ -43,11 +51,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 32px; 
-    z-index:1000;
     flex-wrap: wrap;
-    border: 2px solid red;
 }
 
 .navbar ul {

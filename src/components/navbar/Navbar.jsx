@@ -13,6 +13,8 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
 
   return (
     <>
+    <div className="navbar-container">
+
       {/* Ticker */}
       <div className="ticker-container">
         <div className="ticker">
@@ -61,7 +63,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           <li><Link to="/leaderboard">Leaderboard</Link></li>
           <li><Link to="/booking">Booking</Link></li>
           <li><Link to="/market">Market Place</Link></li>
-          <li><Link to="/contact">Contact Us</Link></li>
+         
 
           {user ? (
             <div className="profile-container">
@@ -70,7 +72,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
                 alt="Profile"
                 className="profile-image"
                 onClick={toggleDropdown}
-              />
+                />
               {dropdownOpen && (
                 <ul className="dropdown-menu">
                   <li><Link to="/profile">Profile</Link></li>
@@ -87,6 +89,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           )}
         </ul>
       </nav>
+              </div>
     </>
   );
 };

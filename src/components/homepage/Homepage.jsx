@@ -210,7 +210,7 @@ const Homepage = () => {
               Whether you're a beginner or a pro, our state-of-the-art facility provides the perfect battleground for adrenaline-fueled action.
               Get ready to engage in immersive game modes like Capture the Flag, Battle Royale, and more!
             </p>
-            <button className="learn-more-button">Learn More</button>
+            <button className="learn-more-button" onClick={() => navigate('/aboutus')} >Learn More</button>
           </div>
 
         </div>
