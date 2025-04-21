@@ -2,9 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-.footer {
+  }
+  
+  /* ===== Footer Section ===== */
+  .footer {
     background: #222;
     color: white;
     padding: 30px 20px;
@@ -12,197 +13,202 @@
     display: flex;
     width: 100%;
     margin-top: 40px;
-}
-
-.footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-container {
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 1200px;
     justify-content: space-between;
-    height: auto; /* Adjusted for responsiveness */
-}
-
-.footer-branding {
+    height: auto;
+  }
+  
+  .footer-branding {
     width: 100%;
     text-align: center;
     font-size: 20px;
-}
-
-.footer-title {
+    margin-bottom: 20px;
+  }
+  
+  .footer-title {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-}
-
-.quick-links {
+    flex-wrap: wrap;
+  }
+  
+  .quick-links {
     width: 20%;
-    min-width: 150px; /* Ensure it doesn't get too small */
-}
-
-.quick-links ul {
+    min-width: 150px;
+    margin: 10px 0;
+  }
+  
+  .quick-links ul {
     list-style: none;
     padding: 0;
-}
-
-.quick-links ul li {
+  }
+  
+  .quick-links ul li {
     margin: 5px 0;
-}
-
-.quick-links a {
+  }
+  
+  .quick-links a {
     color: white;
     text-decoration: none;
     transition: color 0.3s;
-}
-
-.quick-links a:hover {
+  }
+  
+  .quick-links a:hover {
     color: #4a90e2;
-}
-
-.social-icons {
+  }
+  
+  .social-icons {
     margin-top: 10px;
-}
-
-.social-icons a {
+  }
+  
+  .social-icons a {
     color: white;
     margin-right: 10px;
     font-size: 20px;
     transition: color 0.3s;
-}
-
-.social-icons a:hover {
+  }
+  
+  .social-icons a:hover {
     color: #4a90e2;
-}
-
-.map1-section {
+  }
+  
+  /* ===== Map Section ===== */
+  .map1-section {
     text-align: center;
-}
-
-.map1-section iframe {
+    margin-top: 20px;
+  }
+  
+  .map1-section iframe {
     width: 100%;
     height: 300px;
     border-radius: 10px;
     border: none;
-}
-
-.footer-section {
+  }
+  
+  /* ===== Lower Footer Section ===== */
+  .footer-section {
     background: linear-gradient(to right, #4a90e2, #9013fe);
     color: white;
     padding: 40px 20px;
     text-align: center;
-}
-
-.footer-content {
+  }
+  
+  .footer-content {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-.footer-links,
-.footer-social,
-.footer-newsletter {
+  }
+  
+  .footer-links,
+  .footer-social,
+  .footer-newsletter {
     flex: 1;
     margin: 10px;
-    min-width: 200px; /* Ensure they don't get too small */
-}
-
-.footer-newsletter input {
+    min-width: 200px;
+  }
+  
+  .footer-newsletter input {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    margin-right: 10px;
-    width: 100%; /* Full width on smaller screens */
-    margin-bottom: 10px; /* Add spacing for stacked layout */
-}
-
-.footer-newsletter button {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .footer-newsletter button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #fff;
     color: #4a90e2;
     cursor: pointer;
-    width: 100%; /* Full width on smaller screens */
-}
-
-/* Media Queries for Responsiveness */
-
-/* Mobile Devices (up to 767px) */
-@media (max-width: 767px) {
-    .footer-container {
-        height: auto; /* Adjust height for mobile */
-    }
-
+    width: 100%;
+  }
+  
+  /* ===== Responsive Media Queries ===== */
+  
+  /* Mobile Devices */
+  @media (max-width: 767px) {
     .footer-title {
-        flex-direction: column; /* Stack items vertically */
-        align-items: center;
+      flex-direction: column;
+      align-items: center;
     }
-
+  
     .quick-links {
-        width: 100%; /* Full width for mobile */
-        margin-bottom: 20px; /* Add spacing between sections */
+      width: 100%;
+      text-align: center;
     }
-
+  
     .footer-content {
-        flex-direction: column; /* Stack footer sections vertically */
+      flex-direction: column;
+      align-items: center;
     }
-
+  
     .footer-links,
     .footer-social,
     .footer-newsletter {
-        width: 100%; /* Full width for mobile */
-        margin: 10px 0; /* Adjust margin for stacked layout */
+      width: 100%;
+      margin: 10px 0;
     }
-
+  
     .footer-newsletter input,
     .footer-newsletter button {
-        width: 100%; /* Full width for mobile */
-        margin-right: 0; /* Remove margin for stacked layout */
+      width: 100%;
     }
-}
-
-/* Tablets and Small Laptops (768px to 1023px) */
-@media (min-width: 768px) and (max-width: 1023px) {
+  }
+  
+  /* Tablets */
+  @media (min-width: 768px) and (max-width: 1023px) {
     .footer-title {
-        flex-wrap: wrap; /* Allow wrapping for tablets */
+      flex-wrap: wrap;
+      justify-content: center;
     }
-
+  
     .quick-links {
-        width: 45%; /* Adjust width for tablets */
-        margin-bottom: 20px; /* Add spacing between sections */
+      width: 45%;
+      text-align: center;
     }
-
+  
     .footer-content {
-        flex-wrap: wrap; /* Allow wrapping for tablets */
+      justify-content: center;
     }
-
+  
     .footer-links,
     .footer-social,
     .footer-newsletter {
-        width: 45%; /* Adjust width for tablets */
-        margin: 10px; /* Adjust margin for wrapping */
+      width: 45%;
+      margin: 10px;
     }
-}
-
-/* Laptops and Desktops (1024px and above) */
-@media (min-width: 1024px) {
+  }
+  
+  /* Desktop */
+  @media (min-width: 1024px) {
     .footer-title {
-        justify-content: space-evenly; /* Spread items evenly */
+      justify-content: space-evenly;
     }
-
+  
     .quick-links {
-        width: 20%; /* Original width for large screens */
+      width: 20%;
     }
-
+  
     .footer-content {
-        justify-content: space-between; /* Spread sections evenly */
+      justify-content: space-between;
     }
-
+  
     .footer-links,
     .footer-social,
     .footer-newsletter {
-        width: 30%; /* Original width for large screens */
+      width: 30%;
     }
-}
+  }
+  

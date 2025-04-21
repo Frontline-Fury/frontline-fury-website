@@ -6,17 +6,53 @@ import karanprofile from '../assests/karan.jpeg'; // Default profile image
 
 const Navbar = ({ onSignupClick, user, handleLogout }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
   return (
     <>
-      {/* Moving text above navbar */}
+      {/* Ticker */}
       <div className="ticker-container">
         <div className="ticker">
-          <p>This website is under development   |       We're building something amazing – Coming soon!</p>
+          <p>This website is under development   |   We're building something amazing – Coming soon!</p>
         </div>
       </div>
 
+      {/* Hamburger Icon for mobile */}
+      <div className="hamburger" onClick={toggleSidebar}>
+        ☰
+      </div>
+
+      {/* Sidebar for mobile */}
+      <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+        <ul>
+          <li><Link to="/" onClick={toggleSidebar}>Home</Link></li>
+          <li><Link to="/aboutus" onClick={toggleSidebar}>About Us</Link></li>
+          <li><Link to="/leaderboard" onClick={toggleSidebar}>Leaderboard</Link></li>
+          <li><Link to="/booking" onClick={toggleSidebar}>Booking</Link></li>
+          <li><Link to="/market" onClick={toggleSidebar}>Market Place</Link></li>
+          <li><Link to="/contact" onClick={toggleSidebar}>Contact Us</Link></li>
+          {user ? (
+            <>
+              <li><Link to="/profile" onClick={toggleSidebar}>Profile</Link></li>
+              <li><Link to="/friends" onClick={toggleSidebar}>Friends</Link></li>
+              <li><Link to="/notifications" onClick={toggleSidebar}>Notifications</Link></li>
+              <li><Link to="/help" onClick={toggleSidebar}>Help Center</Link></li>
+              <li><Link to="/settings" onClick={toggleSidebar}>Settings</Link></li>
+              <li onClick={() => { handleLogout(); toggleSidebar(); }}>Logout</li>
+            </>
+          ) : (
+            <li onClick={() => { onSignupClick(); toggleSidebar(); }}>Signup/Login</li>
+          )}
+        </ul>
+      </div>
+
+      {/* Overlay when sidebar is open */}
+      {sidebarOpen && <div className="overlay" onClick={toggleSidebar}></div>}
+
+      {/* Desktop Navbar */}
       <nav className="navbar">
         <img src={logo} alt="logo" width={300} />
         <ul>
@@ -24,9 +60,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           <li><Link to="/aboutus">About Us</Link></li>
           <li><Link to="/leaderboard">Leaderboard</Link></li>
           <li><Link to="/booking">Booking</Link></li>
-          
           <li><Link to="/market">Market Place</Link></li>
-          
           <li><Link to="/contact">Contact Us</Link></li>
 
           {user ? (
