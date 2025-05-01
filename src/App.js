@@ -12,7 +12,7 @@ import Market from "./components/market/Market";
 
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); 
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(user));

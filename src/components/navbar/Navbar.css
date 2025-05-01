@@ -24,6 +24,7 @@
     color: white;
     padding: 5px 0;
     font-weight: bold;
+    border-bottom: 2px solid grey;
  
     white-space: nowrap;
 }
@@ -46,12 +47,14 @@
 /* Navbar */
 .navbar {
     background-color: #fff;
+    /* border: 2px solid red; */
     color: black;
-    padding: 10px 20px;
+    padding: 5px 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    border-bottom: 1px solid grey;
 }
 
 .navbar ul {

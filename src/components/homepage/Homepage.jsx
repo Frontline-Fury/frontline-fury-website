@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Homepage.css';
 import captureTheFlagImg from '../assests/captureflag.jpg';
 import spikeRushImg from '../assests/spikerush.jpg';
@@ -7,7 +6,7 @@ import battleRoyalImg from '../assests/battleroyale.jpg';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ff from '../assests/ff.png';
+import '../assests/fonts/fonts.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import bgvideo from '../assests/bgvid.mp4';
@@ -16,24 +15,34 @@ import nandiniimg from '../assests/nandini.jpeg';
 import karanimg from '../assests/karan.jpeg';
 import tarunimg from '../assests/tarun.jpeg';
 import divyanshimg from '../assests/divyansh.jpeg';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import ExitIntentPopup from '../exitpopup/ExitIntentPopup';
+import post2 from '../assests/post2.png'
+import post11 from '../assests/post11.jpg'
+import post3 from '../assests/post3.jpg'
+import post4 from '../assests/post4.jpg'
 
 
 
 const Homepage = () => {
+  const navigate = useNavigate();
+  const [showExitPopup, setShowExitPopup] = useState(false);
+
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: true });
+
+    const handleMouseLeave = (e) => {
+      if (e.clientY <= 0) {
+        setShowExitPopup(true);
+      }
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -42,22 +51,8 @@ const Homepage = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    pauseOnHover: false,  // 👈 This will prevent pausing on hover
+    pauseOnHover: false,
   };
-
-
-
-
-
-
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
-
-  // const [selectedQuestion, setSelectedQuestion] = useState(0);
-
-
-
 
   const gamemodeData = [
     {
@@ -95,48 +90,12 @@ const Homepage = () => {
     },
   ];
 
-
-  // const faqData = [
-  //   {
-  //     question: "What is the objective of the airsoft arena?",
-  //     answer: "Our airsoft arena provides a realistic tactical experience, promoting team-based strategy and sportsmanship."
-  //   },
-  //   {
-  //     question: "What equipment do I need?",
-  //     answer: "We provide all necessary equipment, including airsoft guns, protective gear, and pellets. You can also bring your own gear if it meets safety standards."
-  //   },
-  //   {
-  //     question: "Is airsoft safe?",
-  //     answer: "Yes! We enforce strict safety rules, provide protective gear, and have trained referees monitoring all games."
-  //   },
-  //   {
-  //     question: "Do I need prior experience to play?",
-  //     answer: "No experience is needed! We offer beginner-friendly game modes and provide a quick training session before you start."
-  //   },
-  //   {
-  //     question: "How do I book a session?",
-  //     answer: "You can book a session through our website or contact us directly for reservations and group bookings."
-  //   }
-  // ];
-
-
-
   const steps = [
     { number: "1", title: "Choose Game Mode", description: "Pick from Capture The Flag, Battle Royale, or more!" },
     { number: "2", title: "Select Date & Time", description: "Book a slot that suits you!" },
     { number: "3", title: "Choose The Slot", description: "Choose a slot that suits you!" },
     { number: "4", title: "Confirm Your Booking", description: "Pay, Confirm  & start the action!" },
   ];
-
-
-  // const pricingPlans = [
-  //   { name: "Per Player", price: "₹1000", benefits: ["1 Hour Gameplay", "Basic Equipment", "Standard Arena"] },
-  //   { name: "Team Entry", price: "₹4000", benefits: ["3 Hours Gameplay", "Advanced Equipment", "Priority Booking"] },
-  //   { name: "Shooting Range", price: "₹500", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-  //   { name: "Private Events", price: "₹15000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-  //   { name: "VIP Membership", price: "₹7000", benefits: ["Unlimited Access", "Exclusive Events", "Private Matches"] },
-  // ];
-
 
   const testimonials = [
     {
@@ -167,24 +126,37 @@ const Homepage = () => {
 
 
 
-  const navigate = useNavigate();
+
+
+
+
+  const [popupShown, setPopupShown] = useState(false);
+
+  useEffect(() => {
+    const handleMouseLeave = (e) => {
+      if (e.clientY < 10 && !popupShown) {
+        setShowExitPopup(true);
+        setPopupShown(true); // Show only once
+      }
+    };
+
+    document.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave);
+    };
+  }, [popupShown]);
+
 
 
 
   return (
     <div>
+      {showExitPopup && <ExitIntentPopup onClose={() => setShowExitPopup(false)} />}
 
 
-
-
-
-
-
-      {/* Banner Section */}
       <div className="home-banner">
         <video src={bgvideo} autoPlay loop muted />
-
-        {/* Overlay Content */}
         <div className="home-banner-content">
           <h1>Welcome to India's First Premier Airsoft Arena</h1>
           <p>Where Gaming Meets Action!</p>
@@ -194,67 +166,54 @@ const Homepage = () => {
 
 
 
-      <div data-aos="fade-up">
-        {/* About Frontline Fury Section */}
-        <div className="about-section">
-          <div className="about-image">
-            <img src={ff} alt="About Frontline Fury" />
-          </div>
-          <div className="about-content">
-            <h2> Frontline Fury</h2>
-            <p>
-              Frontline Fury is India’s premier airsoft arena designed for players who crave thrilling and realistic combat experiences.
-              Our mission is to bring tactical gameplay, teamwork, and sportsmanship to the forefront of modern recreational activities.
-            </p>
-            <p>
-              Whether you're a beginner or a pro, our state-of-the-art facility provides the perfect battleground for adrenaline-fueled action.
-              Get ready to engage in immersive game modes like Capture the Flag, Battle Royale, and more!
-            </p>
-            <button className="learn-more-button" onClick={() => navigate('/aboutus')} >Learn More</button>
-          </div>
 
+
+      <div data-aos="fade-up">
+        <div className="about-us-section">
+          <div className="about-us-container">
+            {/* Left side with company name and tagline */}
+            <div className="about-us-left">
+              <h2>FRONTLINE FURY</h2>
+
+            </div>
+
+            {/* Right side with description and button */}
+            <div className="about-us-right">
+              <p className="about-text">
+                Frontline Fury is India's premier airsoft arena, offering an unparalleled combat experience
+                with state-of-the-art equipment and immersive game modes. Our mission is to bring
+                tactical gaming to life, creating adrenaline-pumping battles in a safe and controlled
+                environment. Whether you're a seasoned player or new to airsoft, we provide the
+                ultimate battlefield for you to test your skills and strategy.
+              </p>
+              <button className="learn-more-button" onClick={() => navigate('/aboutus')}>
+                Learn More
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
 
 
 
-  
 
 
 
 
 
-      <div data-aos="fade-up">
-
-        <div className="how-it-works-section">
-          <h2>How It Works</h2>
-          <div className="steps-container">
-            {steps.map((step, index) => (
-              <div key={index} className="step-card">
-                <h3>{step.number}</h3>
-                <h4>{step.title}</h4>
-                <p>{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-      </div>
-{/* 
-      <div data-aos="fade-up">
-        <div className="cta-section">
-          <h2>Ready for Action?</h2>
-          <p>Book your session now and experience the thrill!</p>
-          <button>Book Now</button>
-          <p>📞 Call: +91 639664369 | 📩 Email: info@frontlinefury.com</p>
-        </div>
-      </div> */}
 
 
 
 
-      {/* Game Modes Section */}
+
+
+
+
+
+
+
+
       <div data-aos="fade-up">
         <div className="game-mode" id="features">
           <h2>Game Modes</h2>
@@ -277,61 +236,111 @@ const Homepage = () => {
 
 
 
-
-
-
-      {/* Carousel Section */}
-      <div className="new-carousel">
-      <Slider {...settings}>
-        {carouselData.map((slide, index) => (
-          <div key={index} className="carousel-slide">
-            <img src={slide.image} alt={slide.title} className="carousel-image" />
-            <div className="overlay">
-              <h1>{slide.title}</h1>
-              <p>{slide.description}</p>
-            </div>
-          </div>
-        ))}
-      </Slider>
-    </div>
-      
-
-
-
-
-
-
-
-
-
-      {/* <div data-aos="fade-up">
-        <div className="pricing-section">
-          <h2>Pricing</h2>
-          <div className="pricing-container">
-            {pricingPlans.map((plan, index) => (
-              <div key={index} className="pricing-card">
-                <h3>{plan.name}</h3>
-                <h3>{plan.price}</h3>
-                <ul>
-                  {plan.benefits.map((benefit, i) => (
-                    <li key={i}>{benefit}</li>
-                  ))}
-                </ul>
-                <button>Get Started</button>
+      <div data-aos="fade-up">
+        <div className="how-it-works-section">
+          <h2>How It Works</h2>
+          <div className="steps-container">
+            {steps.map((step, index) => (
+              <div key={index} className="step-card">
+                <h3>{step.number}</h3>
+                <h4>{step.title}</h4>
+                <p>{step.description}</p>
               </div>
             ))}
           </div>
         </div>
-        </div> */}
+      </div>
 
 
 
 
 
 
+      <div className="new-carousel">
+        <Slider {...settings}>
+          {carouselData.map((slide, index) => (
+            <div key={index} className="carousel-slide">
+              <img src={slide.image} alt={slide.title} className="carousel-image" />
+              <div className="overlay">
+                <h1>{slide.title}</h1>
+                <p>{slide.description}</p>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
 
 
 
+      <div data-aos="fade-up" className="instagram-promo-section">
+        <div className="instagram-container">
+          {/* Instagram Preview */}
+          <div className="instagram-preview">
+            <div className="instagram-header">
+              <div className="instagram-profile">
+                <div className="instagram-avatar"></div>
+                <span>frontline.fury</span>
+              </div>
+              <button className="follow-button" onClick={() => window.open('https://instagram.com/frontline.fury')}>
+                Follow
+              </button>
+            </div>
+
+            <div className="instagram-post-grid">
+              {[
+                { img: post2, link: "https://www.instagram.com/p/DJHsoQvC63o/" },
+                { img: post11, link: "https://www.instagram.com/p/CxamplePost2/" },
+                { img: post3, link: "https://www.instagram.com/p/CxamplePost3/" },
+                { img: post11, link: "https://www.instagram.com/p/CxamplePost2/" },
+                { img: post3, link: "https://www.instagram.com/p/CxamplePost3/" },
+                { img: post4, link: "https://www.instagram.com/p/CxamplePost4/" }
+
+              ].map((post, index) => (
+                <div key={index} className="instagram-post">
+                  <img
+                    src={post.img}
+                    alt={`Instagram Post ${index + 1}`}
+                    onClick={() => window.open(post.link)}
+                  />
+                  <div className="post-overlay">
+                    <span>👀 View Post</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Early Bird Offer */}
+          <div className="early-bird-offer">
+            <h3>Exclusive Early Bird Offers!</h3>
+            <p>Follow us on Instagram and get:</p>
+            <ul className="offer-list">
+              <li>✅ 15% off your first booking</li>
+              <li>✅ Access to members-only events</li>
+              <li>✅ Chance to win free game passes</li>
+              <li>✅ Early access to new game modes</li>
+            </ul>
+
+            <div className="offer-code">
+              <p>Use code at checkout:</p>
+              <div className="code-box">FOLLOW15</div>
+            </div>
+
+            <button
+              className="cta-button"
+              onClick={() => window.open('https://instagram.com/frontline.fury')}
+            >
+              Follow Now & Claim Offer
+            </button>
+
+            <div className="social-proof">
+              <div className="followers-count">
+                <strong>2,500+</strong> players already following
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
 
 
@@ -341,17 +350,32 @@ const Homepage = () => {
         <div className="testimonial-section">
           <h2>What Our Players Say</h2>
           <div className="testimonial-container">
-            <div className="testimonial-slider">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="testimonial-card">
+            {/* First row - right to left */}
+            <div className="testimonial-slider slider-1">
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <div key={`slider1-${index}`} className="testimonial-card">
                   <img src={testimonial.image} alt={testimonial.name} />
                   <h3>{testimonial.name}</h3>
                   <p>{testimonial.quote}</p>
                 </div>
               ))}
-              {/* Duplicate for seamless scrolling */}
-              {testimonials.map((testimonial, index) => (
-                <div key={index + testimonials.length} className="testimonial-card">
+            </div>
+
+            {/* Second row - left to right */}
+            <div className="testimonial-slider slider-2">
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <div key={`slider2-${index}`} className="testimonial-card">
+                  <img src={testimonial.image} alt={testimonial.name} />
+                  <h3>{testimonial.name}</h3>
+                  <p>{testimonial.quote}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Third row - right to left */}
+            <div className="testimonial-slider slider-3">
+              {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <div key={`slider3-${index}`} className="testimonial-card">
                   <img src={testimonial.image} alt={testimonial.name} />
                   <h3>{testimonial.name}</h3>
                   <p>{testimonial.quote}</p>
@@ -363,42 +387,141 @@ const Homepage = () => {
       </div>
 
 
-      {/* <div data-aos="fade-up">
-        <div className="faq-container">
-          <h2>Frequently Asked Questions</h2>
-          <div className="faq-layout">
 
-            <div className="faq-right">
-              <h3>Articles in this section</h3>
-              <ul>
-                {faqData.map((item, index) => (
-                  <li
-                    key={index}
-                    className={index === selectedQuestion ? "active" : ""}
-                    onClick={() => setSelectedQuestion(index)}
-                  >
-                    {item.question}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="faq-left">
-              <h1>{faqData[selectedQuestion].question}</h1>
-              <ul>
-                {faqData[selectedQuestion].answer.split("\n").map((line, idx) => (
-                  <li key={idx}>{line.trim()}</li>
-                ))}
-              </ul>
+
+
+
+
+
+
+      {/* <div data-aos="fade-up" className="feedback-section">
+  <h2>💬 We Value Your Feedback</h2>
+  <p>Let us know what you think about your experience or what we can improve.</p>
+  <form className="feedback-form" onSubmit={(e) => e.preventDefault()}>
+    <textarea
+      placeholder="Type your feedback here..."
+      rows="5"
+      className="feedback-textarea"
+      required
+    />
+    <button type="submit" className="submit-feedback-button">Submit Feedback</button>
+  </form>
+</div> */}
+
+
+
+
+
+
+
+
+
+
+      <div data-aos="fade-up" className="feedback-container">
+        <div className="feedback-header">
+          <h2>“We value your opinion! Please share your thoughts below.”</h2>
+          <p>Help us improve your combat experience</p>
+          <div className="pulse-line"></div>
+        </div>
+
+        <form className="tactical-feedback-form">
+          {/* Rating Section */}
+          <div className="form-section">
+            <label>How's your experience so far?</label>
+            <div className="tactical-rating">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <React.Fragment key={star}>
+                  <input type="radio" id={`tactical-star-${star}`} name="rating" value={star} />
+                  <label htmlFor={`tactical-star-${star}`} className="tactical-star">
+                    <div className="star-base"></div>
+                    <div className="star-fill"></div>
+                  </label>
+                </React.Fragment>
+              ))}
             </div>
           </div>
-        </div>
+
+          {/* Feedback Section */}
+          <div className="form-section">
+            <label htmlFor="custom-request">Share your thoughts on this idea?</label>
+            <div className="input-container">
+              <input
+                type="text"
+                id="custom-request"
+                placeholder="Your Thoughts"
+              />
+              <div className="input-decoration"></div>
+            </div>
+          </div>
+
+          {/* Visits Dropdown */}
+          <div className="form-section">
+            <label htmlFor="game-mode">How Frequent will you visit?</label>
+            <div className="custom-select">
+              <select id="game-mode" className="tactical-select">
+                <option value="">Select preferred visit</option>
+                <option value="zombie">Once  a month</option>
+                <option value="sniper">Twice  a month</option>
+                <option value="stealth">Thrice  a month</option>
+                <option value="ctf">More than thrice</option>
+                <option value="other">Other (specify below)</option>
+              </select>
+              <div className="select-arrow"></div>
+            </div>
+          </div>
+
+
+          {/* Game Mode Dropdown */}
+          <div className="form-section">
+            <label htmlFor="game-mode">REQUEST NEW GAME MODES</label>
+            <div className="custom-select">
+              <select id="game-mode" className="tactical-select">
+                <option value="">Select preferred mode</option>
+                <option value="zombie">Zombie Survival</option>
+                <option value="sniper">Sniper Elimination</option>
+                <option value="stealth">Stealth Missions</option>
+                <option value="ctf">CTF Variations</option>
+                <option value="other">Other (specify below)</option>
+              </select>
+              <div className="select-arrow"></div>
+            </div>
+          </div>
+
+          {/* Arena Dropdown */}
+          <div className="form-section">
+            <label htmlFor="arena-upgrade">REQUEST ARENA UPGRADES</label>
+            <div className="custom-select">
+              <select id="arena-upgrade" className="tactical-select">
+                <option value="">Select upgrade type</option>
+                <option value="obstacles">More Obstacles/Cover</option>
+                <option value="lighting">Lighting Effects</option>
+                <option value="theming">Themed Areas</option>
+                <option value="safety">Safety Improvements</option>
+                <option value="other">Other (specify below)</option>
+              </select>
+              <div className="select-arrow"></div>
+            </div>
+          </div>
+
+          {/* Custom Suggestion */}
+          <div className="form-section">
+            <label htmlFor="custom-request">SPECIAL REQUEST</label>
+            <div className="input-container">
+              <input
+                type="text"
+                id="custom-request"
+                placeholder="Your custom suggestion..."
+              />
+              <div className="input-decoration"></div>
+            </div>
+          </div>
+
+          <button type="submit" className="tactical-submit">
+            <span>TRANSMIT REPORT</span>
+            <div className="radio-wave"></div>
+          </button>
+        </form>
       </div>
- */}
-
-
-
-
-
 
 
 
@@ -407,12 +530,7 @@ const Homepage = () => {
 
 
     </div>
-
-
   );
 };
 
 export default Homepage;
-
-
-
