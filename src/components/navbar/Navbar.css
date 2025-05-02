@@ -20,11 +20,11 @@
 .ticker-container {
     width: 100%;
     
-    background: linear-gradient(to right, #4a90e2, #9013fe);
+    background: #e63946;
     color: white;
     padding: 5px 0;
     font-weight: bold;
-    border-bottom: 2px solid grey;
+    /* border-bottom: 2px solid grey; */
  
     white-space: nowrap;
 }

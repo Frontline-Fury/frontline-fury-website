@@ -52,7 +52,7 @@
   padding: 10px 20px;
   font-size: 1.2rem;
   border: none;
-  background-color: #ff6600;
+  background-color: #e63946;
   color: white;
   cursor: pointer;
   border-radius: 5px;
@@ -60,7 +60,7 @@
 }
 
 .home-banner-button:hover {
-  background-color: #ff4500;
+  background-color: #1a1a1a;
 }
 
 
@@ -242,7 +242,7 @@
 }
 
 .step-card h3 {
-  background: linear-gradient(to right, #4a90e2, #9013fe);
+  background: #e63946;
   color: white;
   padding: 5px;
   border-radius: 50%;
@@ -308,10 +308,11 @@
 .game-mode-card:hover {
   transform: translateY(-10px) scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #e0e0e0;
+  background-color: #e63946;
   border-image: linear-gradient(to right, #4a90e2, #9013fe);
   border-image-slice: 1;
   border-radius: 10px;
+  color: #fff;
 }
 
 .game-mode-image img {
@@ -604,7 +605,7 @@
 .cta-button {
   width: 100%;
   padding: 12px;
-  background: #3897f0;
+  background: #1a1a1a;
   color: white;
   border: none;
   border-radius: 4px;
@@ -616,7 +617,7 @@
 }
 
 .cta-button:hover {
-  background: #2684f0;
+  background: #e63946;
 }
 
 .social-proof {
