@@ -99,7 +99,7 @@ const Homepage = () => {
 
   const testimonials = [
     {
-      name: "Nandini Kishore",
+      name: "Nandini ",
       image: nandiniimg,
       quote: "Amazing experience! The best airsoft arena I've ever been to."
     },

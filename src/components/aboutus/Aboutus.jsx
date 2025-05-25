@@ -40,7 +40,7 @@ const Aboutus = () => {
           
             <div className="team-member">
               <img src={nandiniimg} alt="nandini kishore" />
-              <h3>Nandini Kishore</h3>
+              <h3>Nandini </h3>
               <p>COO</p>
             </div>
             <div className="team-member">

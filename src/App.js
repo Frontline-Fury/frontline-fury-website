@@ -7,8 +7,10 @@ import Waiver from "./components/waiver/Waiver";
 import Signup from "./components/signup/Signup";
 import Layout from "./components/layout/Layout";
 import Leaderboard from "./components/leaderboard/Leaderboard";
-import Booking from "./components/booking/Booking";
+// import Booking from "./components/booking/Booking";
 import Market from "./components/market/Market";
+import Gamemode from "./components/gamemode/Gamemode";
+import GameDetail from "./components/gamemode/GameDetail";
 
 
 function App() {
@@ -29,7 +31,8 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/booking" element={<Booking />} />
+          <Route path="/gamemode" element={<Gamemode />} />
+          <Route path="/gamemode/:slug" element={<GameDetail />} />
           <Route path="/waiver" element={<Waiver />} />
           <Route path="/market" element={<Market />} />
           {/* Signup route should receive the prop */}

@@ -214,9 +214,7 @@
   font-size: 50px;
   font-weight: 400;
   margin-bottom: 40px;
-  background: linear-gradient(to right, #4a90e2, #9013fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1a1a1a;
 }
 
 .steps-container {
@@ -275,9 +273,7 @@
 }
 
 .game-mode h2 {
-  background: linear-gradient(to right, #4a90e2, #9013fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1a1a1a;
   margin: auto;
   /* border: 2px solid red; */
   text-align: center;
@@ -308,11 +304,16 @@
 .game-mode-card:hover {
   transform: translateY(-10px) scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  background-color: #e63946;
+  background-color: #1a1a1a;
   border-image: linear-gradient(to right, #4a90e2, #9013fe);
   border-image-slice: 1;
   border-radius: 10px;
   color: #fff;
+}
+
+.game-mode-card:hover .game-mode-content h3,
+.game-mode-card:hover .game-mode-content p {
+  color: white;
 }
 
 .game-mode-image img {
@@ -341,8 +342,8 @@
 }
 
 .book-now-button {
-  background-color: #fff;
-  color: #4a90e2;
+  background-color:  #010000;
+  color: #fff;
   padding: 15px 30px;
   border: none;
   font-size: 1.2rem;
@@ -353,7 +354,7 @@
 }
 
 .book-now-button:hover {
-  background-color: #f4f4f4;
+  background-color: #e63946;
 }
 
 
@@ -677,9 +678,7 @@
   font-size: 50px;
   font-weight: 400;
   margin-bottom: 30px;
-  background: linear-gradient(to right, #4a90e2, #9013fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #1a1a1a;
 }
 
 .testimonial-container {

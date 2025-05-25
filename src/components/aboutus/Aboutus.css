@@ -17,8 +17,8 @@ body::-webkit-scrollbar {
 
 /* Header section with a gradient background */
 .aboutus-header {
-    background: linear-gradient(to right, #4a90e2, #9013fe);
-    color: white;
+  background: linear-gradient(to bottom right, #e63946, #2b2d42);
+  color: white;
     text-align: center;
     padding: 100px 20px;
     position: relative;
@@ -104,9 +104,7 @@ body::-webkit-scrollbar {
   .pricing-page-title {
     font-size: 3rem;
     margin: 40px 0 30px;
-    background: linear-gradient(to right, #4a90e2, #9013fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #1a1a1a;
     font-weight: 700;
   }
   
@@ -165,7 +163,7 @@ body::-webkit-scrollbar {
   
   /* Call to Action Button */
   .pricing-page-button {
-    background: #4a90e2;
+    background: #e63946;  
     color: white;
     border: none;
     padding: 12px 24px;
@@ -177,7 +175,7 @@ body::-webkit-scrollbar {
   }
   
   .pricing-page-button:hover {
-    background: #357abd;
+    background: #1a1a1a;
   }
   
   /* Popular Badge */

@@ -5,9 +5,6 @@ import spikeRushImg from '../assests/spikerush.jpg';
 import battleRoyalImg from '../assests/battleroyale.jpg';
 import { useNavigate } from 'react-router-dom';
 
-
-
-
 const gameModes = [
   {
     id: "tdm",
@@ -15,7 +12,13 @@ const gameModes = [
     description: "Team Deathmatch (TDM) is a fast-paced combat mode where two teams compete to reach the kill limit first. Perfect for players who enjoy constant action and quick respawns.",
     difficulty: "Intermediate",
     teamSize: "4v4 / 5v5",
-    image: captureTheFlagImg
+    image: captureTheFlagImg,
+    features: [
+      "Fast-paced action",
+      "Quick respawns",
+      "Team coordination",
+      "Multiple maps"
+    ]
   },
   {
     id: "ctf",
@@ -23,7 +26,13 @@ const gameModes = [
     description: "Capture the Flag (CTF) is an exciting team-based game mode where players must infiltrate the enemy base, capture their flag, and return it to their own base while defending their own flag.",
     difficulty: "Advanced",
     teamSize: "6v6 / 8v8",
-    image: spikeRushImg
+    image: spikeRushImg,
+    features: [
+      "Strategic gameplay",
+      "Base defense",
+      "Flag mechanics",
+      "Team roles"
+    ]
   },
   {
     id: "bomb-defusal",
@@ -31,7 +40,13 @@ const gameModes = [
     description: "Spike Rush is an intense and tactical game mode where one team plants a bomb (spike) and the other team attempts to defuse it. Requires strategy, coordination, and precise execution.",
     difficulty: "Hard",
     teamSize: "5v5",
-    image: battleRoyalImg
+    image: battleRoyalImg,
+    features: [
+      "Tactical gameplay",
+      "No respawns",
+      "Bomb mechanics",
+      "Competitive rules"
+    ]
   },
   {
     id: "battle-royale",
@@ -39,13 +54,15 @@ const gameModes = [
     description: "Battle Royale is a thrilling survival game mode where players are dropped into a large map that shrinks over time. The last player or team standing wins. Gather resources, outplay opponents, and survive!",
     difficulty: "Expert",
     teamSize: "Solo/Duo/Squad",
-    image: captureTheFlagImg
+    image: captureTheFlagImg,
+    features: [
+      "Large map",
+      "Shrinking zone",
+      "Loot system",
+      "Solo/team options"
+    ]
   },
 ];
-
-
-
-  
 
 const timeSlots = {
   morning: ["9:00 AM", "10:00 AM", "11:00 AM"],
@@ -61,7 +78,8 @@ const Booking = () => {
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedPlayers, setSelectedPlayers] = useState([]);
   const [playerIds, setPlayerIds] = useState({});
-  const [activeTab, setActiveTab] = useState("modes"); // 'modes' or 'booking'
+  const [activeTab, setActiveTab] = useState("modes");
+  const [showGameModeDetails, setShowGameModeDetails] = useState(null);
 
   const getNext14Days = () => {
     return [...Array(14)].map((_, index) => {
@@ -139,8 +157,6 @@ const Booking = () => {
         </div>
       </div>
     );
-
-    
   };
 
   return (
@@ -156,84 +172,50 @@ const Booking = () => {
         <button
           className={`tab-button ${activeTab === 'booking' ? 'active' : ''}`}
           onClick={() => setActiveTab('booking')}
+          disabled={!selectedGameMode}
         >
           Book Session
         </button>
       </div>
 
-      {/* Game Modes Section */}
+      {/* Game Modes Section - Airbnb Style */}
       {activeTab === 'modes' && (
         <div className="game-modes-section">
           <h2 className="section-title">Available Game Modes</h2>
           <p className="section-subtitle">Choose from our exciting game modes</p>
 
-          <div className="alternating-game-modes">
-            {gameModes.map((mode, index) => (
-              <div
+          <div className="game-modes-grid">
+            {gameModes.map((mode) => (
+              <div 
                 key={mode.id}
-                className={`game-mode-row ${index % 2 === 0 ? 'left-image' : 'right-image'}`}
+                className="game-mode-card"
+                onClick={() => setShowGameModeDetails(mode)}
               >
-                {index % 2 === 0 ? (
-                  <>
-                    <div className="mode-images-collage">
-                      <div className="main-image">
-                        <img src={mode.image} alt={mode.name} />
-                      </div>
-                      <div className="side-images">
-                        <img src={mode.image} alt={`${mode.name} side1`} />
-                        <img src={mode.image} alt={`${mode.name} side2`} />
-                      </div>
-                    </div>
-
-                    <div className="mode-details">
-                      <h3>{mode.name}</h3>
-                      <div className="game-mode-meta">
-                        <span className="difficulty">{mode.difficulty}</span>
-                        <span className="team-size">{mode.teamSize}</span>
-                      </div>
-                      <p className="game-mode-description">{mode.description}</p>
-                      <button
-                        className="select-mode-button"
-                        onClick={() => {
-                          setSelectedGameMode(mode.id);
-                          setActiveTab('booking');
-                        }}
-                      >
-                        Book This Mode
-                      </button>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="mode-details">
-                      <h3>{mode.name}</h3>
-                      <div className="game-mode-meta">
-                        <span className="difficulty">{mode.difficulty}</span>
-                        <span className="team-size">{mode.teamSize}</span>
-                      </div>
-                      <p className="game-mode-description">{mode.description}</p>
-                      <button
-                        className="select-mode-button"
-                        onClick={() => {
-                          setSelectedGameMode(mode.id);
-                          setActiveTab('booking');
-                        }}
-                      >
-                        Book This Mode
-                      </button>
-                    </div>
-                    <div className="mode-images-collage">
-                      <div className="main-image">
-                        <img src={mode.image} alt={mode.name} />
-                      </div>
-                      <div className="side-images">
-                        <img src={mode.image} alt={`${mode.name} side1`} />
-                        <img src={mode.image} alt={`${mode.name} side2`} />
-                      </div>
-                    </div>
-
-                  </>
-                )}
+                <div className="game-mode-image">
+                  <img src={mode.image} alt={mode.name} />
+                </div>
+                <div className="game-mode-info">
+                  <h3>{mode.name}</h3>
+                  <div className="game-mode-meta">
+                    <span className={`difficulty ${mode.difficulty.toLowerCase()}`}>
+                      {mode.difficulty}
+                    </span>
+                    <span className="players">{mode.teamSize}</span>
+                  </div>
+                  <p className="game-mode-description">
+                    {mode.description.substring(0, 100)}...
+                  </p>
+                  <button 
+                    className="select-mode-button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedGameMode(mode.id);
+                      setActiveTab('booking');
+                    }}
+                  >
+                    Book Now
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -244,75 +226,80 @@ const Booking = () => {
       {activeTab === 'booking' && (
         <div className="booking-section">
           <div className="booking-header">
+            <button 
+              className="back-to-modes"
+              onClick={() => setActiveTab('modes')}
+            >
+              &larr; Back to Modes
+            </button>
             <h2>Book Your Game Session</h2>
             <p>Fill in the details below to reserve your spot</p>
           </div>
 
           <div className="booking-steps">
-            {/* Game Mode Selection */}
-            <div className={`booking-step ${selectedGameMode ? 'completed' : ''}`}>
-              <div className="step-header">
-                <span className="step-number">1</span>
-                <h3>Select Game Mode</h3>
-              </div>
-              <div className="step-content">
-                <select
-                  value={selectedGameMode}
-                  onChange={(e) => {
-                    setSelectedGameMode(e.target.value);
-                    setSelectedDate(null);
-                    setSelectedTimeCategory("");
-                    setSelectedTimeSlot("");
-                    setSelectedPlayers([]);
-                  }}
-                  required
-                >
-                  <option value="">-- Choose Game Mode --</option>
-                  {gameModes.map((mode) => (
-                    <option key={mode.id} value={mode.id}>
-                      {mode.name} ({mode.teamSize})
-                    </option>
-                  ))}
-                </select>
-              </div>
+            {/* Selected Game Mode Preview */}
+            <div className="selected-mode-preview">
+              {gameModes.find(m => m.id === selectedGameMode) && (
+                <>
+                  <h3>Selected Mode: {gameModes.find(m => m.id === selectedGameMode).name}</h3>
+                  <div className="preview-card">
+                    <img 
+                      src={gameModes.find(m => m.id === selectedGameMode).image} 
+                      alt={gameModes.find(m => m.id === selectedGameMode).name} 
+                    />
+                    <div className="preview-info">
+                      <span className="difficulty">
+                        {gameModes.find(m => m.id === selectedGameMode).difficulty}
+                      </span>
+                      <span className="players">
+                        {gameModes.find(m => m.id === selectedGameMode).teamSize}
+                      </span>
+                    </div>
+                    <button 
+                      className="change-mode-button"
+                      onClick={() => setActiveTab('modes')}
+                    >
+                      Change Mode
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Date Selection */}
-            {selectedGameMode && (
-              <div className={`booking-step ${selectedDate ? 'completed' : ''}`}>
-                <div className="step-header">
-                  <span className="step-number">2</span>
-                  <h3>Select Date</h3>
-                </div>
-                <div className="step-content">
-                  <div className="date-scroll-container">
-                    {getNext14Days().map((d) => (
-                      <button
-                        key={d.key}
-                        type="button"
-                        className={`date-button ${selectedDate === d.fullDate ? "active" : ""}`}
-                        onClick={() => {
-                          setSelectedDate(d.fullDate);
-                          setSelectedTimeCategory("");
-                          setSelectedTimeSlot("");
-                          setSelectedPlayers([]);
-                        }}
-                      >
-                        <div className="day">{d.day}</div>
-                        <div className="date-num">{d.dateNum}</div>
-                        <div className="month">{d.month}</div>
-                      </button>
-                    ))}
-                  </div>
+            <div className={`booking-step ${selectedDate ? 'completed' : ''}`}>
+              <div className="step-header">
+                <span className="step-number">1</span>
+                <h3>Select Date</h3>
+              </div>
+              <div className="step-content">
+                <div className="date-scroll-container">
+                  {getNext14Days().map((d) => (
+                    <button
+                      key={d.key}
+                      type="button"
+                      className={`date-button ${selectedDate === d.fullDate ? "active" : ""}`}
+                      onClick={() => {
+                        setSelectedDate(d.fullDate);
+                        setSelectedTimeCategory("");
+                        setSelectedTimeSlot("");
+                        setSelectedPlayers([]);
+                      }}
+                    >
+                      <div className="day">{d.day}</div>
+                      <div className="date-num">{d.dateNum}</div>
+                      <div className="month">{d.month}</div>
+                    </button>
+                  ))}
                 </div>
               </div>
-            )}
+            </div>
 
             {/* Time Selection */}
             {selectedDate && (
               <div className={`booking-step ${selectedTimeSlot ? 'completed' : ''}`}>
                 <div className="step-header">
-                  <span className="step-number">3</span>
+                  <span className="step-number">2</span>
                   <h3>Select Time</h3>
                 </div>
                 <div className="step-content">
@@ -378,7 +365,7 @@ const Booking = () => {
             {selectedTimeSlot && (
               <div className={`booking-step ${selectedPlayers.length > 0 ? 'completed' : ''}`}>
                 <div className="step-header">
-                  <span className="step-number">4</span>
+                  <span className="step-number">3</span>
                   <h3>Select Players</h3>
                 </div>
                 <div className="step-content">
@@ -391,7 +378,7 @@ const Booking = () => {
             {selectedPlayers.length > 0 && (
               <div className="booking-summary">
                 <div className="step-header">
-                  <span className="step-number">5</span>
+                  <span className="step-number">4</span>
                   <h3>Confirm Booking</h3>
                 </div>
                 <div className="summary-card">
@@ -439,6 +426,63 @@ const Booking = () => {
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Game Mode Details Modal */}
+      {showGameModeDetails && (
+        <div className="game-mode-modal">
+          <div className="modal-overlay" onClick={() => setShowGameModeDetails(null)}></div>
+          <div className="modal-content">
+            <button 
+              className="close-modal" 
+              onClick={() => setShowGameModeDetails(null)}
+            >
+              ×
+            </button>
+            
+            <div className="modal-image">
+              <img src={showGameModeDetails.image} alt={showGameModeDetails.name} />
+            </div>
+            
+            <div className="modal-body">
+              <h2>{showGameModeDetails.name}</h2>
+              
+              <div className="modal-meta">
+                <span className={`difficulty ${showGameModeDetails.difficulty.toLowerCase()}`}>
+                  {showGameModeDetails.difficulty}
+                </span>
+                <span className="players">{showGameModeDetails.teamSize}</span>
+              </div>
+              
+              <div className="modal-section">
+                <h3>Description</h3>
+                <p>{showGameModeDetails.description}</p>
+              </div>
+              
+              <div className="modal-section">
+                <h3>Features</h3>
+                <ul className="features-list">
+                  {showGameModeDetails.features.map((feature, index) => (
+                    <li key={index}>{feature}</li>
+                  ))}
+                </ul>
+              </div>
+              
+              <div className="modal-actions">
+                <button 
+                  className="book-now-button"
+                  onClick={() => {
+                    setSelectedGameMode(showGameModeDetails.id);
+                    setShowGameModeDetails(null);
+                    setActiveTab('booking');
+                  }}
+                >
+                  Book This Mode
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
