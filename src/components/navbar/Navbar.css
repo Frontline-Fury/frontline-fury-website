@@ -13,6 +13,8 @@
     overflow: hidden;
     top: 0;
     z-index: 1000;
+    /* border: 2px solid red; */
+    
 }
 
 
@@ -46,8 +48,9 @@
 
 /* Navbar */
 .navbar {
-    background-color: white;
-    color: #1a1a1a;
+    /* background-color: white; */
+    background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+    color: #fff;
     padding: 0 2rem;
     display: flex;
     justify-content: space-between;

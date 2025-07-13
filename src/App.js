@@ -35,6 +35,7 @@ function App() {
           <Route path="/gamemode/:slug" element={<GameDetail />} />
           <Route path="/waiver" element={<Waiver />} />
           <Route path="/market" element={<Market />} />
+        
           {/* Signup route should receive the prop */}
           <Route path="/signup" element={<Signup onAuthSuccess={handleAuthSuccess} />} />
         </Routes>

@@ -66,8 +66,8 @@ const GameDetail = () => {
   <h2 className="section-title">Player Testimonials</h2>
   <div className="testimonials-grid">
     {game.testimonials.map((testimonial, index) => (
-      <div key={index} className="testimonial-card">
-        <div className="testimonial-header">
+      <div key={index} className="testimonials-card">
+        <div className="testimonials-header">
           <img 
             src={testimonial.avatar} 
             alt={testimonial.name} 
@@ -85,14 +85,14 @@ const GameDetail = () => {
           </div>
         </div>
         <p className="testimonial-text">"{testimonial.text}"</p>
-        <div className="testimonial-footer">
+        <div className="testimonials-footer">
           <span className="playtime">{testimonial.playtime} hours played</span>
           <span className="date">{testimonial.date}</span>
         </div>
       </div>
     ))}
   </div>
-  <button className="add-testimonial-btn">
+  <button className="add-testimonials-btn">
     Share Your Experience
   </button>
 </div>
