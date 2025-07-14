@@ -216,18 +216,18 @@ const Homepage = () => {
         </p>
 
         <div className="comparison-box">
-          <h4>🚀 Airsoft vs Paintball:</h4>
+          <h4>Airsoft vs Paintball:</h4>
           <ul>
             <li>
-              <strong>🔫 Realism:</strong> Airsoft guns mimic real firearms (weight, recoil, magazines). 
+              <strong> Realism:</strong> Airsoft guns mimic real firearms (weight, recoil, magazines). 
               Paintball feels like a game.
             </li>
             <li>
-              <strong>🎯 Precision:</strong> Airsoft BBs fly straighter (100+ feet range). Paintballs 
+              <strong> Precision:</strong> Airsoft BBs fly straighter (100+ feet range). Paintballs 
               arc and splatter.
             </li>
             <li>
-              <strong>💂 Military Simulation:</strong> Airsoft focuses on tactics like 
+              <strong> Military Simulation:</strong> Airsoft focuses on tactics like 
               <strong> flanking</strong>, <strong>cover fire</strong>, and <strong>missions</strong>. 
               Paintball is more casual.
             </li>
@@ -236,10 +236,10 @@ const Homepage = () => {
 
         <div className="cta-box">
           <button className="cta-button">
-            🎥 WATCH AIRSOFT IN ACTION
+             WATCH AIRSOFT IN ACTION
           </button>
           <button className="secondary-button">
-            📖 COMPLETE BEGINNER’S GUIDE
+            COMPLETE BEGINNER’S GUIDE
           </button>
         </div>
       </div>
