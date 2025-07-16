@@ -18,7 +18,7 @@
 /* ==== Page Background & Font ==== */
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: var(--dark);
+   background: linear-gradient(to right, #0f0f0f, #1c1c1c);
   color: var(--light);
   line-height: 1.6;
 }
@@ -170,7 +170,7 @@ body {
   padding: 6rem 2rem;
 }
 
-.team-members {
+.founding-members {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -179,7 +179,7 @@ body {
   margin: 0 auto;
 }
 
-.team-member {
+.founding-team-member {
   width: 250px;
 }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import "./Aboutus.css";
 
-// Import images
 import nandiniImg from '../assests/nandini.jpeg';
 import karanImg from '../assests/karan.jpeg';
 import tarunImg from '../assests/tarun.jpeg';
@@ -53,7 +52,7 @@ const teamMembers = [
   {
     img: divyanshImg,
     name: "Divyansh Negi",
-    role: "CBDO"
+    role: "Intern"
   }
 ];
 
@@ -177,9 +176,9 @@ const Aboutus = () => {
           <h2>MEET THE TEAM</h2>
           <div className="divider"></div>
         </div>
-        <div className="team-members">
+        <div className="founding-members">
           {teamMembers.map((member, idx) => (
-            <div className="team-member" key={idx}>
+            <div className="founding-team-member" key={idx}>
               <div className="member-image-container">
                 <img src={member.img} alt={member.name} />
                 <div className="member-info">
