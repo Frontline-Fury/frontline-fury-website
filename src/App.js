@@ -1,48 +1,57 @@
-// App.js
-import React, { useState, useEffect } from "react";
-import Aboutus from "./components/aboutus/Aboutus";
-import Homepage from "./components/homepage/Homepage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Waiver from "./components/waiver/Waiver";
-import Signup from "./components/signup/Signup";
+import { useState } from "react";
 import Layout from "./components/layout/Layout";
+import Homepage from "./components/homepage/Homepage";
+import Aboutus from "./components/aboutus/Aboutus";
+import Waiver from "./components/waiver/Waiver";
 import Leaderboard from "./components/leaderboard/Leaderboard";
-// import Booking from "./components/booking/Booking";
 import Market from "./components/market/Market";
-import Gamemode from "./components/gamemode/Gamemode";
-import GameDetail from "./components/gamemode/GameDetail";
+import CombinedGamePage from "./components/CombinedGamePage/CombinedGamePage";
+import Signup from "./components/signup/Signup";  // Import Signup
+import supabase from "./supabaseClient"; 
 
 
 function App() {
-  const [user, setUser] = useState(null); 
-
-  useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(user));
-  }, [user]);
+  const [user, setUser] = useState(null);
+  const [isSignupOpen, setIsSignupOpen] = useState(false);
+  const [resetSignup, setResetSignup] = useState(false);
 
   const handleAuthSuccess = (userData) => {
     setUser(userData);
+    setIsSignupOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    setResetSignup(true);
+    // Reset flag immediately after to prevent loop
+    setTimeout(() => setResetSignup(false), 0);
   };
 
   return (
     <Router>
-      <Layout user={user} onAuthSuccess={setUser}>
+      <Layout user={user} onLogout={handleLogout} onAuthSuccess={handleAuthSuccess} openSignup={() => setIsSignupOpen(true)}>
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/aboutus" element={<Aboutus />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/gamemode" element={<Gamemode />} />
-          <Route path="/gamemode/:slug" element={<GameDetail />} />
+          <Route path="/gamemode" element={<CombinedGamePage />} />
+          <Route path="/gamemode/:slug" element={<CombinedGamePage />} />
           <Route path="/waiver" element={<Waiver />} />
           <Route path="/market" element={<Market />} />
-        
-          {/* Signup route should receive the prop */}
-          <Route path="/signup" element={<Signup onAuthSuccess={handleAuthSuccess} />} />
         </Routes>
+
+        {/* Signup modal controlled here */}
+        <Signup
+          isOpen={isSignupOpen}
+          onClose={() => setIsSignupOpen(false)}
+          onAuthSuccess={handleAuthSuccess}
+          reset={resetSignup}
+        />
       </Layout>
     </Router>
   );
 }
-
 
 export default App;
