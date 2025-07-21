@@ -1122,12 +1122,7 @@ body {
   100% { width: 30px; height: 30px; opacity: 0; }
 }
 
-@media (max-width: 768px) {
-  .feedback-container {
-    padding: 30px 20px;
-    margin: 60px 20px;
-  }
-}
+
 
 /* Updated CSS for dropdowns */
 .custom-select {
@@ -1401,3 +1396,143 @@ body {
     align-items: flex-start;
   }
 }
+
+
+@media (max-width: 768px) {
+  .home-banner h1 {
+    font-size: 2rem;
+  }
+
+   .home-banner {
+    height: 50vh;  /* Mobile pe height half screen kar di */
+  }
+
+  .home-banner p {
+    font-size: 1rem;
+  }
+
+  .home-banner-button {
+    font-size: 1rem;
+    padding: 8px 16px;
+  }
+
+  .about-us-left h2 {
+    font-size: 3rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .steps-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-card {
+    width: 90%;
+    max-width: none;
+  }
+
+  .game-modess-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .game-modess-card {
+    width: 100%;
+  }
+
+  .game-modess-content h3 {
+    font-size: 1.5rem;
+  }
+
+  .game-modess-content p {
+    font-size: 1rem;
+  }
+
+  .book-now-button {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+
+  .carousel-slide {
+    height: 60vh;
+  }
+
+  .carousel-image {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .overlay {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .overlay h1 {
+    font-size: 1.5rem;
+  }
+
+  .overlay p {
+    font-size: 1rem;
+  }
+
+  .instagram-post-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 768px) {
+  .testimonial-section {
+    padding: 1rem; /* reduce padding */
+  }
+
+  .testimonial-heading {
+    font-size: 1.2rem; /* smaller heading */
+    text-align: center;
+  }
+
+  .testimonial-card {
+    padding: 0.8rem;
+    margin: 0.5rem auto;
+    max-width: 95%;
+    font-size: 0.9rem;
+  }
+
+  .testimonial-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: auto;
+  }
+
+  .text-content {
+    font-size: 14px;
+    padding: 0 10px;
+  }
+
+  .text-content .lead-text {
+    font-size: 16px;
+  }
+
+  .comparison-box h4 {
+    font-size: 16px;
+  }
+
+  .cta-button, .secondary-button {
+    font-size: 0.9rem;
+    padding: 10px 16px;
+  }
+}
+

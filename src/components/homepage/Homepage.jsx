@@ -198,112 +198,112 @@ const Homepage = () => {
 
 
 
-{/* ====== WHAT IS AIRSOFT? ====== */}
-<section className="airsoft-intro">
-  <div className="container">
-    <div className="section-header" data-aos="fade-up">
-      <h2><span className="highlight-red">AIRSOFT</span> - REALISTIC COMBAT SPORT</h2>
-      <p>India’s Most Thrilling Tactical Experience</p>
-    </div>
+      {/* ====== WHAT IS AIRSOFT? ====== */}
+      <section className="airsoft-intro">
+        <div className="container">
+          <div className="section-header" data-aos="fade-up">
+            <h2><span className="highlight-red">AIRSOFT</span> - REALISTIC COMBAT SPORT</h2>
+            <p>India’s Most Thrilling Tactical Experience</p>
+          </div>
 
-    <div className="content-grid">
-      {/* Left Side - Text */}
-      <div className="text-content" data-aos="fade-right">
-        <p className="lead-text">
-          Imagine <strong>realistic military combat</strong> with <strong>replica guns</strong>, 
-          <strong> teamwork</strong>, and <strong>heart-pounding action</strong>—but with 
-          <strong> 100% safe plastic BBs</strong>. That’s Airsoft!
-        </p>
+          <div className="content-grid">
+            {/* Left Side - Text */}
+            <div className="text-content" data-aos="fade-right">
+              <p className="lead-text">
+                Imagine <strong>realistic military combat</strong> with <strong>replica guns</strong>,
+                <strong> teamwork</strong>, and <strong>heart-pounding action</strong>—but with
+                <strong> 100% safe plastic BBs</strong>. That’s Airsoft!
+              </p>
 
-        <div className="comparison-box">
-          <h4>Airsoft vs Paintball:</h4>
-          <ul>
-            <li>
-              <strong> Realism:</strong> Airsoft guns mimic real firearms (weight, recoil, magazines). 
-              Paintball feels like a game.
-            </li>
-            <li>
-              <strong> Precision:</strong> Airsoft BBs fly straighter (100+ feet range). Paintballs 
-              arc and splatter.
-            </li>
-            <li>
-              <strong> Military Simulation:</strong> Airsoft focuses on tactics like 
-              <strong> flanking</strong>, <strong>cover fire</strong>, and <strong>missions</strong>. 
-              Paintball is more casual.
-            </li>
-          </ul>
-        </div>
+              <div className="comparison-box">
+                <h4>Airsoft vs Paintball:</h4>
+                <ul>
+                  <li>
+                    <strong> Realism:</strong> Airsoft guns mimic real firearms (weight, recoil, magazines).
+                    Paintball feels like a game.
+                  </li>
+                  <li>
+                    <strong> Precision:</strong> Airsoft BBs fly straighter (100+ feet range). Paintballs
+                    arc and splatter.
+                  </li>
+                  <li>
+                    <strong> Military Simulation:</strong> Airsoft focuses on tactics like
+                    <strong> flanking</strong>, <strong>cover fire</strong>, and <strong>missions</strong>.
+                    Paintball is more casual.
+                  </li>
+                </ul>
+              </div>
 
-        <div className="cta-box">
-          <button className="cta-button">
-             WATCH AIRSOFT IN ACTION
-          </button>
-          <button className="secondary-button">
-            COMPLETE BEGINNER’S GUIDE
-          </button>
-        </div>
-      </div>
+              <div className="cta-box">
+                <button className="cta-button">
+                  WATCH AIRSOFT IN ACTION
+                </button>
+                <button className="secondary-button">
+                  COMPLETE BEGINNER’S GUIDE
+                </button>
+              </div>
+            </div>
 
-      {/* Right Side - Image */}
-      <div className="image-content" data-aos="fade-left">
-        <div className="image-wrapper">
-          <img 
-            src={airsoftIntroImg} 
-            alt="Airsoft match in India - Teamwork & tactics" 
-          />
-          <div className="floating-badge">
-            <div className="badge-icon">🔫</div>
-            <span>6mm PLASTIC BBs | NO REAL BULLETS</span>
+            {/* Right Side - Image */}
+            <div className="image-content" data-aos="fade-left">
+              <div className="image-wrapper">
+                <img
+                  src={airsoftIntroImg}
+                  alt="Airsoft match in India - Teamwork & tactics"
+                />
+                <div className="floating-badge">
+                  <div className="badge-icon">--</div>
+                  <span>6mm PLASTIC BBs | NO REAL BULLETS --</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
-{/* ====== WHY FRONTLINE FURY? ====== */}
-<section className="features-section dark-bg">
-  <div className="container">
-    <div className="section-header" data-aos="fade-up">
-      <h2>WHY <span className="highlight-red">FRONTLINE FURY</span>?</h2>
-      <p>India’s #1 Professional Airsoft Arena</p>
-    </div>
+      {/* ====== WHY FRONTLINE FURY? ====== */}
+      <section className="features-section dark-bg">
+        <div className="container">
+          <div className="section-header" data-aos="fade-up">
+            <h2>WHY <span className="highlight-red">FRONTLINE FURY</span>?</h2>
+            <p>India’s #1 Professional Airsoft Arena</p>
+          </div>
 
-    <div className="features-grid">
-      {[
-        {
-          icon: '🎯',
-          title: 'AUTHENTIC COMBAT GEAR',
-          desc: 'Use <strong>Tokyo Marui, G&G, Specna Arms</strong> replicas—the same brands used by pros worldwide.'
-        },
-        {
-          icon: '🏰',
-          title: 'IMMERSIVE ARENAS',
-          desc: 'Urban warfare, jungle ops, and CQB (Close Quarters Battle) zones—no two games feel alike!'
-        },
-        {
-          icon: '🛡️',
-          title: 'MILITARY-GRADE SAFETY',
-          desc: '<strong>Full-face masks</strong>, certified marshals, and strict FPS limits for 100% safe gameplay.'
-        },
-        {
-          icon: '🏆',
-          title: 'TOURNAMENTS & EVENTS',
-          desc: 'Compete in <strong>ranked matches</strong>, corporate team-building, and zombie survival nights!'
-        }
-      ].map((item, index) => (
-        <div key={index} className="feature-card" data-aos="fade-up" data-aos-delay={index * 100}>
-          <div className="feature-icon">{item.icon}</div>
-          <h3>{item.title}</h3>
-          <p dangerouslySetInnerHTML={{ __html: item.desc }} />
-          {index === 3 && (
-            <button className="mini-button">VIEW EVENT CALENDAR →</button>
-          )}
+          <div className="features-grid">
+            {[
+              {
+                icon: '🎯',
+                title: 'AUTHENTIC COMBAT GEAR',
+                desc: 'Use <strong>Tokyo Marui, G&G, Specna Arms</strong> replicas—the same brands used by pros worldwide.'
+              },
+              {
+                icon: '🏰',
+                title: 'IMMERSIVE ARENAS',
+                desc: 'Urban warfare, jungle ops, and CQB (Close Quarters Battle) zones—no two games feel alike!'
+              },
+              {
+                icon: '🛡️',
+                title: 'MILITARY-GRADE SAFETY',
+                desc: '<strong>Full-face masks</strong>, certified marshals, and strict FPS limits for 100% safe gameplay.'
+              },
+              {
+                icon: '🏆',
+                title: 'TOURNAMENTS & EVENTS',
+                desc: 'Compete in <strong>ranked matches</strong>, corporate team-building, and zombie survival nights!'
+              }
+            ].map((item, index) => (
+              <div key={index} className="feature-card" data-aos="fade-up" data-aos-delay={index * 100}>
+                <div className="feature-icon">{item.icon}</div>
+                <h3>{item.title}</h3>
+                <p dangerouslySetInnerHTML={{ __html: item.desc }} />
+                {index === 3 && (
+                  <button className="mini-button">VIEW EVENT CALENDAR →</button>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
 
 
@@ -326,7 +326,10 @@ const Homepage = () => {
 
       <div data-aos="fade-up">
         <div className="game-modess" id="features">
-          <h2>GAME MODES</h2>
+          <div className="section-header" data-aos="fade-up">
+            <h2>EXPLORE OUR <span className="highlight-red">GAME MODES</span></h2>
+
+          </div>
           <div className="game-modess-container">
             {gamemodeData.map((gamemode, index) => (
               <div className="game-modess-card" key={index}>
@@ -348,7 +351,10 @@ const Homepage = () => {
 
       <div data-aos="fade-up">
         <div className="how-it-works-section">
-          <h2>HOW IT WORKS</h2>
+          <div className="section-header" data-aos="fade-up">
+            <h2>HOW IT <span className="highlight-red">WORKS </span></h2>
+
+          </div>
           <div className="steps-container">
             {steps.map((step, index) => (
               <div key={index} className="step-card">
@@ -458,7 +464,10 @@ const Homepage = () => {
 
       <div data-aos="fade-up">
         <div className="testimonial-section">
-          <h2>WHAT OUR PLAYERS SAY</h2>
+          <div className="section-header" data-aos="fade-up">
+            <h2>WHAT OUR <span className="highlight-red">PLAYERS </span>SAY</h2>
+
+          </div>
           <div className="testimonial-container">
             {/* First row - right to left */}
             <div className="testimonial-slider slider-1">
