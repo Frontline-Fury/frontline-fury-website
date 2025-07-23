@@ -86,7 +86,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           <li><Link to="/" onClick={toggleSidebar}>Home</Link></li>
           <li><Link to="/aboutus" onClick={toggleSidebar}>About Us</Link></li>
           <li><Link to="/leaderboard" onClick={toggleSidebar}>Leaderboard</Link></li>
-          <li><Link to="/booking" onClick={toggleSidebar}>Booking</Link></li>
+          <li><Link to="/gamemode" onClick={toggleSidebar}>Booking</Link></li>
           <li><Link to="/market" onClick={toggleSidebar}>Market Place</Link></li>
           <li><Link to="/contact" onClick={toggleSidebar}>Contact Us</Link></li>
 
