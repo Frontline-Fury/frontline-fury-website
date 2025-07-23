@@ -158,7 +158,7 @@ const Homepage = () => {
 
 
       <div className="home-banner">
-        <video src={bgvideo} autoPlay loop muted />
+        <video src={bgvideo} autoPlay loop muted playsInline  />
         <div className="home-banner-content">
           <h1>Welcome to India's First Premier Airsoft Arena</h1>
           <p>Where Gaming Meets Action!</p>
