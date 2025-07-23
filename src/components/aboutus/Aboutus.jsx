@@ -36,7 +36,7 @@ const techFeatures = [
 const teamMembers = [
   {
     img: nandiniImg,
-    name: "Nandini Kishore",
+    name: "Nandini ",
     role: "COO & Founder"
   },
   {
@@ -181,7 +181,7 @@ const Aboutus = () => {
             <div className="founding-team-member" key={idx}>
               <div className="member-image-container">
                 <img src={member.img} alt={member.name} />
-                <div className="member-info">
+                <div className="aboutus-member-info">
                   <h3>{member.name}</h3>
                   <p>{member.role}</p>
                 </div>
@@ -224,7 +224,7 @@ const Aboutus = () => {
                 <p className="price">{plan.price}</p>
                 <ul>
                   {plan.features.map((feature, idx) => (
-                    <li key={idx}>✔ {feature}</li>
+                    <li key={idx}> {feature}</li>
                   ))}
                 </ul>
                 <button className="book-button">Book Now</button>
@@ -240,7 +240,7 @@ const Aboutus = () => {
                 <p className="price">{plan.price}</p>
                 <ul>
                   {plan.features.map((feature, idx) => (
-                    <li key={idx}>✔ {feature}</li>
+                    <li key={idx}> {feature}</li>
                   ))}
                 </ul>
                 <button className="book-button">Join Now</button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   FaSearch, FaTrophy, FaMedal, FaUsers, FaUser,
-  FaChartLine, FaCalendarAlt, FaShareAlt,
+   FaCalendarAlt, FaShareAlt,
   FaHeart, FaRegHeart
 } from "react-icons/fa";
 import { IoMdTrophy } from "react-icons/io";
@@ -28,10 +28,6 @@ const teamData = {
   Delta: { id: 4, wins: 113, members: 2, logo: "δ", color: "#FFA07A", bio: "Experienced veterans of the game", achievements: [4] },
 };
 
-
-
-
-
 const achievements = [
   { id: 1, name: "First Win", icon: "🥇", description: "Win your first match", common: true },
   { id: 2, name: "Streak Starter", icon: "🔥", description: "3 wins in a row", common: false },
@@ -48,13 +44,9 @@ const upcomingRewards = [
   { position: "All participants", reward: "Seasonal Badge" },
 ];
 
-
-
 const Leaderboard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("players");
-
-
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [followedPlayers, setFollowedPlayers] = useState([]);
@@ -66,20 +58,11 @@ const Leaderboard = () => {
   const seasonEndDate = new Date();
   seasonEndDate.setDate(seasonEndDate.getDate() + 14);
 
-
-
-
-
   useEffect(() => {
     if (searchTerm && firstMatchRef.current) {
       firstMatchRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   }, [searchTerm]);
-
-
-
-
-
 
   const sortedTeams = Object.entries(teamData)
     .map(([team, data]) => ({ team, ...data }))
@@ -126,13 +109,12 @@ const Leaderboard = () => {
   };
 
   const renderPlayerCard = (player, position) => {
-    const isTop3 = position <= 3 && !searchTerm;;
+    const isTop3 = position <= 3 && !searchTerm;
     const medalColor = getMedalColor(position);
     const isHighlighted = searchTerm && player.name.toLowerCase().includes(searchTerm.toLowerCase());
     const isFollowed = followedPlayers.includes(player.id);
 
     const handlePlayerClick = (e) => {
-      // Only open modal if the click wasn't on a button
       if (!e.target.closest('button')) {
         setSelectedPlayer(player);
       }
@@ -178,36 +160,39 @@ const Leaderboard = () => {
   };
 
   const renderTeamCard = (team, position) => {
-    const isTop3 = position <= 3;
+    const isTop3 = position <= 3 && !searchTerm;
     const medalColor = getMedalColor(position);
+    const isHighlighted = searchTerm && team.team.toLowerCase().includes(searchTerm.toLowerCase());
     const isFollowed = followedTeams.includes(team.id);
+
+    const handleTeamClick = (e) => {
+      if (!e.target.closest('button')) {
+        setSelectedTeam(team);
+      }
+    };
 
     return (
       <div
         key={team.team}
-        className={`team-card ${medalColor}`}
-        onClick={() => setSelectedTeam(team)}
+        ref={isHighlighted ? firstMatchRef : null}
+        className={`player-card ${medalColor} ${isHighlighted ? "highlight" : ""}`}
+        onClick={handleTeamClick}
       >
-        <div className="team-rank">{isTop3 ? <FaMedal /> : position}</div>
-        <div className="team-logo" style={{ backgroundColor: team.color }}>
+        <div className="player-rank">{isTop3 ? <FaMedal /> : position}</div>
+        <div className="player-avatar" style={{ backgroundColor: team.color }}>
           {team.logo}
         </div>
-        <div className="team-info">
-          <h3>{team.team}</h3>
-          <div className="team-stats">
-            <span><FaTrophy /> {team.wins} total wins</span>
+        <div className="player-info">
+          <div className="player-name">
+            {team.team}
+          </div>
+          <div className="player-stats">
+            <span><FaTrophy /> {team.wins} wins</span>
             <span><FaUsers /> {team.members} members</span>
+            <span className="trend-up">↑</span>
           </div>
         </div>
-        <div className="team-performance">
-          <FaChartLine />
-          <span>Top performer: {
-            initialLeaderboardData
-              .filter(p => p.team === team.team)
-              .sort((a, b) => b.wins - a.wins)[0].name
-          }</span>
-        </div>
-        <div className="team-actions">
+        <div className="player-actions">
           <button
             className={`follow-btn ${isFollowed ? 'followed' : ''}`}
             onClick={(e) => { e.stopPropagation(); toggleFollowTeam(team.id); }}
@@ -232,7 +217,6 @@ const Leaderboard = () => {
     const team = teamData[player.team];
     const isFollowed = followedPlayers.includes(player.id);
     const playerAchievements = achievements.filter(a => player.achievements.includes(a.id));
-
 
     return (
       <div className="profile-modal-overlay">
@@ -290,8 +274,6 @@ const Leaderboard = () => {
                   <p className="no-data">No achievements yet</p>
                 )}
               </div>
-
-
             </div>
           </div>
         </div>
@@ -309,8 +291,8 @@ const Leaderboard = () => {
 
     return (
       <div className="profile-modal-overlay">
-        <div className="profile-modal">
-          <div className="modal-content team-modal">
+        <div className="profile-modal team-modal">
+          <div className="modal-content">
             <button className="close-modal" onClick={() => setSelectedTeam(null)}>×</button>
 
             <div className="profile-header">
@@ -319,9 +301,15 @@ const Leaderboard = () => {
               </div>
               <div className="profile-info">
                 <h2>{team.team} Team</h2>
-                <div className="profile-stats">
-                  <div><span className="stat-value">{team.wins}</span><span className="stat-label">Total Wins</span></div>
-                  <div><span className="stat-value">{team.members}</span><span className="stat-label">Members</span></div>
+                <div className="team-stats-large">
+                  <div>
+                    <span className="stat-value">{team.wins}</span>
+                    <span className="stat-label">Total Wins</span>
+                  </div>
+                  <div>
+                    <span className="stat-value">{team.members}</span>
+                    <span className="stat-label">Members</span>
+                  </div>
                   <div>
                     <span className="stat-value">
                       {Math.round(team.wins / members.reduce((sum, m) => sum + m.matches, 0) * 100)}%
@@ -332,13 +320,16 @@ const Leaderboard = () => {
               </div>
               <div className="profile-actions">
                 <button
-                  className={`follow-btn ${isFollowed ? 'followed' : ''}`}
+                  className={`action-btn ${isFollowed ? 'primary followed' : 'secondary'}`}
                   onClick={() => toggleFollowTeam(team.id)}
                 >
                   {isFollowed ? <FaHeart /> : <FaRegHeart />}
                   {isFollowed ? 'Following' : 'Follow Team'}
                 </button>
-                <button className="share-btn" onClick={() => handleShare('team', team.id)}>
+                <button 
+                  className="action-btn secondary"
+                  onClick={() => handleShare('team', team.id)}
+                >
                   <FaShareAlt /> Share
                 </button>
               </div>
@@ -424,107 +415,69 @@ const Leaderboard = () => {
     );
   };
 
-
   const renderLeaderboardContent = () => {
-  const filteredPlayers = initialLeaderboardData
-    .filter(player => searchTerm ? player.name.toLowerCase().includes(searchTerm.toLowerCase()) : true)
-    .sort((a, b) => b.wins - a.wins);
+    const filteredPlayers = initialLeaderboardData
+      .filter(player => searchTerm ? player.name.toLowerCase().includes(searchTerm.toLowerCase()) : true)
+      .sort((a, b) => b.wins - a.wins);
 
-     const playersWithOriginalRanks = filteredPlayers.map(player => ({
-    ...player,
-    originalRank: initialLeaderboardData.findIndex(p => p.id === player.id) + 1
-  }));
+    const playersWithOriginalRanks = filteredPlayers.map(player => ({
+      ...player,
+      originalRank: initialLeaderboardData.findIndex(p => p.id === player.id) + 1
+    }));
 
-  return (
-    <>
-      <div className="top-controls-container">
-        {/* Tabs - Right Side */}
-        <div className="tabs">
-          <button
-            className={activeTab === "players" ? "active" : ""}
-            onClick={() => {
-              setActiveTab("players");
-              setSearchTerm(""); // Clear search when switching tabs
-            }}
-          >
-            <FaUser /> SOLO
-          </button>
-          <button
-            className={activeTab === "teams" ? "active" : ""}
-            onClick={() => {
-              setActiveTab("teams");
-              setSearchTerm(""); // Clear search when switching tabs
-            }}
-          >
-            <FaUsers /> SQUAD
-          </button>
+    return (
+      <>
+        <div className="top-controls-container">
+          <div className="tabs">
+            <button
+              className={activeTab === "players" ? "active" : ""}
+              onClick={() => {
+                setActiveTab("players");
+                setSearchTerm("");
+              }}
+            >
+              <FaUser /> SOLO
+            </button>
+            <button
+              className={activeTab === "teams" ? "active" : ""}
+              onClick={() => {
+                setActiveTab("teams");
+                setSearchTerm("");
+              }}
+            >
+              <FaUsers /> SQUAD
+            </button>
+          </div>
+
+          <div className="search-box">
+            <FaSearch className="search-icon" />
+            <input
+              type="text"
+              placeholder={activeTab === "players" ? "Search players..." : "Search teams..."}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
         </div>
 
-        {/* Search Box - Left Side */}
-        <div className="search-box">
-          <FaSearch className="search-icon" />
-          <input
-            type="text"
-            placeholder={activeTab === "players" ? "Search players..." : "Search teams..."}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-      </div>
-
-       {activeTab === "players" ? (
-        <>
-          {/* Only show top players when not searching */}
-          {!searchTerm && (
-            <div className="top-players">
-              {filteredPlayers.slice(0, 3).map((player, index) => (
-                <div key={player.id} className={`podium-card ${getMedalColor(index + 1)}`}
-                  onClick={() => setSelectedPlayer(player)}>
-                  <div className="podium-rank">{index + 1}</div>
-                  <div className="podium-name">{player.name}</div>
-                  <div className="podium-wins">{player.wins} wins</div>
-                </div>
-              ))}
-            </div>
-          )}
-
+        {activeTab === "players" ? (
           <div className="players-list">
             {playersWithOriginalRanks.map((player) =>
-              renderPlayerCard(player, player.originalRank) // Use original rank here
+              renderPlayerCard(player, player.originalRank)
             )}
           </div>
-        </>
-      ) : (
-        // Similar logic for teams tab
-        <>
-          {!searchTerm && (
-            <div className="top-players">
-              {sortedTeams.slice(0, 3).map((team, index) => (
-                <div
-                  key={team.team}
-                  className={`podium-card ${getMedalColor(index + 1)}`}
-                  onClick={() => setSelectedTeam(team)}
-                >
-                  <div className="podium-rank">{index + 1}</div>
-                  <div className="podium-name">{team.team}</div>
-                  <div className="podium-wins">{team.wins} total wins</div>
-                </div>
-              ))}
-            </div>
-          )}
+        ) : (
           <div className="players-list">
             {sortedTeams
               .filter(team => searchTerm ? team.team.toLowerCase().includes(searchTerm.toLowerCase()) : true)
-              .slice(searchTerm ? 0 : 3)
               .map((team, index) =>
-                renderTeamCard(team, searchTerm ? index + 1 : index + 4)
+                renderTeamCard(team, index + 1)
               )}
           </div>
-        </>
-      )}
-    </>
-  );
-};
+        )}
+      </>
+    );
+  };
 
   const renderSidebar = () => (
     <div className="leaderboard-sidebar">
@@ -541,8 +494,6 @@ const Leaderboard = () => {
         </div>
       </div>
 
-
-
       <div className="sidebar-section">
         <h3><IoMdTrophy /> Upcoming Rewards</h3>
         <div className="rewards-list">
@@ -558,34 +509,25 @@ const Leaderboard = () => {
           ))}
         </div>
       </div>
-
-
-
-
     </div>
   );
 
   return (
     <div>
-
       <section className="aboutus-header">
         <h1>LEADERBOARD</h1>
         <p>THE ULTIMATE RANKING OF CHAMPIONS</p>
       </section>
 
       <div className="leaderboard-app">
-
-
-        <div className="leaderboard-content">
-          <div className="leaderboard-main">
-
-
-            <div className="leaderboard-container">
-              {renderLeaderboardContent()}
-            </div>
-          </div>
-
+        <div className="leaderboard-sidebar">
           {renderSidebar()}
+        </div>
+
+        <div className="leaderboard-main">
+          <div className="leaderboard-container">
+            {renderLeaderboardContent()}
+          </div>
         </div>
 
         {renderPlayerProfile()}

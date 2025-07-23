@@ -207,6 +207,13 @@ const CombinedGamePage = () => {
     }
 
     return (
+
+      <div>
+
+       <section className="aboutus-header">
+        <h1>Choose Your Battle Style</h1>
+        <p>Select from our exciting game modes to begin your adventure</p>
+      </section>
       <div className="game-detail-container">
         {/* Back button to return to listing */}
         <button className="back-button" onClick={() => navigate(-1)}>
@@ -254,19 +261,19 @@ const CombinedGamePage = () => {
           <button 
             className={activeTab === 'overview' ? 'active' : ''}
             onClick={() => setActiveTab('overview')}
-          >
+            >
             Overview
           </button>
           <button 
             className={activeTab === 'rules' ? 'active' : ''}
             onClick={() => setActiveTab('rules')}
-          >
+            >
             Rules
           </button>
           <button 
             className={activeTab === 'testimonials' ? 'active' : ''}
             onClick={() => setActiveTab('testimonials')}
-          >
+            >
             Community
           </button>
         </div>
@@ -348,23 +355,27 @@ const CombinedGamePage = () => {
           <button className="secondary-button">Add to Favorites</button>
         </div>
       </div>
+          </div>
     );
   }
 
   // If no slug, show listing view
   return (
-    <div className="game-mode-container">
-      <div className="game-mode-header">
+    <div>
+
+    <section className="aboutus-header">
         <h1>Choose Your Battle Style</h1>
         <p>Select from our exciting game modes to begin your adventure</p>
-      </div>
+      </section>
+    <div className="game-mode-container">
+     
       
       <div className="game-mode-grid">
         {listings.map((item, index) => (
           <div 
-            key={index} 
-            className="game-card" 
-            onClick={() => navigate(`/gamemode/${item.slug}`)}
+          key={index} 
+          className="game-card" 
+          onClick={() => navigate(`/gamemode/${item.slug}`)}
           >
             <div className="game-card-image-container">
               <img src={item.image} alt={item.title} className="game-card-image" />
@@ -387,6 +398,7 @@ const CombinedGamePage = () => {
         ))}
       </div>
     </div>
+        </div>
   );
 };
 
