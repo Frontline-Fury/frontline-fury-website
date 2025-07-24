@@ -434,7 +434,7 @@ const Homepage = () => {
             <div className="instagram-header">
               <div className="instagram-profile">
                 <div className="instagram-avatar"></div>
-                <span>frontline.fury</span>
+                <span>thefrontlinefury</span>
               </div>
               <button className="follow-button" onClick={() => window.open('https://instagram.com/thefrontlinefury')}>
                 Follow
