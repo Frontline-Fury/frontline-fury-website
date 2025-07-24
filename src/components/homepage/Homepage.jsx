@@ -153,14 +153,24 @@ const Homepage = () => {
       quote: "Incredible game modes and friendly staff. Highly recommended!"
     },
     {
+      name: "Shruti Sharma",
+      image: karanimg,
+      quote: "Incredible game modes"
+    },
+    {
+      name: "Atul Guleria",
+      image: karanimg,
+      quote: "Best place for OUTINGS!"
+    },
+    {
       name: "Tarun Guleria",
       image: tarunimg,
-      quote: "Had a blast with my friends. Can't wait to come back!"
+      quote: "Real Guns ki feel hai boss!"
     },
     {
       name: "Divyansh Negi",
       image: divyanshimg,
-      quote: "Had a blast with my friends. Can't wait to come back!"
+      quote: "Concept is really amazing!!"
     }
   ];
 

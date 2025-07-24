@@ -58,6 +58,11 @@ const teamMembers = [
     img: null,
     name: "Shruti Sharma",
     role: "Intern"
+  },
+    {
+    img: null,
+    name: "Sangeeta Rawat",
+    role: "Intern"
   }
 ];
 
