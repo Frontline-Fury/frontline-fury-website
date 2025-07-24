@@ -29,7 +29,7 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [showExitPopup, setShowExitPopup] = useState(false);
   const [popupShown, setPopupShown] = useState(false);
-  
+
   // Feedback form state
   const [formData, setFormData] = useState({
     rating: 0,
@@ -56,29 +56,29 @@ const Homepage = () => {
 
     // Fetch user and check feedback
     const fetchUserAndFeedback = async () => {
-  const { data: { user }, error: userError } = await supabase.auth.getUser();
-  if (userError) {
-    console.error('Error fetching user:', userError);
-    return;
-  }
+      const { data: { user }, error: userError } = await supabase.auth.getUser();
+      if (userError) {
+        console.error('Error fetching user:', userError);
+        return;
+      }
 
-  if (user) {
-    setUserId(user.id);
-    const { data, error: feedbackError } = await supabase
-      .from('feedback')
-      .select('*')
-      .eq('user_id', user.id);
-    
-    if (feedbackError) {
-      console.error('Error fetching feedback:', feedbackError);
-      return;
-    }
-    
-    if (data && data.length > 0) {
-      setHasSubmittedFeedback(true);
-    }
-  }
-};
+      if (user) {
+        setUserId(user.id);
+        const { data, error: feedbackError } = await supabase
+          .from('feedback')
+          .select('*')
+          .eq('user_id', user.id);
+
+        if (feedbackError) {
+          console.error('Error fetching feedback:', feedbackError);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setHasSubmittedFeedback(true);
+        }
+      }
+    };
 
     fetchUserAndFeedback();
 
@@ -154,12 +154,12 @@ const Homepage = () => {
     },
     {
       name: "Shruti Sharma",
-      image: karanimg,
+      image: null,
       quote: "Incredible game modes"
     },
     {
       name: "Atul Guleria",
-      image: karanimg,
+      image: null,
       quote: "Best place for OUTINGS!"
     },
     {
@@ -168,9 +168,19 @@ const Homepage = () => {
       quote: "Real Guns ki feel hai boss!"
     },
     {
+      name: "Sangeeta Rawat",
+      image: null,
+      quote: "Really loved the place"
+    },
+    {
       name: "Divyansh Negi",
       image: divyanshimg,
       quote: "Concept is really amazing!!"
+    },
+      {
+      name: "Varun Sharma",
+      image: null,
+      quote: "Better than paintball"
     }
   ];
 
@@ -191,45 +201,56 @@ const Homepage = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  if (!userId) {
-    alert('Please sign in to submit feedback');
-    navigate('/login');
-    return;
-  }
+    e.preventDefault();
 
-  const { error } = await supabase
-    .from('feedback')
-    .insert([
-      {
-        user_id: userId,
-        rating: formData.rating,
-        thoughts: formData.thoughts,
-        visit_frequency: formData.visit_frequency,
-        game_mode_request: formData.game_mode_request,
-        arena_upgrade: formData.arena_upgrade,
-        custom_request: formData.custom_request,
-        submitted_at: new Date().toISOString()
-      }
-    ]);
+    if (!userId) {
+      alert('Please sign in to submit feedback');
+      navigate('/login');
+      return;
+    }
 
-  if (error) {
-    console.error('Error submitting feedback:', error);
-    alert('Failed to submit feedback. Please try again.');
-  } else {
-    alert('Feedback submitted successfully!');
-    setHasSubmittedFeedback(true);
-    setFormData({
-      rating: 0,
-      thoughts: '',
-      visit_frequency: '',
-      game_mode_request: '',
-      arena_upgrade: '',
-      custom_request: ''
-    });
-  }
-};
+    const { error } = await supabase
+      .from('feedback')
+      .insert([
+        {
+          user_id: userId,
+          rating: formData.rating,
+          thoughts: formData.thoughts,
+          visit_frequency: formData.visit_frequency,
+          game_mode_request: formData.game_mode_request,
+          arena_upgrade: formData.arena_upgrade,
+          custom_request: formData.custom_request,
+          submitted_at: new Date().toISOString()
+        }
+      ]);
+
+    if (error) {
+      console.error('Error submitting feedback:', error);
+      alert('Failed to submit feedback. Please try again.');
+    } else {
+      alert('Feedback submitted successfully!');
+      setHasSubmittedFeedback(true);
+      setFormData({
+        rating: 0,
+        thoughts: '',
+        visit_frequency: '',
+        game_mode_request: '',
+        arena_upgrade: '',
+        custom_request: ''
+      });
+    }
+  };
+
+  const getInitials = (name) => {
+    const names = name.split(' ');
+    let initials = names[0].substring(0, 1).toUpperCase();
+
+    if (names.length > 1) {
+      initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+
+    return initials;
+  };
 
   return (
     <div>
@@ -369,29 +390,29 @@ const Homepage = () => {
         </div>
       </section>
 
-    <div data-aos="fade-up">
-      <div className="game-modess" id="features">
-        <div className="section-header" data-aos="fade-up">
-          <h2>EXPLORE OUR <span className="highlight-red">GAME MODES</span></h2>
-        </div>
-        <div className="game-modess-container">
-          {gamemodeData.map((gamemode, index) => (
-            <div className="game-modess-card" key={index}>
-              <div className="game-modess-image">
-                <img src={gamemode.image} alt={gamemode.title} />
+      <div data-aos="fade-up">
+        <div className="game-modess" id="features">
+          <div className="section-header" data-aos="fade-up">
+            <h2>EXPLORE OUR <span className="highlight-red">GAME MODES</span></h2>
+          </div>
+          <div className="game-modess-container">
+            {gamemodeData.map((gamemode, index) => (
+              <div className="game-modess-card" key={index}>
+                <div className="game-modess-image">
+                  <img src={gamemode.image} alt={gamemode.title} />
+                </div>
+                <div className="game-modess-content">
+                  <h3>{gamemode.title}</h3>
+                  <p>{gamemode.description}</p>
+                </div>
+                <button className="book-now-button" onClick={() => navigate('/gamemode')}>
+                  Book Now
+                </button>
               </div>
-              <div className="game-modess-content">
-                <h3>{gamemode.title}</h3>
-                <p>{gamemode.description}</p>
-              </div>
-              <button className="book-now-button" onClick={() => navigate('/gamemode')}>
-                Book Now
-              </button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
 
       <div data-aos="fade-up">
         <div className="how-it-works-section">
@@ -425,11 +446,11 @@ const Homepage = () => {
       </div> */}
 
 
-       <div className="home-banner">
+      <div className="home-banner">
         <video src={bgvideo} autoPlay loop muted playsInline />
-        
-          
-        
+
+
+
       </div>
 
 
@@ -514,7 +535,13 @@ const Homepage = () => {
             <div className="testimonial-slider slider-1">
               {[...testimonials, ...testimonials].map((testimonial, index) => (
                 <div key={`slider1-${index}`} className="testimonial-card">
-                  <img src={testimonial.image} alt={testimonial.name} />
+                  {testimonial.image ? (
+                    <img src={testimonial.image} alt={testimonial.name} />
+                  ) : (
+                    <div className="initials-circle">
+                      {getInitials(testimonial.name)}
+                    </div>
+                  )}
                   <h3>{testimonial.name}</h3>
                   <p>{testimonial.quote}</p>
                 </div>
@@ -524,7 +551,13 @@ const Homepage = () => {
             <div className="testimonial-slider slider-2">
               {[...testimonials, ...testimonials].map((testimonial, index) => (
                 <div key={`slider2-${index}`} className="testimonial-card">
-                  <img src={testimonial.image} alt={testimonial.name} />
+                  {testimonial.image ? (
+                    <img src={testimonial.image} alt={testimonial.name} />
+                  ) : (
+                    <div className="initials-circle">
+                      {getInitials(testimonial.name)}
+                    </div>
+                  )}
                   <h3>{testimonial.name}</h3>
                   <p>{testimonial.quote}</p>
                 </div>
@@ -534,7 +567,13 @@ const Homepage = () => {
             <div className="testimonial-slider slider-3">
               {[...testimonials, ...testimonials].map((testimonial, index) => (
                 <div key={`slider3-${index}`} className="testimonial-card">
-                  <img src={testimonial.image} alt={testimonial.name} />
+                  {testimonial.image ? (
+                    <img src={testimonial.image} alt={testimonial.name} />
+                  ) : (
+                    <div className="initials-circle">
+                      {getInitials(testimonial.name)}
+                    </div>
+                  )}
                   <h3>{testimonial.name}</h3>
                   <p>{testimonial.quote}</p>
                 </div>
@@ -563,10 +602,10 @@ const Homepage = () => {
               <div className="tactical-rating">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <React.Fragment key={star}>
-                    <input 
-                      type="radio" 
-                      id={`tactical-star-${star}`} 
-                      name="rating" 
+                    <input
+                      type="radio"
+                      id={`tactical-star-${star}`}
+                      name="rating"
                       value={star}
                       checked={formData.rating === star}
                       onChange={() => handleRatingChange(star)}
@@ -598,8 +637,8 @@ const Homepage = () => {
             <div className="form-section">
               <label htmlFor="visit_frequency">How Frequent will you visit?</label>
               <div className="custom-select">
-                <select 
-                  id="visit_frequency" 
+                <select
+                  id="visit_frequency"
                   name="visit_frequency"
                   value={formData.visit_frequency}
                   onChange={handleChange}
@@ -619,8 +658,8 @@ const Homepage = () => {
             <div className="form-section">
               <label htmlFor="game_mode_request">REQUEST NEW GAME MODES</label>
               <div className="custom-select">
-                <select 
-                  id="game_mode_request" 
+                <select
+                  id="game_mode_request"
                   name="game_mode_request"
                   value={formData.game_mode_request}
                   onChange={handleChange}
@@ -640,8 +679,8 @@ const Homepage = () => {
             <div className="form-section">
               <label htmlFor="arena_upgrade">REQUEST ARENA UPGRADES</label>
               <div className="custom-select">
-                <select 
-                  id="arena_upgrade" 
+                <select
+                  id="arena_upgrade"
                   name="arena_upgrade"
                   value={formData.arena_upgrade}
                   onChange={handleChange}
