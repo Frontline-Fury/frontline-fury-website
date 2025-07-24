@@ -1561,18 +1561,18 @@ body {
     }
 
     .slider-1 {
-      animation: scrollRightToLeft 10s linear infinite;
+      animation: scrollRightToLeft 5s linear infinite;
     }
 
     /* Second row animation */
     .slider-2 {
-      animation: scrollLeftToRight 15s linear infinite;
+      animation: scrollLeftToRight 9s linear infinite;
 
     }
 
     /* Third row animation */
     .slider-3 {
-      animation: scrollRightToLeft 20s linear infinite;
+      animation: scrollRightToLeft 10s linear infinite;
     }
 
     .testimonial-grid {
