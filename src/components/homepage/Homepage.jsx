@@ -3,7 +3,7 @@ import './Homepage.css';
 import captureTheFlagImg from '../assests/captureflag.jpg';
 import spikeRushImg from '../assests/spikerush.jpg';
 import battleRoyalImg from '../assests/battleroyale.jpg';
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../assests/fonts/fonts.css'
@@ -87,16 +87,16 @@ const Homepage = () => {
     };
   }, [popupShown]);
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnHover: false,
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 1000,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   autoplaySpeed: 3000,
+  //   pauseOnHover: false,
+  // };
 
   const gamemodeData = [
     {
@@ -116,23 +116,23 @@ const Homepage = () => {
     },
   ];
 
-  const carouselData = [
-    {
-      title: "Experience the Ultimate Battle!",
-      description: "Get ready for adrenaline-pumping airsoft action in a realistic battleground.",
-      image: captureTheFlagImg,
-    },
-    {
-      title: "Game Modes & Events",
-      description: "Team Deathmatch, Capture the Flag, VIP Escort, and more exciting challenges await you!",
-      image: spikeRushImg,
-    },
-    {
-      title: "Top Shooters & Leaderboard",
-      description: "Compete with the best and rise to the top of the leaderboard!",
-      image: battleRoyalImg,
-    },
-  ];
+  // const carouselData = [
+  //   {
+  //     title: "Experience the Ultimate Battle!",
+  //     description: "Get ready for adrenaline-pumping airsoft action in a realistic battleground.",
+  //     image: captureTheFlagImg,
+  //   },
+  //   {
+  //     title: "Game Modes & Events",
+  //     description: "Team Deathmatch, Capture the Flag, VIP Escort, and more exciting challenges await you!",
+  //     image: spikeRushImg,
+  //   },
+  //   {
+  //     title: "Top Shooters & Leaderboard",
+  //     description: "Compete with the best and rise to the top of the leaderboard!",
+  //     image: battleRoyalImg,
+  //   },
+  // ];
 
   const steps = [
     { number: "1", title: "Choose Game Mode", description: "Pick from Capture The Flag, Battle Royale, or more!" },
@@ -326,22 +326,22 @@ const Homepage = () => {
           <div className="features-grid">
             {[
               {
-                icon: '🎯',
+                icon: '',
                 title: 'AUTHENTIC COMBAT GEAR',
                 desc: 'Use <strong>Tokyo Marui, G&G, Specna Arms</strong> replicas—the same brands used by pros worldwide.'
               },
               {
-                icon: '🏰',
+                icon: '',
                 title: 'IMMERSIVE ARENAS',
                 desc: 'Urban warfare, jungle ops, and CQB (Close Quarters Battle) zones—no two games feel alike!'
               },
               {
-                icon: '🛡️',
+                icon: '',
                 title: 'MILITARY-GRADE SAFETY',
                 desc: '<strong>Full-face masks</strong>, certified marshals, and strict FPS limits for 100% safe gameplay.'
               },
               {
-                icon: '🏆',
+                icon: '',
                 title: 'TOURNAMENTS & EVENTS',
                 desc: 'Compete in <strong>ranked matches</strong>, corporate team-building, and zombie survival nights!'
               }
@@ -359,27 +359,29 @@ const Homepage = () => {
         </div>
       </section>
 
-      <div data-aos="fade-up">
-        <div className="game-modess" id="features">
-          <div className="section-header" data-aos="fade-up">
-            <h2>EXPLORE OUR <span className="highlight-red">GAME MODES</span></h2>
-          </div>
-          <div className="game-modess-container">
-            {gamemodeData.map((gamemode, index) => (
-              <div className="game-modess-card" key={index}>
-                <div className="game-modess-image">
-                  <img src={gamemode.image} alt={gamemode.title} />
-                </div>
-                <div className="game-modess-content">
-                  <h3>{gamemode.title}</h3>
-                  <p>{gamemode.description}</p>
-                </div>
-                <button className="book-now-button">Book Now</button>
+    <div data-aos="fade-up">
+      <div className="game-modess" id="features">
+        <div className="section-header" data-aos="fade-up">
+          <h2>EXPLORE OUR <span className="highlight-red">GAME MODES</span></h2>
+        </div>
+        <div className="game-modess-container">
+          {gamemodeData.map((gamemode, index) => (
+            <div className="game-modess-card" key={index}>
+              <div className="game-modess-image">
+                <img src={gamemode.image} alt={gamemode.title} />
               </div>
-            ))}
-          </div>
+              <div className="game-modess-content">
+                <h3>{gamemode.title}</h3>
+                <p>{gamemode.description}</p>
+              </div>
+              <button className="book-now-button" onClick={() => navigate('/gamemode')}>
+                Book Now
+              </button>
+            </div>
+          ))}
         </div>
       </div>
+    </div>
 
       <div data-aos="fade-up">
         <div className="how-it-works-section">
@@ -398,7 +400,7 @@ const Homepage = () => {
         </div>
       </div>
 
-      <div className="new-carousel">
+      {/* <div className="new-carousel">
         <Slider {...settings}>
           {carouselData.map((slide, index) => (
             <div key={index} className="carousel-slide">
@@ -410,7 +412,21 @@ const Homepage = () => {
             </div>
           ))}
         </Slider>
+      </div> */}
+
+
+       <div className="home-banner">
+        <video src={bgvideo} autoPlay loop muted playsInline />
+        
+          
+        
       </div>
+
+
+
+
+
+
 
       <div data-aos="fade-up" className="instagram-promo-section">
         <div className="instagram-container">
@@ -420,7 +436,7 @@ const Homepage = () => {
                 <div className="instagram-avatar"></div>
                 <span>frontline.fury</span>
               </div>
-              <button className="follow-button" onClick={() => window.open('https://instagram.com/frontline.fury')}>
+              <button className="follow-button" onClick={() => window.open('https://instagram.com/thefrontlinefury')}>
                 Follow
               </button>
             </div>

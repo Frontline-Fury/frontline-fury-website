@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 
@@ -31,11 +32,12 @@ const Footer = () => {
                     <div className="footer-section">
                         <h4 className="section-title">Quick Links</h4>
                         <ul className="footer-links">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#events">Events</a></li>
-                            <li><a href="#pricing">Pricing</a></li>
-                            <li><a href="#contact">Contact Us</a></li>
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to="/aboutus" >About Us</Link></li>
+                            <li><Link to="/leaderboard">Leaderboard</Link></li>
+                            <li><Link to="/gamemode">Booking</Link></li>
+                            <li><Link to="/market">Market Place</Link></li>
+                            
                         </ul>
                     </div>
 
@@ -45,7 +47,7 @@ const Footer = () => {
                         <ul className="contact-info">
                             <li>
                                 <FaEnvelope className="contact-icon" />
-                                <span>info@frontlinefury.com</span>
+                                <span>thefrontlinefury@gmail.com</span>
                             </li>
                             <li>
                                 <FaPhone className="contact-icon" />

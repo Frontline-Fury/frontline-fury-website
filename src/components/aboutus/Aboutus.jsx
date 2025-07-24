@@ -36,12 +36,12 @@ const techFeatures = [
 const teamMembers = [
   {
     img: nandiniImg,
-    name: "Nandini ",
+    name: "Nandini",
     role: "COO & Founder"
   },
   {
     img: karanImg,
-    name: "Karan Negi",
+    name: "Karan",
     role: "CEO & Founder"
   },
   {
@@ -52,6 +52,11 @@ const teamMembers = [
   {
     img: divyanshImg,
     name: "Divyansh Negi",
+    role: "Core Team"
+  },
+  {
+    img: null,
+    name: "Shruti Sharma",
     role: "Intern"
   }
 ];
@@ -153,7 +158,8 @@ const Aboutus = () => {
       </section>
 
       {/* Technology Section */}
-      <section className="tech-section"><div className="section-header">
+      <section className="tech-section">
+        <div className="section-header">
           <h2>OUR TECHNOLOGIES</h2>
           <div className="divider"></div>
         </div> 
@@ -180,7 +186,17 @@ const Aboutus = () => {
           {teamMembers.map((member, idx) => (
             <div className="founding-team-member" key={idx}>
               <div className="member-image-container">
-                <img src={member.img} alt={member.name} />
+                {member.img ? (
+                  <img src={member.img} alt={member.name} />
+                ) : (
+                  <div className="initials-placeholder">
+                    {member.name
+                      .split(' ')
+                      .map(word => word[0])
+                      .join('')
+                      .toUpperCase()}
+                  </div>
+                )}
                 <div className="aboutus-member-info">
                   <h3>{member.name}</h3>
                   <p>{member.role}</p>
@@ -249,8 +265,6 @@ const Aboutus = () => {
           )}
         </div>
       </section>
-
-      
     </div>
   );
 };
