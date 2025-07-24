@@ -56,19 +56,29 @@ const Homepage = () => {
 
     // Fetch user and check feedback
     const fetchUserAndFeedback = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUserId(user.id);
-        const { data } = await supabase
-          .from('feedback')
-          .select('*')
-          .eq('user_id', user.id);
-        
-        if (data && data.length > 0) {
-          setHasSubmittedFeedback(true);
-        }
-      }
-    };
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  if (userError) {
+    console.error('Error fetching user:', userError);
+    return;
+  }
+
+  if (user) {
+    setUserId(user.id);
+    const { data, error: feedbackError } = await supabase
+      .from('feedback')
+      .select('*')
+      .eq('user_id', user.id);
+    
+    if (feedbackError) {
+      console.error('Error fetching feedback:', feedbackError);
+      return;
+    }
+    
+    if (data && data.length > 0) {
+      setHasSubmittedFeedback(true);
+    }
+  }
+};
 
     fetchUserAndFeedback();
 
@@ -171,46 +181,45 @@ const Homepage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!userId) {
-      alert('Please sign in to submit feedback');
-      navigate('/login'); // Redirect to login if not authenticated
-      return;
-    }
+  e.preventDefault();
+  
+  if (!userId) {
+    alert('Please sign in to submit feedback');
+    navigate('/login');
+    return;
+  }
 
-    const { data, error } = await supabase
-      .from('feedback')
-      .insert([
-        {
-          user_id: userId,
-          rating: formData.rating,
-          thoughts: formData.thoughts,
-          visit_frequency: formData.visit_frequency,
-          game_mode_request: formData.game_mode_request,
-          arena_upgrade: formData.arena_upgrade,
-          custom_request: formData.custom_request,
-          submitted_at: new Date().toISOString()
-        }
-      ]);
+  const { error } = await supabase
+    .from('feedback')
+    .insert([
+      {
+        user_id: userId,
+        rating: formData.rating,
+        thoughts: formData.thoughts,
+        visit_frequency: formData.visit_frequency,
+        game_mode_request: formData.game_mode_request,
+        arena_upgrade: formData.arena_upgrade,
+        custom_request: formData.custom_request,
+        submitted_at: new Date().toISOString()
+      }
+    ]);
 
-    if (error) {
-      console.error('Error submitting feedback:', error);
-      alert('Failed to submit feedback. Please try again.');
-    } else {
-      alert('Feedback submitted successfully!');
-      setHasSubmittedFeedback(true);
-      // Reset form
-      setFormData({
-        rating: 0,
-        thoughts: '',
-        visit_frequency: '',
-        game_mode_request: '',
-        arena_upgrade: '',
-        custom_request: ''
-      });
-    }
-  };
+  if (error) {
+    console.error('Error submitting feedback:', error);
+    alert('Failed to submit feedback. Please try again.');
+  } else {
+    alert('Feedback submitted successfully!');
+    setHasSubmittedFeedback(true);
+    setFormData({
+      rating: 0,
+      thoughts: '',
+      visit_frequency: '',
+      game_mode_request: '',
+      arena_upgrade: '',
+      custom_request: ''
+    });
+  }
+};
 
   return (
     <div>
