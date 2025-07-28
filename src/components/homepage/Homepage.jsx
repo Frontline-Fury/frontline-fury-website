@@ -25,6 +25,8 @@ import airsoftIntroImg from '../assests/post4.jpg';
 import supabase from "../../supabaseClient";
 
 
+
+
 const Homepage = () => {
   const navigate = useNavigate();
   const [showExitPopup, setShowExitPopup] = useState(false);
@@ -264,6 +266,10 @@ const Homepage = () => {
           <button className="home-banner-button" onClick={() => navigate('/gamemode')}>Book Now</button>
         </div>
       </div>
+
+
+
+     
 
       <div data-aos="fade-up">
         <div className="about-us-section">
