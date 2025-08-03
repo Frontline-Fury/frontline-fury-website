@@ -452,12 +452,12 @@ const Homepage = () => {
       </div> */}
 
 
-      <div className="home-banner">
+      {/* <div className="home-banner">
         <video src={bgvideo} autoPlay loop muted playsInline />
 
 
 
-      </div>
+      </div> */}
 
 
 
