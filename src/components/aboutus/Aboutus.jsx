@@ -3,8 +3,8 @@ import "./Aboutus.css";
 
 import nandiniImg from '../assests/nandini.jpeg';
 import karanImg from '../assests/karan.jpeg';
+import JatinImg from '../assests/jatin.jpg';
 import tarunImg from '../assests/tarun.jpeg';
-import divyanshImg from '../assests/divyansh.jpeg';
 import techImage1 from '../assests/spikerush.jpg';
 import techImage2 from '../assests/spikerush.jpg';
 import techImage3 from '../assests/spikerush.jpg';
@@ -45,15 +45,16 @@ const teamMembers = [
     role: "CEO & Founder"
   },
   {
+    img: JatinImg,
+    name: "Jatin Agarwal",
+    role: "CMO"
+  },
+  {
     img: tarunImg,
     name: "Tarun Guleria",
     role: "CTO & Founder"
   },
-  {
-    img: divyanshImg,
-    name: "Divyansh Negi",
-    role: "Core Team"
-  },
+ 
   {
     img: null,
     name: "Shruti Sharma",

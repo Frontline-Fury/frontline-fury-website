@@ -39,6 +39,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           <li><Link to="/leaderboard">Leaderboard</Link></li>
           <li><Link to="/gamemode">Booking</Link></li>
           <li><Link to="/market">Market Place</Link></li>
+          
 
           {/* CONDITIONAL: Signup/Login OR Profile Image */}
           <li className="nav-profile">

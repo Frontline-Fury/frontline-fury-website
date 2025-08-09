@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './CombinedGamePage.css';
-import spikeRushImg from '../assests/spikerush.jpg';
-import battleRoyalImg from '../assests/battleroyale.jpg';
-import captureTheFlagImg from '../assests/captureflag.jpg';
+import spikeRushImg from '../assests/Sr1.jpg';
+import battleRoyalImg from '../assests/Br.jpg';
+import captureTheFlagImg from '../assests/Ctf.jpg';
 
 // Game data
 const listings = [

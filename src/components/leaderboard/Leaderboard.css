@@ -345,7 +345,11 @@ body {
   max-height: 90vh;
   overflow-y: auto;
   padding: 1.5rem;
-  box-shadow: 0 0 30px rgba(255, 165, 0, 0.5);
+  /* box-shadow: 0 0 30px rgba(255, 165, 0, 0.5); */
+  
+}
+::-webkit-scrollbar {
+  display: none;
 }
 
 .close-modal {

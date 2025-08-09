@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import './Homepage.css';
-import captureTheFlagImg from '../assests/captureflag.jpg';
-import spikeRushImg from '../assests/spikerush.jpg';
-import battleRoyalImg from '../assests/battleroyale.jpg';
+import captureTheFlagImg from '../assests/Ctf.jpg';
+import spikeRushImg from '../assests/Sr.jpg';
+import battleRoyalImg from '../assests/Br.jpg';
 // import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../assests/fonts/fonts.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import bgvideo from '../assests/bgvid.mp4';
+import bgvideo from '../assests/bgvideofinal.mp4';
 import { useNavigate } from 'react-router-dom';
 import nandiniimg from '../assests/nandini.jpeg';
 import karanimg from '../assests/karan.jpeg';
 import tarunimg from '../assests/tarun.jpeg';
-import divyanshimg from '../assests/divyansh.jpeg';
+
 import ExitIntentPopup from '../exitpopup/ExitIntentPopup';
-import post2 from '../assests/post2.png'
-import post11 from '../assests/post11.jpg'
-import post3 from '../assests/post3.jpg'
-import post4 from '../assests/post4.jpg'
-import airsoftIntroImg from '../assests/post4.jpg';
+import post1 from '../assests/1.jpg'
+import post2 from '../assests/2.jpg'
+import post3 from '../assests/3.jpg'
+import post4 from '../assests/4.jpg'
+import post5 from '../assests/5.jpg'
+import post6 from '../assests/6.jpg'
+import instalogo from '../assests/newlogo.png'
 
 import supabase from "../../supabaseClient";
 
@@ -174,11 +176,7 @@ const Homepage = () => {
       image: null,
       quote: "Really loved the place"
     },
-    {
-      name: "Divyansh Negi",
-      image: divyanshimg,
-      quote: "Concept is really amazing!!"
-    },
+  
       {
       name: "Varun Sharma",
       image: null,
@@ -340,13 +338,13 @@ const Homepage = () => {
             <div className="image-content" data-aos="fade-left">
               <div className="image-wrapper">
                 <img
-                  src={airsoftIntroImg}
+                  src={post6}
                   alt="Airsoft match in India - Teamwork & tactics"
                 />
-                <div className="floating-badge">
+                {/* <div className="floating-badge">
                   <div className="badge-icon">--</div>
                   <span>6mm PLASTIC BBs | NO REAL BULLETS --</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -470,7 +468,9 @@ const Homepage = () => {
           <div className="instagram-preview">
             <div className="instagram-header">
               <div className="instagram-profile">
-                <div className="instagram-avatar"></div>
+                <div className="instagram-avatar">
+                  <img src={instalogo} alt='instalogo'/>
+                </div>
                 <span>thefrontlinefury</span>
               </div>
               <button className="follow-button" onClick={() => window.open('https://instagram.com/thefrontlinefury')}>
@@ -480,12 +480,12 @@ const Homepage = () => {
 
             <div className="instagram-post-grid">
               {[
-                { img: post2, link: "https://www.instagram.com/p/DJHsoQvC63o/" },
-                { img: post11, link: "https://www.instagram.com/p/CxamplePost2/" },
+                { img: post1, link: "https://www.instagram.com/p/DJHsoQvC63o/" },
+                { img: post2, link: "https://www.instagram.com/p/CxamplePost2/" },
                 { img: post3, link: "https://www.instagram.com/p/CxamplePost3/" },
-                { img: post11, link: "https://www.instagram.com/p/CxamplePost2/" },
-                { img: post3, link: "https://www.instagram.com/p/CxamplePost3/" },
-                { img: post4, link: "https://www.instagram.com/p/CxamplePost4/" }
+                { img: post4, link: "https://www.instagram.com/p/CxamplePost2/" },
+                { img: post5, link: "https://www.instagram.com/p/CxamplePost3/" },
+                { img: post6, link: "https://www.instagram.com/p/CxamplePost4/" }
               ].map((post, index) => (
                 <div key={index} className="instagram-post">
                   <img
