@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
-import logo from "../assests/donelogo.png";
+import logo from "../assests/navlogo.png";
 import karanprofile from '../assests/karan.jpeg';
 
 const Navbar = ({ onSignupClick, user, handleLogout }) => {

@@ -41,7 +41,7 @@
 /* Navbar */
 .navbar {
     background: linear-gradient(to right, #0f0f0f, #1c1c1c);
-    color: #fff;
+    /* color: #fff; */
     padding: 0 2rem;
     display: flex;
     justify-content: space-between;
