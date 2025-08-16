@@ -22,7 +22,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
 
       {/* Desktop Navbar */}
       <nav className="navbar">
-        <img src={logo} alt="logo" className="logo-white" />
+        <img src={logo} alt="logo"  />
 
         {/* Hamburger Icon for mobile */}
         <button
