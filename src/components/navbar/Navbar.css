@@ -384,8 +384,9 @@ img.logo-white {
     }
     
     .navbar img[alt="logo"] {
-        max-height: 70px;
-        max-width: 160px;
+        height: 40px;
+        width: 150px;
+        /* border: 2px solid red; */
         
     }
     
@@ -411,7 +412,7 @@ img.logo-white {
     }
     
     .navbar img[alt="logo"] {
-        max-width: 120px;
+        width: 155px;
     }
     
     .ticker-container {
