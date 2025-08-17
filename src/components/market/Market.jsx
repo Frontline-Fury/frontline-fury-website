@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Market.css';
+import { Helmet } from 'react-helmet-async';
 import ProductCard from '../productcard/Productcard';
 import merchcombo from '../assests/merch.png'
 import jacket from '../assests/jacket.png'
@@ -115,7 +116,14 @@ const Market = () => {
 
 
   return (
-    <div><div className="marketplace">
+    <div>
+       <Helmet>
+        <title>Our Merchandise | Tactical Gear & Accessories | Frontline Fury</title>
+        <link rel="canonical" href="https://www.thefrontlinefury.com/market"/>
+
+        <meta name="description" content="Get Airsoft merchandise in India, featuring premium tactical gear and accessories. Gear up for immersive airsoft battles in India and enhance your gameplay experience." />
+      </Helmet>
+      <div className="marketplace">
     <div className="marketplace-header">
       <h1>Marketplace</h1>
       <div className="search-filter">

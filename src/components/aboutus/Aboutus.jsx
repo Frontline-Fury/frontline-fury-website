@@ -1,5 +1,6 @@
 import React from "react";
 import "./Aboutus.css";
+import { Helmet } from 'react-helmet-async';
 
 import nandiniImg from '../assests/nandini.jpeg';
 import karanImg from '../assests/karan.jpeg';
@@ -50,13 +51,13 @@ const teamMembers = [
     role: "CMO"
   },
 
- 
+
   {
     img: null,
     name: "Shruti Sharma",
     role: "Intern"
   },
-    {
+  {
     img: null,
     name: "Sangeeta Rawat",
     role: "Intern"
@@ -118,6 +119,11 @@ const Aboutus = () => {
 
   return (
     <div className="aboutus-container">
+      <Helmet>
+        <title>About Frontline Fury | Pioneering India's Airsoft Scene</title>
+        <link rel="canonical" href="https://www.thefrontlinefury.com/aboutus"/>
+        <meta name="description" content="”India’s 1st immersive airsoft arena with real airsoft rifles. Step into Frontline Fury for adrenaline-pumping battles, realistic airsoft gameplay, and ultimate tactical combats." />
+      </Helmet>
       {/* Header */}
       <section className="aboutus-header">
         <h1>Welcome to Frontline Fury</h1>
@@ -133,12 +139,12 @@ const Aboutus = () => {
         <div className="story-content">
           <div className="story-text">
             <p>
-              Founded in 2025, Frontline Fury was born from a passion for tactical gaming and 
-              innovation. We set out to create India's most immersive combat experience by 
+              Founded in 2025, Frontline Fury was born from a passion for tactical gaming and
+              innovation. We set out to create India's most immersive combat experience by
               combining military simulation with advanced gaming technology.
             </p>
             <p>
-              What started as a small team of enthusiasts has grown into a premier destination 
+              What started as a small team of enthusiasts has grown into a premier destination
               for gamers seeking authentic, tech-driven combat experiences.
             </p>
           </div>
@@ -164,7 +170,7 @@ const Aboutus = () => {
         <div className="section-header">
           <h2>OUR TECHNOLOGIES</h2>
           <div className="divider"></div>
-        </div> 
+        </div>
         <div className="tech-features-container">
           {techFeatures.map((feature, index) => (
             <div key={index} className="tech-feature">
@@ -215,22 +221,22 @@ const Aboutus = () => {
           <h2>GAME PLANS</h2>
           <div className="divider"></div>
         </div>
-        
+
         <div className="pricing-tabs">
-          <button 
+          <button
             className={`tab-button ${!showMemberships ? 'active' : ''}`}
             onClick={() => setShowMemberships(false)}
           >
             Single Sessions
           </button>
-          <button 
+          <button
             className={`tab-button ${showMemberships ? 'active' : ''}`}
             onClick={() => setShowMemberships(true)}
           >
             Memberships
           </button>
         </div>
-        
+
         <div className="pricing-cards">
           {!showMemberships ? (
             pricingPlans.map((plan, i) => (

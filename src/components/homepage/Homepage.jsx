@@ -9,6 +9,8 @@ import "slick-carousel/slick/slick-theme.css";
 import '../assests/fonts/fonts.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Helmet } from 'react-helmet-async'; 
+
 import bgvideo from '../assests/bgvideofinal.mp4';
 import { useNavigate } from 'react-router-dom';
 import nandiniimg from '../assests/nandini.jpeg';
@@ -255,7 +257,12 @@ const Homepage = () => {
   return (
     <div>
       {showExitPopup && <ExitIntentPopup onClose={() => setShowExitPopup(false)} />}
+         <Helmet>
+        <title>India’s 1st Immersive Airsoft Arena | Frontline Fury</title>
+        <link rel="canonical" href="https://www.thefrontlinefury.com/"/>
 
+        <meta name="description" content="India’s 1st immersive airsoft arena with real airsoft rifles. Step into Frontline Fury for adrenaline-pumping battles, realistic airsoft gameplay, and ultimate tactical combats." />
+      </Helmet>
       <div className="home-banner">
         <video src={bgvideo} autoPlay loop muted playsInline />
         <div className="home-banner-content">

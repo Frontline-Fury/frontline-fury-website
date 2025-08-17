@@ -4,6 +4,7 @@ import {
    FaCalendarAlt, FaShareAlt,
   FaHeart, FaRegHeart
 } from "react-icons/fa";
+import { Helmet } from 'react-helmet-async';
 import { IoMdTrophy } from "react-icons/io";
 import { GiLaurelsTrophy } from "react-icons/gi";
 import "./Leaderboard.css";
@@ -514,6 +515,13 @@ const Leaderboard = () => {
 
   return (
     <div>
+
+      <Helmet>
+        <title>Leaderboards - Frontline Fury | India's 1st Immersive Airsoft Arena</title>
+        <link rel="canonical" href="https://www.thefrontlinefury.com/leaderboard"/>
+        <meta name="description" content="Check out the top players at Frontline Fury, India's first immersive airsoft arena. View rankings, stats, and see who leads the battlefield." />
+      </Helmet>
+
       <section className="aboutus-header">
         <h1>LEADERBOARD</h1>
         <p>THE ULTIMATE RANKING OF CHAMPIONS</p>
