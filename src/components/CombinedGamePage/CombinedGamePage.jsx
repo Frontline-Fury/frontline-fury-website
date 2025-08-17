@@ -44,7 +44,7 @@ const listings = [
   },
 
    {
-    slug: 'battleroale',
+    slug: 'battle-royale',
     image: battleRoyalImg,
     title: 'Battle Royale',
     description: 'Fast-paced mode where the spike appears randomly. First to 4 rounds wins!',
@@ -80,7 +80,7 @@ const listings = [
   },
 
    {
-    slug: 'capturetheflag',
+    slug: 'capture-the-flag',
     image: captureTheFlagImg,
     title: 'Capture The Flag',
     description: 'Fast-paced mode where the spike appears randomly. First to 4 rounds wins!',
