@@ -122,7 +122,7 @@ const Aboutus = () => {
       <Helmet>
         <title>About Frontline Fury | Pioneering India's Airsoft Scene</title>
         <link rel="canonical" href="https://www.thefrontlinefury.com/aboutus"/>
-        <meta name="description" content="”India’s 1st immersive airsoft arena with real airsoft rifles. Step into Frontline Fury for adrenaline-pumping battles, realistic airsoft gameplay, and ultimate tactical combats." />
+        <meta name="description" content="Founded in 2025, Frontline Fury is India's first immersive airsoft arena providing company, blending tactical realism with cutting-edge technology for an unparalleled combat experience." />
       </Helmet>
       {/* Header */}
       <section className="aboutus-header">
