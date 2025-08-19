@@ -3,20 +3,17 @@ import './Homepage.css';
 import captureTheFlagImg from '../assests/Ctf.jpg';
 import spikeRushImg from '../assests/Sr.jpg';
 import battleRoyalImg from '../assests/Br.jpg';
-// import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../assests/fonts/fonts.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Helmet } from 'react-helmet-async'; 
-
 import bgvideo from '../assests/bgvideofinal.mp4';
 import { useNavigate } from 'react-router-dom';
 import nandiniimg from '../assests/nandini.jpeg';
 import karanimg from '../assests/karan.jpeg';
 import tarunimg from '../assests/tarun.jpeg';
-
 import ExitIntentPopup from '../exitpopup/ExitIntentPopup';
 import post1 from '../assests/1.jpg'
 import post2 from '../assests/2.jpg'
@@ -25,11 +22,7 @@ import post4 from '../assests/4.jpg'
 import post5 from '../assests/5.jpg'
 import post6 from '../assests/6.jpg'
 import instalogo from '../assests/newlogo.png'
-
 import supabase from "../../supabaseClient";
-
-
-
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -47,6 +40,19 @@ const Homepage = () => {
   });
   const [userId, setUserId] = useState(null);
   const [hasSubmittedFeedback, setHasSubmittedFeedback] = useState(false);
+
+  // Pre-book form state
+  const [showPreBookForm, setShowPreBookForm] = useState(false);
+  const [preBookData, setPreBookData] = useState({
+    name: '',
+    email: '',
+    mobile: '',
+    city: '',
+    comments: '',
+    agreeTerms: false
+  });
+  const [isSubmittingPreBook, setIsSubmittingPreBook] = useState(false);
+  const [preBookError, setPreBookError] = useState('');
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -93,17 +99,6 @@ const Homepage = () => {
     };
   }, [popupShown]);
 
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 1000,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   autoplay: true,
-  //   autoplaySpeed: 3000,
-  //   pauseOnHover: false,
-  // };
-
   const gamemodeData = [
     {
       title: 'Capture The Flag',
@@ -121,24 +116,6 @@ const Homepage = () => {
       image: battleRoyalImg,
     },
   ];
-
-  // const carouselData = [
-  //   {
-  //     title: "Experience the Ultimate Battle!",
-  //     description: "Get ready for adrenaline-pumping airsoft action in a realistic battleground.",
-  //     image: captureTheFlagImg,
-  //   },
-  //   {
-  //     title: "Game Modes & Events",
-  //     description: "Team Deathmatch, Capture the Flag, VIP Escort, and more exciting challenges await you!",
-  //     image: spikeRushImg,
-  //   },
-  //   {
-  //     title: "Top Shooters & Leaderboard",
-  //     description: "Compete with the best and rise to the top of the leaderboard!",
-  //     image: battleRoyalImg,
-  //   },
-  // ];
 
   const steps = [
     { number: "1", title: "Choose Game Mode", description: "Pick from Capture The Flag, Battle Royale, or more!" },
@@ -178,8 +155,7 @@ const Homepage = () => {
       image: null,
       quote: "Really loved the place"
     },
-  
-      {
+    {
       name: "Varun Sharma",
       image: null,
       quote: "Better than paintball"
@@ -207,7 +183,7 @@ const Homepage = () => {
 
     if (!userId) {
       alert('Please sign in to submit feedback');
-      navigate('/login');
+      
       return;
     }
 
@@ -243,6 +219,62 @@ const Homepage = () => {
     }
   };
 
+  // Pre-book form handlers
+  const handlePreBookInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setPreBookData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+    // Clear error when user starts typing
+    if (preBookError) setPreBookError('');
+  };
+
+  const handlePreBookSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmittingPreBook(true);
+    setPreBookError('');
+    
+    try {
+      // Insert pre-book data into Supabase
+      const { data, error } = await supabase
+        .from('prebookings')
+        .insert([
+          {
+            name: preBookData.name,
+            email: preBookData.email,
+            mobile: preBookData.mobile,
+            city: preBookData.city,
+            comments: preBookData.comments,
+            agree_terms: preBookData.agreeTerms,
+            submitted_at: new Date().toISOString()
+          }
+        ]);
+
+      if (error) {
+        console.error('Error submitting pre-booking:', error);
+        setPreBookError(error.message || 'Failed to submit pre-booking. Please try again.');
+      } else {
+        console.log('Pre-booking submitted successfully:', data);
+        setShowPreBookForm(false);
+        alert('Thank you for your interest! We will contact you soon about early access perks.');
+        setPreBookData({
+          name: '',
+          email: '',
+          mobile: '',
+          city: '',
+          comments: '',
+          agreeTerms: false
+        });
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      setPreBookError('An unexpected error occurred. Please try again.');
+    } finally {
+      setIsSubmittingPreBook(false);
+    }
+  };
+
   const getInitials = (name) => {
     const names = name.split(' ');
     let initials = names[0].substring(0, 1).toUpperCase();
@@ -257,24 +289,135 @@ const Homepage = () => {
   return (
     <div>
       {showExitPopup && <ExitIntentPopup onClose={() => setShowExitPopup(false)} />}
-         <Helmet>
-        <title>India’s 1st Immersive Airsoft Arena | Frontline Fury</title>
+      <Helmet>
+        <title>India's 1st Immersive Airsoft Arena | Frontline Fury</title>
         <link rel="canonical" href="https://www.thefrontlinefury.com/"/>
-
-        <meta name="description" content="India’s 1st immersive airsoft arena with real airsoft rifles. Step into Frontline Fury for adrenaline-pumping battles, realistic airsoft gameplay, and ultimate tactical combats." />
+        <meta name="description" content="India's 1st immersive airsoft arena with real airsoft rifles. Step into Frontline Fury for adrenaline-pumping battles, realistic airsoft gameplay, and ultimate tactical combats." />
       </Helmet>
+
+      {showPreBookForm && (
+        <div className="perks-form-overlay">
+          <div className="perks-early-access-form">
+            <button className="perks-close-button" onClick={() => setShowPreBookForm(false)}>
+              ×
+            </button>
+            
+            <h2>Early Access Perks</h2>
+            <ul className="perks-list">
+              <li>🎯 Exclusive access before public launch</li>
+              <li>💰 Special discounted pricing</li>
+              <li>🏆 Priority booking for sessions</li>
+              <li>🎁 Free merchandise on first visit</li>
+              <li>👑 VIP status for first 100 members</li>
+            </ul>
+
+            {preBookError && (
+              <div className="perks-error-message">
+                {preBookError}
+              </div>
+            )}
+
+            <form onSubmit={handlePreBookSubmit}>
+              <div className="perks-form-group">
+                <label>Full Name*</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={preBookData.name}
+                  onChange={handlePreBookInputChange}
+                  required
+                />
+              </div>
+
+              <div className="perks-form-group">
+                <label>Email Address*</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={preBookData.email}
+                  onChange={handlePreBookInputChange}
+                  required
+                />
+              </div>
+
+              <div className="perks-form-group">
+                <label>Mobile Number*</label>
+                <input
+                  type="tel"
+                  name="mobile"
+                  value={preBookData.mobile}
+                  onChange={handlePreBookInputChange}
+                  required
+                  pattern="[0-9]{10}"
+                  title="Please enter a 10-digit mobile number"
+                />
+              </div>
+
+              <div className="perks-form-group">
+                <label>City*</label>
+                <select
+                  name="city"
+                  value={preBookData.city}
+                  onChange={handlePreBookInputChange}
+                  required
+                >
+                  <option value="">Select your city</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Mumbai">Mumbai</option>
+                  <option value="Bangalore">Bangalore</option>
+                  <option value="Hyderabad">Hyderabad</option>
+                  <option value="Chennai">Chennai</option>
+                  <option value="Kolkata">Kolkata</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div className="perks-form-group">
+                <label>Comments/Questions</label>
+                <textarea
+                  name="comments"
+                  value={preBookData.comments}
+                  onChange={handlePreBookInputChange}
+                  rows="3"
+                />
+              </div>
+
+              <div className="perks-form-group checkbox-group">
+                <input
+                  type="checkbox"
+                  name="agreeTerms"
+                  id="agreeTerms"
+                  checked={preBookData.agreeTerms}
+                  onChange={handlePreBookInputChange}
+                  required
+                />
+                <label htmlFor="agreeTerms">
+                  I agree to receive updates and offers from Frontline Fury
+                </label>
+              </div>
+
+              <button 
+                type="submit" 
+                className="perks-submit-button"
+                disabled={isSubmittingPreBook}
+              >
+                {isSubmittingPreBook ? 'Submitting...' : 'Get Early Access'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div className="home-banner">
         <video src={bgvideo} autoPlay loop muted playsInline />
         <div className="home-banner-content">
           <h1>Welcome to India's First Premier Airsoft Arena</h1>
           <p>Where Gaming Meets Action!</p>
-          <button className="home-banner-button" onClick={() => navigate('/gamemode')}>Book Now</button>
+          <button className="home-banner-button" onClick={() => setShowPreBookForm(true)}>
+            Pre-Book Now
+          </button>
         </div>
       </div>
-
-
-
-     
 
       <div data-aos="fade-up">
         <div className="about-us-section">
@@ -348,10 +491,6 @@ const Homepage = () => {
                   src={post6}
                   alt="Airsoft match in India - Teamwork & tactics"
                 />
-                {/* <div className="floating-badge">
-                  <div className="badge-icon">--</div>
-                  <span>6mm PLASTIC BBs | NO REAL BULLETS --</span>
-                </div> */}
               </div>
             </div>
           </div>
@@ -417,7 +556,7 @@ const Homepage = () => {
                   <p>{gamemode.description}</p>
                 </div>
                 <button className="book-now-button" onClick={() => navigate('/gamemode')}>
-                  Book Now
+                  Learn More
                 </button>
               </div>
             ))}
@@ -441,34 +580,6 @@ const Homepage = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="new-carousel">
-        <Slider {...settings}>
-          {carouselData.map((slide, index) => (
-            <div key={index} className="carousel-slide">
-              <img src={slide.image} alt={slide.title} className="carousel-image" />
-              <div className="overlay">
-                <h1>{slide.title}</h1>
-                <p>{slide.description}</p>
-              </div>
-            </div>
-          ))}
-        </Slider>
-      </div> */}
-
-
-      {/* <div className="home-banner">
-        <video src={bgvideo} autoPlay loop muted playsInline />
-
-
-
-      </div> */}
-
-
-
-
-
-
 
       <div data-aos="fade-up" className="instagram-promo-section">
         <div className="instagram-container">

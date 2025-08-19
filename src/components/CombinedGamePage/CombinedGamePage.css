@@ -15,7 +15,7 @@
   font-size: 1rem;
   cursor: pointer;
   margin-bottom: 2rem;
-  display: flex;
+  display: flex; 
   align-items: center;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -287,14 +287,14 @@
 }
 
 /* Action Buttons */
-.action-buttons {
+.game-action-buttons {
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-top: 2rem;
 }
 
-.primary-button {
+.game-primary-button {
   background: #6200ea;
   color: white;
   border: none;
@@ -307,11 +307,11 @@
   min-width: 200px;
 }
 
-.primary-button:hover {
+.game-primary-button:hover {
   background: #7c4dff;
 }
 
-.secondary-button {
+.game-secondary-button {
   background: transparent;
   color: #6200ea;
   border: 1px solid #6200ea;
@@ -324,7 +324,7 @@
   min-width: 200px;
 }
 
-.secondary-button:hover {
+.game-secondary-button:hover {
   background: rgba(98, 0, 234, 0.1);
 }
 
@@ -445,11 +445,11 @@
     grid-row: 1 / span 1;
   }
   
-  .action-buttons {
+  .game-action-buttons {
     flex-direction: column;
   }
   
-  .primary-button, .secondary-button {
+  .game-primary-button, .game-secondary-button {
     width: 100%;
   }
   

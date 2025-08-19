@@ -291,9 +291,9 @@ const CombinedGamePage = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="action-buttons">
-            <button className="primary-button">Book Now</button>
-            <button className="secondary-button">Add to Favorites</button>
+          <div className="game-action-buttons">
+            <button className="game-primary-button">Pre-Book Now</button>
+            <button className="game-secondary-button">Add to Favorites</button>
           </div>
         </div>
       </div>
@@ -303,7 +303,11 @@ const CombinedGamePage = () => {
   // If no slug, show listing view
   return (
     <div>
-
+       <Helmet>
+        <title>Choose Game Mode | Airsoft Games India | Frontline Fury</title>
+        <meta name="description" content="Discover all exciting airsoft game modes available at Frontline Fury - India's premier tactical airsoft arena. Choose your battle style today!" />
+        <link rel="canonical" href="https://www.thefrontlinefury.com/gamemode" />
+      </Helmet>
       <section className="aboutus-header">
         <h1>Choose Your Battle Style</h1>
         <p>Select from our exciting game modes to begin your adventure</p>

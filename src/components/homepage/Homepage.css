@@ -119,8 +119,215 @@ body::-webkit-scrollbar {
   }
 }
 
+/* Pre-Book Form Styles */
+.perks-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto; /* Allow scrolling if content is too long */
+  padding: 20px; /* Add some padding around the form */
+}
 
+.perks-early-access-form {
+  background-color: #1a1a1a;
+  padding: 30px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 500px;
+  color: white;
+  position: relative;
+  border: 1px solid #ff3c3c;
+  box-shadow: 0 0 20px rgba(255, 60, 60, 0.3);
+  margin: auto; /* Center horizontally */
+  max-height: 90vh; /* Limit height */
+  overflow-y: auto; /* Make form content scrollable */
+}
 
+.perks-close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+  z-index: 1; /* Ensure close button stays on top */
+}
+
+.perks-close-button:hover {
+  color: #ff3c3c;
+}
+
+.perks-early-access-form h2 {
+  font-size: 1.8rem;
+  color: #ff3c3c;
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.perks-list {
+  margin: 15px 0 25px;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.perks-list li {
+  margin-bottom: 12px;
+  padding-left: 30px;
+  position: relative;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.perks-list li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: #ff3c3c;
+  border-radius: 50%;
+}
+
+.perks-form-group {
+  margin-bottom: 20px;
+}
+
+.perks-form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.perks-form-group input,
+.perks-form-group select,
+.perks-form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #0f0f0f;
+  color: #fff;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.perks-form-group input:focus,
+.perks-form-group select:focus,
+.perks-form-group textarea:focus {
+  outline: none;
+  border-color: #ff3c3c;
+  box-shadow: 0 0 5px rgba(255, 60, 60, 0.5);
+}
+
+.perks-form-group textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+}
+
+.checkbox-group input {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  accent-color: #ff3c3c;
+}
+
+.checkbox-group label {
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: #ccc;
+}
+
+.perks-submit-button {
+  background-color: #ff3c3c;
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  width: 100%;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.perks-error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  border-left: 4px solid #c62828;
+}
+.perks-submit-button:hover {
+  background-color: #e03333;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 60, 60, 0.4);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .perks-form-overlay {
+    padding: 10px;
+    align-items: flex-start; /* Align form to top on small screens */
+  }
+  
+  .perks-early-access-form {
+    padding: 20px;
+    max-height: 85vh; /* Slightly less height on mobile */
+    margin-top: 20px; /* Add some top margin */
+    margin-bottom: 20px; /* Add some bottom margin */
+  }
+  
+  .perks-early-access-form h2 {
+    font-size: 1.5rem;
+  }
+  
+  .perks-list li {
+    font-size: 0.85rem;
+  }
+  
+  .perks-form-group label {
+    font-size: 0.8rem;
+  }
+  
+  .perks-form-group input,
+  .perks-form-group select,
+  .perks-form-group textarea {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .perks-submit-button {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+}
 
 
 
