@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import '../assests/fonts/fonts.css'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Helmet } from 'react-helmet-async'; 
+import { Helmet } from 'react-helmet-async';
 import bgvideo from '../assests/bgvideofinal.mp4';
 import { useNavigate } from 'react-router-dom';
 import nandiniimg from '../assests/nandini.jpeg';
@@ -48,6 +48,7 @@ const Homepage = () => {
     email: '',
     mobile: '',
     city: '',
+    otherCity: '',
     comments: '',
     agreeTerms: false
   });
@@ -183,7 +184,7 @@ const Homepage = () => {
 
     if (!userId) {
       alert('Please sign in to submit feedback');
-      
+
       return;
     }
 
@@ -234,7 +235,7 @@ const Homepage = () => {
     e.preventDefault();
     setIsSubmittingPreBook(true);
     setPreBookError('');
-    
+
     try {
       // Insert pre-book data into Supabase
       const { data, error } = await supabase
@@ -244,7 +245,8 @@ const Homepage = () => {
             name: preBookData.name,
             email: preBookData.email,
             mobile: preBookData.mobile,
-            city: preBookData.city,
+            city: preBookData.city === "Other" ? preBookData.otherCity : preBookData.city,
+            other_city: preBookData.city === "Other" ? preBookData.otherCity : null,
             comments: preBookData.comments,
             agree_terms: preBookData.agreeTerms,
             submitted_at: new Date().toISOString()
@@ -263,6 +265,7 @@ const Homepage = () => {
           email: '',
           mobile: '',
           city: '',
+          otherCity: '',
           comments: '',
           agreeTerms: false
         });
@@ -291,7 +294,7 @@ const Homepage = () => {
       {showExitPopup && <ExitIntentPopup onClose={() => setShowExitPopup(false)} />}
       <Helmet>
         <title>India's 1st Immersive Airsoft Arena | Frontline Fury</title>
-        <link rel="canonical" href="https://www.thefrontlinefury.com/"/>
+        <link rel="canonical" href="https://www.thefrontlinefury.com/" />
         <meta name="description" content="India's 1st immersive airsoft arena with real airsoft rifles. Step into Frontline Fury for adrenaline-pumping battles, realistic airsoft gameplay, and ultimate tactical combats." />
       </Helmet>
 
@@ -301,7 +304,7 @@ const Homepage = () => {
             <button className="perks-close-button" onClick={() => setShowPreBookForm(false)}>
               ×
             </button>
-            
+
             <h2>Early Access Perks</h2>
             <ul className="perks-list">
               <li>🎯 Exclusive access before public launch</li>
@@ -362,14 +365,29 @@ const Homepage = () => {
                   required
                 >
                   <option value="">Select your city</option>
+                  <option value="Dehradun">Dehradun</option>
+                  <option value="Rishikesh">Rishikesh</option>
                   <option value="Delhi">Delhi</option>
-                  <option value="Mumbai">Mumbai</option>
-                  <option value="Bangalore">Bangalore</option>
-                  <option value="Hyderabad">Hyderabad</option>
-                  <option value="Chennai">Chennai</option>
-                  <option value="Kolkata">Kolkata</option>
+                  <option value="Haridwar">Haridwar</option>
+                  <option value="Noida">Noida</option>
+                  <option value="Gurugram">Gurugram</option>
                   <option value="Other">Other</option>
                 </select>
+
+                {preBookData.city === "Other" && (
+                  <div className="perks-form-group" style={{ marginTop: '10px' }}>
+                    <label>Please specify your city*</label>
+                    <input
+                      type="text"
+                      name="otherCity"
+                      value={preBookData.otherCity || ''}
+                      onChange={handlePreBookInputChange}
+                      required={preBookData.city === "Other"}
+                      placeholder="Enter your city name"
+                    />
+                  </div>
+                )}
+
               </div>
 
               <div className="perks-form-group">
@@ -396,8 +414,8 @@ const Homepage = () => {
                 </label>
               </div>
 
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 className="perks-submit-button"
                 disabled={isSubmittingPreBook}
               >
@@ -587,7 +605,7 @@ const Homepage = () => {
             <div className="instagram-header">
               <div className="instagram-profile">
                 <div className="instagram-avatar">
-                  <img src={instalogo} alt='instalogo'/>
+                  <img src={instalogo} alt='instalogo' />
                 </div>
                 <span>thefrontlinefury</span>
               </div>

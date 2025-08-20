@@ -290,6 +290,23 @@ body::-webkit-scrollbar {
   box-shadow: 0 5px 15px rgba(255, 60, 60, 0.4);
 }
 
+
+.perks-form-group input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s;
+  margin-top: 5px;
+}
+
+.perks-form-group input[type="text"]:focus {
+  outline: none;
+  border-color: #4a6de5;
+  box-shadow: 0 0 0 3px rgba(74, 109, 229, 0.2);
+}
+
 /* Responsive adjustments */
 @media (max-width: 480px) {
   .perks-form-overlay {
