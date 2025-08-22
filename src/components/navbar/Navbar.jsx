@@ -39,6 +39,7 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           <li><Link to="/leaderboard">Leaderboard</Link></li>
           <li><Link to="/gamemode">Booking</Link></li>
           <li><Link to="/market">Market Place</Link></li>
+          <li><Link to="/blogs">Blogs</Link></li>
           
 
           {/* CONDITIONAL: Signup/Login OR Profile Image */}
@@ -89,7 +90,8 @@ const Navbar = ({ onSignupClick, user, handleLogout }) => {
           <li><Link to="/leaderboard" onClick={toggleSidebar}>Leaderboard</Link></li>
           <li><Link to="/gamemode" onClick={toggleSidebar}>Booking</Link></li>
           <li><Link to="/market" onClick={toggleSidebar}>Market Place</Link></li>
-          <li><Link to="/contact" onClick={toggleSidebar}>Contact Us</Link></li>
+          <li><Link to="/blogs" onClick={toggleSidebar}>Blogs</Link></li>
+         
 
           {user ? (
             <>

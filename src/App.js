@@ -9,6 +9,7 @@ import Market from "./components/market/Market";
 import CombinedGamePage from "./components/CombinedGamePage/CombinedGamePage";
 import Signup from "./components/signup/Signup";  // Import Signup
 import supabase from "./supabaseClient"; 
+import Blogpage from "./components/blogs/Blogpage";
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/gamemode/:slug" element={<CombinedGamePage />} />
           <Route path="/waiver" element={<Waiver />} />
           <Route path="/market" element={<Market />} />
+           <Route path="/blogs" element={<Blogpage />} />
         </Routes>
 
         {/* Signup modal controlled here */}
