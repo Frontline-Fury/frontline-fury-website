@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 
 import nandiniImg from '../assests/nandini.jpeg';
 import karanImg from '../assests/karan.jpeg';
-import JatinImg from '../assests/jatin.jpg';
+// import JatinImg from '../assests/jatin.jpg';
 
 import techImage1 from '../assests/spikerush.jpg';
 import techImage2 from '../assests/spikerush.jpg';
@@ -45,11 +45,11 @@ const teamMembers = [
     name: "Karan",
     role: "CEO & Founder"
   },
-  {
-    img: JatinImg,
-    name: "Jatin Agarwal",
-    role: "CMO"
-  },
+  // {
+  //   img: JatinImg,
+  //   name: "Jatin Agarwal",
+  //   role: "CMO"
+  // },
 
 
   {
