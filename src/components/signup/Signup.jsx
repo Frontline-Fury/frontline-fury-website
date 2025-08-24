@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Signup.css";
 import { FcGoogle } from "react-icons/fc";
-import supabase from "../../supabaseClient";
+import axios from "axios";
 
 const Signup = ({ isOpen, onClose, onAuthSuccess, reset }) => {
   const [isLogin, setIsLogin] = useState(false);
@@ -9,12 +9,11 @@ const Signup = ({ isOpen, onClose, onAuthSuccess, reset }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [tempGoogleUser, setTempGoogleUser] = useState(null);
-  const [googleUserId, setGoogleUserId] = useState(null);
 
+  // Use Render URL for production
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://frontline-fury-backend.onrender.com";
   useEffect(() => {
     if (reset) {
-      setTempGoogleUser(null);
       setIsLogin(false);
       setUsername("");
       setEmail("");
@@ -23,61 +22,12 @@ const Signup = ({ isOpen, onClose, onAuthSuccess, reset }) => {
     }
   }, [reset]);
 
-  useEffect(() => {
-    const checkSession = async () => {
-      if (tempGoogleUser) return;
-
-      const {
-        data: { session },
-        error: sessionError,
-      } = await supabase.auth.getSession();
-
-      if (sessionError) {
-        console.error("Session fetch error:", sessionError);
-        return;
-      }
-
-      const user = session?.user;
-      if (user) {
-        const { data: profile, error: profileError } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", user.id)
-          .single();
-
-        if (profileError && profileError.code !== "PGRST116") {
-          console.error("Profile fetch error:", profileError);
-          setError("Failed to fetch profile.");
-          return;
-        }
-
-        const providers = user.identities?.map((id) => id.provider) || [];
-        const isGoogleUser = providers.includes("google");
-
-        if (!profile && isGoogleUser) {
-          setGoogleUserId(user.id);
-          setTempGoogleUser({
-            name: user.user_metadata?.name || "Google User",
-            email: user.email,
-            profileImage: user.user_metadata?.avatar_url || null,
-          });
-        } else if (profile) {
-          onAuthSuccess(profile);
-          onClose();
-        }
-      }
-    };
-
-    checkSession();
-  }, [onAuthSuccess, onClose, tempGoogleUser]);
-
   const toggleAuthMode = () => {
     setIsLogin(!isLogin);
     setError("");
     setUsername("");
     setEmail("");
     setPassword("");
-    setTempGoogleUser(null);
   };
 
   const validateEmail = (email) => {
@@ -88,51 +38,7 @@ const Signup = ({ isOpen, onClose, onAuthSuccess, reset }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Always convert username to lowercase for check and insertion
-    const usernameLower = username.trim().toLowerCase();
-
-    if (tempGoogleUser) {
-      if (usernameLower.length < 3) {
-        setError("Username must be at least 3 characters long.");
-        return;
-      }
-
-      // Check if username already exists (case-insensitive)
-      const { data: existingUsernames, error: checkError } = await supabase
-        .from("profiles")
-        .select("username")
-        .ilike("username", usernameLower)
-        .limit(1);
-
-      if (checkError) {
-        setError("Failed to validate username.");
-        return;
-      }
-      if (existingUsernames.length > 0) {
-        setError("Username already taken. Please choose another.");
-        return;
-      }
-
-      const { error: insertErr } = await supabase.from("profiles").insert([
-        {
-          id: googleUserId,
-          username: usernameLower,
-        },
-      ]);
-
-      if (insertErr) {
-        setError(insertErr.message);
-        return;
-      }
-
-      onAuthSuccess({ ...tempGoogleUser, username: usernameLower });
-      onClose();
-      setTempGoogleUser(null);
-      setUsername("");
-      return;
-    }
-
-    if (!isLogin && usernameLower.length < 3) {
+    if (!isLogin && username.trim().length < 3) {
       setError("Username must be at least 3 characters long.");
       return;
     }
@@ -149,89 +55,36 @@ const Signup = ({ isOpen, onClose, onAuthSuccess, reset }) => {
 
     setError("");
 
-    if (isLogin) {
-      const { data, error: loginError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+    try {
+      if (isLogin) {
+        // 🔹 Login API call - Using Render URL
+        const res = await axios.post(`${API_BASE_URL}/api/auth/login`, {
+          email,
+          password,
+        });
 
-      if (loginError) {
-        setError(loginError.message);
-        return;
-      }
-
-      const userId = data?.user?.id;
-      if (userId) {
-        const { data: profile, error: profileError } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", userId)
-          .single();
-
-        if (profileError) {
-          setError("Failed to load profile after login.");
-          return;
-        }
-
-        onAuthSuccess(profile);
+        localStorage.setItem("token", res.data.token); // save token
+        onAuthSuccess(res.data.user); // pass user data back to parent
         onClose();
+      } else {
+        // 🔹 Signup API call - Using Render URL
+        await axios.post(`${API_BASE_URL}/api/auth/signup`, {
+          username: username.trim().toLowerCase(),
+          email,
+          password,
+        });
+
+        alert("Account created successfully ✅. Please login.");
+        setIsLogin(true);
       }
-    } else {
-      // Signup mode - Check username availability before signup (case-insensitive)
-      const { data: existingUsernames, error: checkError } = await supabase
-        .from("profiles")
-        .select("username")
-        .ilike("username", usernameLower)
-        .limit(1);
-
-      if (checkError) {
-        setError("Failed to validate username.");
-        return;
-      }
-      if (existingUsernames.length > 0) {
-        setError("Username already taken. Please choose another.");
-        return;
-      }
-
-      const { data, error: signupError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-
-      if (signupError) {
-        setError(signupError.message);
-        return;
-      }
-
-      const userId = data?.user?.id;
-
-      if (userId) {
-        const { error: insertError } = await supabase.from("profiles").insert([
-          {
-            id: userId,
-            username: usernameLower,
-          },
-        ]);
-
-        if (insertError) {
-          setError(insertError.message);
-          return;
-        }
-
-        onAuthSuccess({ username: usernameLower, email });
-        onClose();
-      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
     }
   };
 
-  const handleGoogleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-
-    if (error) {
-      setError("Google sign-in failed.");
-    }
+  // Abhi ke liye Google Auth ko disable rakha (baad me backend OAuth integrate kr skte hai)
+  const handleGoogleLogin = () => {
+    alert("Google login not implemented yet ⚡");
   };
 
   if (!isOpen) return null;
@@ -240,91 +93,67 @@ const Signup = ({ isOpen, onClose, onAuthSuccess, reset }) => {
     <div className="signup-modal-overlay" onClick={onClose}>
       <div className="signup-modal" onClick={(e) => e.stopPropagation()}>
         <div className="form-box">
-          {tempGoogleUser ? (
-            <>
-              <h1>Set Your Username</h1>
-              <form onSubmit={handleSubmit}>
-                <div className="input-field">
-                  <i className="fa-solid fa-user"></i>
-                  <input
-                    type="text"
-                    placeholder="Choose a username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    autoFocus
-                  />
-                </div>
-                {error && <p className="error-message">{error}</p>}
-                <button type="submit" className="auth-btn">
-                  Save Username
-                </button>
-              </form>
-            </>
-          ) : (
-            <>
-              <h1>{isLogin ? "LOGIN" : "SIGN UP"}</h1>
+          <h1>{isLogin ? "LOGIN" : "SIGN UP"}</h1>
 
-              <form onSubmit={handleSubmit}>
-                {!isLogin && (
-                  <div className="input-field">
-                    <i className="fa-solid fa-user"></i>
-                    <input
-                      type="text"
-                      placeholder="Username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                      autoFocus={!isLogin}
-                    />
-                  </div>
-                )}
+          <form onSubmit={handleSubmit}>
+            {!isLogin && (
+              <div className="input-field">
+                <i className="fa-solid fa-user"></i>
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  autoFocus={!isLogin}
+                />
+              </div>
+            )}
 
-                <div className="input-field">
-                  <i className="fa-solid fa-envelope"></i>
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoFocus={isLogin}
-                  />
-                </div>
+            <div className="input-field">
+              <i className="fa-solid fa-envelope"></i>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoFocus={isLogin}
+              />
+            </div>
 
-                <div className="input-field">
-                  <i className="fa-solid fa-lock"></i>
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
+            <div className="input-field">
+              <i className="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-                {error && <p className="error-message">{error}</p>}
+            {error && <p className="error-message">{error}</p>}
 
-                <button type="submit" className="auth-btn">
-                  {isLogin ? "LOGIN" : "CREATE ACCOUNT"}
-                </button>
-              </form>
+            <button type="submit" className="auth-btn">
+              {isLogin ? "LOGIN" : "CREATE ACCOUNT"}
+            </button>
+          </form>
 
-              <p className="or-text">OR</p>
+          <p className="or-text">OR</p>
 
-              <button className="google-btn" onClick={handleGoogleLogin}>
-                <FcGoogle size={22} style={{ marginRight: "8px" }} />
-                {isLogin ? "Login" : "Sign Up"} with Google
-              </button>
+          <button className="google-btn" onClick={handleGoogleLogin}>
+            <FcGoogle size={22} style={{ marginRight: "8px" }} />
+            {isLogin ? "Login" : "Sign Up"} with Google
+          </button>
 
-              <p className="switch-auth">
-                {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-                <button
-                  type="button"
-                  className="switch-auth-btn"
-                  onClick={toggleAuthMode}
-                >
-                  {isLogin ? "Sign Up" : "Login"}
-                </button>
-              </p>
-            </>
-          )}
+          <p className="switch-auth">
+            {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+            <button
+              type="button"
+              className="switch-auth-btn"
+              onClick={toggleAuthMode}
+            >
+              {isLogin ? "Sign Up" : "Login"}
+            </button>
+          </p>
         </div>
       </div>
     </div>

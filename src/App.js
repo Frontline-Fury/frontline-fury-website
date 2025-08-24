@@ -10,6 +10,7 @@ import CombinedGamePage from "./components/CombinedGamePage/CombinedGamePage";
 import Signup from "./components/signup/Signup";  // Import Signup
 import supabase from "./supabaseClient"; 
 import Blogpage from "./components/blogs/Blogpage";
+import TestApi from "./components/testing/TestApi";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/waiver" element={<Waiver />} />
           <Route path="/market" element={<Market />} />
            <Route path="/blogs" element={<Blogpage />} />
+           <Route path="/testapi" element={<TestApi />} />
         </Routes>
 
         {/* Signup modal controlled here */}

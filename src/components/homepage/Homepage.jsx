@@ -22,7 +22,8 @@ import post4 from '../assests/4.jpg'
 import post5 from '../assests/5.jpg'
 import post6 from '../assests/6.jpg'
 import instalogo from '../assests/newlogo.png'
-import supabase from "../../supabaseClient";
+
+import axios from "axios";
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -38,7 +39,6 @@ const Homepage = () => {
     arena_upgrade: '',
     custom_request: ''
   });
-  const [userId, setUserId] = useState(null);
   const [hasSubmittedFeedback, setHasSubmittedFeedback] = useState(false);
 
   // Pre-book form state
@@ -67,33 +67,11 @@ const Homepage = () => {
 
     document.addEventListener('mouseleave', handleMouseLeave);
 
-    // Fetch user and check feedback
-    const fetchUserAndFeedback = async () => {
-      const { data: { user }, error: userError } = await supabase.auth.getUser();
-      if (userError) {
-        console.error('Error fetching user:', userError);
-        return;
-      }
-
-      if (user) {
-        setUserId(user.id);
-        const { data, error: feedbackError } = await supabase
-          .from('feedback')
-          .select('*')
-          .eq('user_id', user.id);
-
-        if (feedbackError) {
-          console.error('Error fetching feedback:', feedbackError);
-          return;
-        }
-
-        if (data && data.length > 0) {
-          setHasSubmittedFeedback(true);
-        }
-      }
-    };
-
-    fetchUserAndFeedback();
+    // Check if user has already submitted feedback
+    const feedbackSubmitted = localStorage.getItem('feedbackSubmitted');
+    if (feedbackSubmitted) {
+      setHasSubmittedFeedback(true);
+    }
 
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -180,45 +158,54 @@ const Homepage = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    if (!userId) {
-      alert('Please sign in to submit feedback');
+  try {
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://frontline-fury-backend.onrender.com";    
+    console.log("Submitting feedback to:", `${API_BASE_URL}/api/feedback`);
+    console.log("Feedback data:", formData);
+    
+    const response = await axios.post(`${API_BASE_URL}/api/feedback`, {
+      rating: formData.rating,
+      thoughts: formData.thoughts,
+      visit_frequency: formData.visit_frequency,
+      game_mode_request: formData.game_mode_request,
+      arena_upgrade: formData.arena_upgrade,
+      custom_request: formData.custom_request
+    }, {
+      timeout: 15000 // 15 seconds timeout
+    });
 
-      return;
-    }
-
-    const { error } = await supabase
-      .from('feedback')
-      .insert([
-        {
-          user_id: userId,
-          rating: formData.rating,
-          thoughts: formData.thoughts,
-          visit_frequency: formData.visit_frequency,
-          game_mode_request: formData.game_mode_request,
-          arena_upgrade: formData.arena_upgrade,
-          custom_request: formData.custom_request,
-          submitted_at: new Date().toISOString()
-        }
-      ]);
-
-    if (error) {
-      console.error('Error submitting feedback:', error);
-      alert('Failed to submit feedback. Please try again.');
+    console.log("Feedback response:", response.data);
+    
+    alert("Feedback submitted ✅");
+    setHasSubmittedFeedback(true);
+    setFormData({
+      rating: 0,
+      thoughts: "",
+      visit_frequency: "",
+      game_mode_request: "",
+      arena_upgrade: "",
+      custom_request: ""
+    });
+  } catch (err) {
+    console.error("Full error details:", err);
+    console.error("Error response:", err.response);
+    
+    if (err.code === 'ECONNABORTED') {
+      alert("Connection timeout. Please try again. ❌");
+    } else if (err.response) {
+      console.error("Server error data:", err.response.data);
+      alert(`Server error: ${err.response.data.error} ❌`);
+    } else if (err.request) {
+      console.error("Network error:", err.request);
+      alert("Network error. Please check your internet connection. ❌");
     } else {
-      alert('Feedback submitted successfully!');
-      setHasSubmittedFeedback(true);
-      setFormData({
-        rating: 0,
-        thoughts: '',
-        visit_frequency: '',
-        game_mode_request: '',
-        arena_upgrade: '',
-        custom_request: ''
-      });
+      console.error("Unexpected error:", err.message);
+      alert("Error submitting feedback. Please try again later. ❌");
     }
-  };
+  }
+};
 
   // Pre-book form handlers
   const handlePreBookInputChange = (e) => {
@@ -231,53 +218,64 @@ const Homepage = () => {
     if (preBookError) setPreBookError('');
   };
 
-  const handlePreBookSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmittingPreBook(true);
-    setPreBookError('');
+ const handlePreBookSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmittingPreBook(true);
+  setPreBookError('');
 
-    try {
-      // Insert pre-book data into Supabase
-      const { data, error } = await supabase
-        .from('prebookings')
-        .insert([
-          {
-            name: preBookData.name,
-            email: preBookData.email,
-            mobile: preBookData.mobile,
-            city: preBookData.city === "Other" ? preBookData.otherCity : preBookData.city,
-            other_city: preBookData.city === "Other" ? preBookData.otherCity : null,
-            comments: preBookData.comments,
-            agree_terms: preBookData.agreeTerms,
-            submitted_at: new Date().toISOString()
-          }
-        ]);
+  try {
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://frontline-fury-backend.onrender.com";    
+    console.log("Submitting pre-booking to:", `${API_BASE_URL}/api/prebooking`);
+    console.log("Pre-booking data:", preBookData);
+    
+    const response = await axios.post(`${API_BASE_URL}/api/prebooking`, {
+      name: preBookData.name,
+      email: preBookData.email,
+      mobile: preBookData.mobile,
+      city: preBookData.city === "Other" ? preBookData.otherCity : preBookData.city,
+      otherCity: preBookData.city === "Other" ? preBookData.otherCity : null,
+      comments: preBookData.comments,
+      agreeTerms: preBookData.agreeTerms
+    }, {
+      timeout: 10000
+    });
 
-      if (error) {
-        console.error('Error submitting pre-booking:', error);
-        setPreBookError(error.message || 'Failed to submit pre-booking. Please try again.');
-      } else {
-        console.log('Pre-booking submitted successfully:', data);
-        setShowPreBookForm(false);
-        alert('Thank you for your interest! We will contact you soon about early access perks.');
-        setPreBookData({
-          name: '',
-          email: '',
-          mobile: '',
-          city: '',
-          otherCity: '',
-          comments: '',
-          agreeTerms: false
-        });
-      }
-    } catch (error) {
-      console.error('Unexpected error:', error);
+    console.log('Pre-booking response:', response.data);
+    
+    setShowPreBookForm(false);
+    alert('Thank you for your interest! We will contact you soon about early access perks.');
+    setPreBookData({
+      name: '',
+      email: '',
+      mobile: '',
+      city: '',
+      otherCity: '',
+      comments: '',
+      agreeTerms: false
+    });
+  } catch (error) {
+    console.error('Full error details:', error);
+    console.error('Error response:', error.response);
+    
+    if (error.code === 'ECONNABORTED') {
+      setPreBookError('Connection timeout. Please try again.');
+    } else if (error.response) {
+      // Server responded with error status
+      console.error("Server error data:", error.response.data);
+      setPreBookError(error.response.data.error || 'Failed to submit pre-booking. Please try again.');
+    } else if (error.request) {
+      // Network error - no response received
+      console.error("Network error:", error.request);
+      setPreBookError('Network error. Please check your internet connection.');
+    } else {
+      // Other errors
+      console.error("Unexpected error:", error.message);
       setPreBookError('An unexpected error occurred. Please try again.');
-    } finally {
-      setIsSubmittingPreBook(false);
     }
-  };
-
+  } finally {
+    setIsSubmittingPreBook(false);
+  }
+};
   const getInitials = (name) => {
     const names = name.split(' ');
     let initials = names[0].substring(0, 1).toUpperCase();
@@ -436,6 +434,9 @@ const Homepage = () => {
           </button>
         </div>
       </div>
+
+
+      
 
       <div data-aos="fade-up">
         <div className="about-us-section">
@@ -607,13 +608,13 @@ const Homepage = () => {
                 <div className="instagram-avatar">
                   <img src={instalogo} alt='instalogo' />
                 </div>
-                <span>thefrontlinefury</span>
+                <span>frontlinefuryairsoft</span>
               </div>
-              <button className="follow-button" onClick={() => window.open('https://instagram.com/thefrontlinefury')}>
+              <button className="follow-button" onClick={() => window.open('https://instagram.com/frontlinefuryairsoft')}>
                 Follow
               </button>
             </div>
-
+ 
             <div className="instagram-post-grid">
               {[
                 { img: post1, link: "https://www.instagram.com/p/DJHsoQvC63o/" },
@@ -724,6 +725,8 @@ const Homepage = () => {
           </div>
         </div>
       </div>
+
+      {/* ... (rest of the JSX remains the same) ... */}
 
       <div data-aos="fade-up" className="feedback-container">
         <div className="feedback-header">
