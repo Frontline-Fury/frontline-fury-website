@@ -11,6 +11,7 @@ import Signup from "./components/signup/Signup";  // Import Signup
 import supabase from "./supabaseClient"; 
 import Blogpage from "./components/blogs/Blogpage";
 import TestApi from "./components/testing/TestApi";
+import KeepAlive from "./components/keepalive/KeepAlive";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 
   return (
     <Router>
+      <KeepAlive/>
       <Layout user={user} onLogout={handleLogout} onAuthSuccess={handleAuthSuccess} openSignup={() => setIsSignupOpen(true)}>
         <Routes>
           <Route path="/" element={<Homepage />} />
